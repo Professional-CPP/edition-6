@@ -1,4 +1,4 @@
-//void Database::displayCurrent() const           // The displayCurrent() method.
+//void Database::displayCurrent() const         // The displayCurrent() member function.
 //{
 //	for (const auto& employee : m_employees) {  // For each employee...
 //		if (employee.isHired()) {               // If the employee is hired
@@ -26,7 +26,7 @@ void Database::displayCurrent() const
 
 
 //// Even that one line of comment is not that useful.
-//// So, this displayCurrent() method does not really
+//// So, this displayCurrent() member function does not really
 //// require any comments, as the code is self-documenting.
 
 void Database::displayCurrent() const
