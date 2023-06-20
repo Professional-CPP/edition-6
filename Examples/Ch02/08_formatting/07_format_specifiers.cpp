@@ -68,6 +68,7 @@ int main()
 		int width{ 12 };
 		int precision{ 3 };
 		println("|{2:{0}.{1}f}|", width, precision, d); // |       1.366|
+		println("|{2:{0}.{1}}|", width, precision, d);  // |        1.37|
 	}
 
 	println("");
