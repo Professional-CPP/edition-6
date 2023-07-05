@@ -34,7 +34,7 @@ private:
 	static inline size_t ms_counter{ 0 };
 };
 
-// Spreadsheet::Impl method definitions.
+// Spreadsheet::Impl member function definitions.
 Spreadsheet::Impl::Impl(size_t width, size_t height)
 	: m_id{ ms_counter++ }
 	, m_width{ min(width, Spreadsheet::MaxWidth) }
@@ -118,7 +118,7 @@ size_t Spreadsheet::Impl::getId() const
 
 
 
-// Spreadsheet method definitions.
+// Spreadsheet member function definitions.
 Spreadsheet::Spreadsheet(size_t width, size_t height)
 {
 	m_impl = make_unique<Impl>(width, height);

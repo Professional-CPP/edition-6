@@ -52,7 +52,7 @@ public:
 		return *this;
 	}
 
-	// swap method.
+	// swap member function.
 	//// Added to avoid code duplication
 	void swap(Person& other) noexcept
 	{

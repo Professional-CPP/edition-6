@@ -28,7 +28,7 @@ private:
 };
 
 
-// Person::Impl class method definitions.
+// Person::Impl class member function definitions.
 
 // Two-parameter constructor automatically creates initials and
 // delegates the work to the three-parameter constructor.
@@ -56,7 +56,7 @@ void Person::Impl::setInitials(string initials) { m_initials = move(initials); }
 
 
 
-// Person class method definitions.
+// Person class member function definitions.
 
 Person::Person(string firstName, string lastName)
 	: m_impl{ make_unique<Impl>(move(firstName), move(lastName)) }

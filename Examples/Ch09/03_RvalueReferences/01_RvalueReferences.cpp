@@ -33,6 +33,6 @@ int main()
 	// Handle a literal
 	handleMessage("Hello World"); // Calls handleMessage(string&& value)
 
-	// Handle a named variable and force to use rvalue reference method
+	// Handle a named variable and force to use rvalue reference function
 	handleMessage(std::move(b));  // Calls handleMessage(string&& value)
 }
