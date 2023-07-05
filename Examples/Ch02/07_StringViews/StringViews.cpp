@@ -34,7 +34,7 @@ int main()
 
 		//handleExtension(extractExtension("my file.ext")); // Error, does not compile!
 
-		handleExtension(extractExtension("my file.ext").data());    // data() method
+		handleExtension(extractExtension("my file.ext").data());    // data() member function
 		handleExtension(string{ extractExtension("my file.ext") }); // explicit ctor
 	}
 
