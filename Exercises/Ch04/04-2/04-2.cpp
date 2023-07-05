@@ -43,7 +43,7 @@ public:
 	// Shuffles the deck of cards.
 	void shuffle() { /* Shuffle the deck... */ }
 
-	// More methods ...
+	// More member functions ...
 
 private:
 	std::vector<Card> m_deck;
