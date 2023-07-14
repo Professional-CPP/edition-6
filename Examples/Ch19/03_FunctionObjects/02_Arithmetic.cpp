@@ -2,8 +2,9 @@ import std;
 
 using namespace std;
 
-template<typename Iter, typename StartValue, typename Operation>
-auto accumulateData(Iter begin, Iter end, StartValue startValue, Operation op)
+template <forward_iterator Iter, copy_constructible StartValue,
+	invocable<const StartValue&, const StartValue&> Operation>
+auto accumulateData(Iter begin, Iter end, const StartValue& startValue, Operation op)
 {
 	auto accumulated{ startValue };
 	for (Iter iter{ begin }; iter != end; ++iter) {
