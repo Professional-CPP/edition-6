@@ -1,0 +1,37 @@
+import std;
+
+using namespace std;
+
+class Counter
+{
+public:
+	Counter(int id, int numIterations)
+		: m_id{ id }, m_numIterations{ numIterations }
+	{
+	}
+
+	void operator()() const
+	{
+		for (int i{ 0 }; i < m_numIterations; ++i) {
+			osyncstream syncedCout{ cout };
+			syncedCout << format("Counter {} has value {}", m_id, i) << endl;
+		}
+	}
+
+private:
+	int m_id;
+	int m_numIterations;
+};
+
+int main()
+{
+	// Using uniform initialization syntax
+	jthread t1{ Counter{ 1, 20 } };
+
+	// Using named variable
+	Counter c{ 2, 12 };
+	jthread t2{ c };
+
+	// No need to manually call join(), as we are using jthread.
+}
+
