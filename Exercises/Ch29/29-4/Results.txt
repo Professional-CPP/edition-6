@@ -1,0 +1,3 @@
+On my machine, the implementation using std::map takes around 238ms to execute.
+The implementation using std::unordered_map takes around 186ms to execute.
+The implementation using std::unordered_map and without operator>> takes around 146ms to execute.
