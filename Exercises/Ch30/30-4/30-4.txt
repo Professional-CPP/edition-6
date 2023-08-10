@@ -1,0 +1,5 @@
+Such a unit test is flawed.
+
+You are using your own code to generate an output based on some input, and then write a unit test to validate that for the given input you always get the same output. However, this says nothing about whether the calculation is correct in the first place; It just verifies that you keep getting the same value with a given input.
+
+The proper way to write such a unit test is to calculate the factorial of 5 using some other application, or even manually using a calculator, then verify that your code produces the same value.
