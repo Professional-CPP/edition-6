@@ -1,0 +1,2 @@
+The following Wikipedia article discusses the mediator pattern in detail:
+https://en.wikipedia.org/wiki/Mediator_pattern
