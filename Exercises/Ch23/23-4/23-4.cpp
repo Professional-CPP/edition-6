@@ -5,7 +5,7 @@ using namespace std;
 int main()
 {
 	const unsigned int Start{ 1 };
-	const unsigned int End{ 99 };
+	const unsigned int End{ 20 };
 	const unsigned int Iterations{ 1'000'000 };
 
 	random_device seeder;
