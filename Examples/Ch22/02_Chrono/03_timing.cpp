@@ -11,7 +11,7 @@ int main()
 	// Execute code that you want to time.
 	const int numberOfIterations{ 10'000'000 };
 	double d{ 0 };
-	for (int i{ 1 }; i < numberOfIterations; ++i) {
+	for (int i{ 0 }; i < numberOfIterations; ++i) {
 		d += sqrt(abs(sin(i) * cos(i)));
 	}
 
