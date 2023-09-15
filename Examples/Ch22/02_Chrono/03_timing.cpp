@@ -11,13 +11,17 @@ int main()
 	// Execute code that you want to time.
 	const int numberOfIterations{ 10'000'000 };
 	double d{ 0 };
-	for (int i{ 0 }; i < numberOfIterations; ++i) {
-		d += sqrt(sin(i) * cos(i));
+	for (int i{ 1 }; i < numberOfIterations; ++i) {
+		d += sqrt(abs(sin(i) * cos(i)));
 	}
 
 	// Get the end time and calculate the difference.
 	auto end{ steady_clock::now() };
 	auto diff{ end - start };
+
+	// Use the calculated result, otherwise the compiler might
+	// optimize away the entire loop!
+	println("d = {}", d);
 
 	// Convert the difference into milliseconds and output to the console.
 	println("Total: {}", duration<double, milli> { diff });
