@@ -2,12 +2,10 @@ import std;
 
 using namespace std;
 
-string_view extractExtension(string_view filename)
+string extractExtension(string_view filename)
 {
-	return filename.substr(filename.rfind('.'));
+	return string{ filename.substr(filename.rfind('.')) };
 }
-
-void handleExtension(const string& extension) { /* ... */ }
 
 int main()
 {
@@ -29,13 +27,10 @@ int main()
 		println("Raw: {}", extractExtension({ raw, length }));
 		println("Raw: {}", extractExtension(string_view{ raw, length }));
 
-		// Assigning the result to a std::string.
-		string extension{ extractExtension(filename).data() };
-
-		//handleExtension(extractExtension("my file.ext")); // Error, does not compile!
-
-		handleExtension(extractExtension("my file.ext").data());    // data() member function
-		handleExtension(string{ extractExtension("my file.ext") }); // explicit ctor
+		// Converting a string_view to an std::string.
+		string_view sv{ "Hello World!" };
+		string s{ sv };
+		println("String: {}", s);
 	}
 
 	{
@@ -43,9 +38,11 @@ int main()
 		string str{ "Hello" };
 		string_view sv{ " world" };
 		//auto result{ str + sv };  // Error, does not compile!
-		auto result1{ str + sv.data() };
+		auto result1{ str + string { sv } };
+
 		string result2{ str };
 		result2.append(sv.data(), sv.size());
+		
 		println("{}\n{}", result1, result2);
 	}
 

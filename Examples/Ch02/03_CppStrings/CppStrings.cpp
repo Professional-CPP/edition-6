@@ -7,12 +7,20 @@ int main()
 	{
 		string a{ "12" };
 		string b{ "34" };
-		string c;
-		c = a + b;    // c is "1234"
+		string c{ a + b };    // c is "1234"
 		println("{}", c);
 
 		a += b;    // a is "1234"
 		println("{}", a);
+	}
+
+	println("");
+
+	{
+		string a{ "Hello" };
+		string b{ "World" };
+		println("'{}' < '{}' = {}", a, b, a < b);
+		println("'{}' > '{}' = {}", a, b, a > b);
 	}
 
 	println("");
@@ -67,22 +75,18 @@ int main()
 			strHello.replace(position, 2, strWorld.substr(3, 6));
 		}
 		println("{}", strHello);
-	}
 
-	println("");
-
-	{
-		string s{ "Hello World!" };
-		string toFind{ "Hello" };
-		println("{}", s.contains(toFind));  // true
-		println("{}", s.contains('!'));     // true
-		println("{}", s.contains("world")); // false
+		string toFind{ "World" };
+		println("{}", strWorld.contains(toFind));  // true
+		println("{}", strWorld.contains('.'));     // true
+		println("{}", strWorld.contains("Hello")); // false
 	}
 	
 	println("");
 
 	{
 		auto string1{ "Hello World" };    // string1 is a const char*.
-		auto string2{ "Hello World"s };   // string2 is an std::string.
+		auto& string2{ "Hello World" };   // string2 is a const char[12].
+		auto string3{ "Hello World"s };   // string3 is an std::string.
 	}
 }
