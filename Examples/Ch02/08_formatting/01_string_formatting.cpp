@@ -24,4 +24,7 @@ int main()
 	
 	// I/O streams + Unicode.
 	cout << "こんにちは世界" << endl;
+
+	// C++23 std::println() + Unicode emojis.
+	println("😀");
 }
