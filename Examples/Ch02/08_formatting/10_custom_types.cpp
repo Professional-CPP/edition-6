@@ -76,7 +76,7 @@ public:
 		return iter;
 	}
 
-	auto format(const KeyValue& kv, auto& ctx)
+	auto format(const KeyValue& kv, auto& ctx) const
 	{
 		switch (m_outputType) {
 			using enum OutputType;
