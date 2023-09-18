@@ -76,6 +76,7 @@ int main()
 		}
 		println("{}", strHello);
 
+		// Test contains().
 		string toFind{ "World" };
 		println("{}", strWorld.contains(toFind));  // true
 		println("{}", strWorld.contains('.'));     // true
