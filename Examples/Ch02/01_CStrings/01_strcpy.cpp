@@ -2,6 +2,12 @@ import std;
 
 using namespace std;
 
+#if defined(_MSC_VER)
+	// Disable the following Microsoft Visual C++ warning for this example:
+	// C4996: 'xyz': This function or variable may be unsafe. Consider using xyz_s instead.
+	#pragma warning( disable : 4996)
+#endif
+
 char* copyString(const char* str)
 {
 	//char* result{ new char[strlen(str)] };  // BUG! Off by one!
