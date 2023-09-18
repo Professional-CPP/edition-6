@@ -4,6 +4,7 @@ using namespace std;
 
 string extractExtension(string_view filename)
 {
+	// Return a copy of the extension.
 	return string{ filename.substr(filename.rfind('.')) };
 }
 
@@ -26,11 +27,6 @@ int main()
 		size_t length{ 8 };
 		println("Raw: {}", extractExtension({ raw, length }));
 		println("Raw: {}", extractExtension(string_view{ raw, length }));
-
-		// Converting a string_view to an std::string.
-		string_view sv{ "Hello World!" };
-		string s{ sv };
-		println("String: {}", s);
 	}
 
 	{
