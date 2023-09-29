@@ -5,6 +5,9 @@ using namespace std;
 class Simple
 {
 public:
+	Simple() { println("Simple constructor called!"); }
+	~Simple() { println("Simple destructor called!"); }
+
 	void go() {}
 };
 
