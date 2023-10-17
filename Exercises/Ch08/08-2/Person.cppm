@@ -3,7 +3,7 @@ export module person;
 import std;
 
 //// To make the following line work, a default constructor is needed.
-//// Person phoneBook[3];
+//// Person persons[3];
 
 export class Person
 {
