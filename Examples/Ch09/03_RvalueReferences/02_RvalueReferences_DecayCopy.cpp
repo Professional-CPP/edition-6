@@ -10,6 +10,6 @@ void handleMessage(string&& message)
 
 int main()
 {
-	string a{ "Hello " };
-	handleMessage(auto{ a });
+	string value{ "Hello " };
+	handleMessage(auto{ value });
 }
