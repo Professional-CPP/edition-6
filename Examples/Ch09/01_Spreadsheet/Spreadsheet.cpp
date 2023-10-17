@@ -59,7 +59,7 @@ SpreadsheetCell& Spreadsheet::getCellAt(size_t x, size_t y)
 	return m_cells[x][y];
 }
 
-//bool Spreadsheet::inRange(std::size_t value, std::size_t upper) const
+//bool Spreadsheet::inRange(size_t value, size_t upper) const
 //{
 //	return value < upper;
 //}
