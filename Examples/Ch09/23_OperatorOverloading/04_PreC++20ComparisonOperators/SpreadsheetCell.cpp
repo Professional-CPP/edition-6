@@ -1,6 +1,6 @@
-module spreadsheet_cell;
-
-import std;
+#include "SpreadsheetCell.h"
+#include <charconv>
+#include <stdexcept>
 
 using namespace std;
 
@@ -110,4 +110,34 @@ SpreadsheetCell& SpreadsheetCell::operator/=(const SpreadsheetCell& rhs)
 	}
 	set(getValue() / rhs.getValue());
 	return *this;
+}
+
+bool operator==(const SpreadsheetCell& lhs, const SpreadsheetCell& rhs)
+{
+	return (lhs.getValue() == rhs.getValue());
+}
+
+bool operator<(const SpreadsheetCell& lhs, const SpreadsheetCell& rhs)
+{
+	return (lhs.getValue() < rhs.getValue());
+}
+
+bool operator>(const SpreadsheetCell& lhs, const SpreadsheetCell& rhs)
+{
+	return (lhs.getValue() > rhs.getValue());
+}
+
+bool operator!=(const SpreadsheetCell& lhs, const SpreadsheetCell& rhs)
+{
+	return (lhs.getValue() != rhs.getValue());
+}
+
+bool operator<=(const SpreadsheetCell& lhs, const SpreadsheetCell& rhs)
+{
+	return (lhs.getValue() <= rhs.getValue());
+}
+
+bool operator>=(const SpreadsheetCell& lhs, const SpreadsheetCell& rhs)
+{
+	return (lhs.getValue() >= rhs.getValue());
 }

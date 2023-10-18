@@ -31,9 +31,3 @@ export SpreadsheetCell operator+(const SpreadsheetCell& lhs, const SpreadsheetCe
 export SpreadsheetCell operator-(const SpreadsheetCell& lhs, const SpreadsheetCell& rhs);
 export SpreadsheetCell operator*(const SpreadsheetCell& lhs, const SpreadsheetCell& rhs);
 export SpreadsheetCell operator/(const SpreadsheetCell& lhs, const SpreadsheetCell& rhs);
-export bool operator==(const SpreadsheetCell& lhs, const SpreadsheetCell& rhs);
-export bool operator<(const SpreadsheetCell& lhs, const SpreadsheetCell& rhs);
-export bool operator>(const SpreadsheetCell& lhs, const SpreadsheetCell& rhs);
-export bool operator!=(const SpreadsheetCell& lhs, const SpreadsheetCell& rhs);
-export bool operator<=(const SpreadsheetCell& lhs, const SpreadsheetCell& rhs);
-export bool operator>=(const SpreadsheetCell& lhs, const SpreadsheetCell& rhs);

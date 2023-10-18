@@ -1,5 +1,5 @@
-import spreadsheet_cell;
-import std;
+#include "SpreadsheetCell.h"
+#include <iostream>
 
 using namespace std;
 
@@ -25,11 +25,29 @@ int main()
 	try {
 		aThirdCell = myCell / 0;
 	} catch (const invalid_argument& e) {
-		println("Caught: {}", e.what());
+		cout << "Caught: " << e.what() << endl;
 	}
 
 	aThirdCell -= myCell;
 	aThirdCell += 5.4;
 	aThirdCell *= myCell;
 	aThirdCell /= myCell;
+
+	if (myCell > aThirdCell || myCell < 10) {
+		cout << myCell.getValue() << endl;
+	}
+
+	if (myCell < 10) {
+		cout << "myCell < 10" << endl;
+	}
+
+	if (10 < myCell) {
+		cout << "10 < myCell" << endl;
+	}
+
+	if (anotherCell == myCell) {
+		cout << "cells are equal" << endl;
+	} else {
+		cout << "cells are not equal" << endl;
+	}
 }
