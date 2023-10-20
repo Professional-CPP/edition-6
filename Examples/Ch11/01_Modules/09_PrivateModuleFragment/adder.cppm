@@ -1,4 +1,4 @@
-export module Adder;
+export module adder;
 
 import std;
 

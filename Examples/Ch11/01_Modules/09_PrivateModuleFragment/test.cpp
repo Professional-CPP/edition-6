@@ -1,5 +1,5 @@
 import std;
-import Adder;
+import adder;
 
 using namespace std;
 
