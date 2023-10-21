@@ -6,7 +6,7 @@ int main()
 {
 	regex r{ "//\\s*(.+)$" };
 	while (true) {
-		print("Enter a string with optional code comments (q=quit): ");
+		print("Enter a string with optional code comments (q=quit):\n> ");
 		string str;
 		if (!getline(cin, str) || str == "q") {
 			break;
