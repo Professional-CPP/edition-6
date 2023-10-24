@@ -17,5 +17,6 @@ public:
 	int getB() const { return m_b; }
 
 private:
-	int m_a, m_b;
+	int m_a{ 0 };
+	int m_b{ 0 };
 };
