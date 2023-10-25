@@ -7,8 +7,7 @@ module;
 
 export module object_pool;
 
-// Provides an object pool that can be used with any class that provides a
-// default constructor.
+// Provides an object pool that can be used with any class.
 //
 // acquireObject() returns an object from the list of free objects. If
 // there are no more free objects, acquireObject() creates a new chunk
