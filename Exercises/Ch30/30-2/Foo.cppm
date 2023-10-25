@@ -6,7 +6,7 @@ export class Foo
 {
 public:
 	// Constructs a Foo. Throws invalid_argument if a >= b.
-	Foo(int a, int b) : m_a{ a }, m_b{ b }
+	explicit Foo(int a, int b) : m_a{ a }, m_b{ b }
 	{
 		if (a >= b) {
 			throw std::invalid_argument{ "a should be less than b." };
