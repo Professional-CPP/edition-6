@@ -1,14 +1,11 @@
 module;
 #include <cassert>
+#include <vector>
+#include <memory>
+#include <print>
+#include <numeric>
 
 export module object_pool;
-
-//import std;
-import <concepts>;
-import <vector>;
-import <memory>;
-import <print>;
-import <numeric>;
 
 // Provides an object pool that can be used with any class that provides a
 // default constructor.
@@ -22,21 +19,21 @@ import <numeric>;
 // automatically puts the object back into the object pool when the
 // shared_ptr is destroyed and its reference count reaches 0.
 export
-template <std::default_initializable T, typename Allocator = std::allocator<T>>
+template <typename T, typename Allocator = std::allocator<T>>
 class ObjectPool
 {
 public:
-	ObjectPool() = default;
+	explicit ObjectPool() = default;
 	explicit ObjectPool(const Allocator& allocator);
-	virtual ~ObjectPool();
+	~ObjectPool();
 
-	// Allow move construction and move assignment.
-	ObjectPool(ObjectPool&& src) noexcept = default;
-	ObjectPool& operator=(ObjectPool&& rhs) noexcept = default;
+	// Prevent move construction and move assignment.
+	ObjectPool(ObjectPool&&) = delete;
+	ObjectPool& operator=(ObjectPool&&) = delete;
 
 	// Prevent copy construction and copy assignment.
-	ObjectPool(const ObjectPool& src) = delete;
-	ObjectPool& operator=(const ObjectPool& rhs) = delete;
+	ObjectPool(const ObjectPool&) = delete;
+	ObjectPool& operator=(const ObjectPool&) = delete;
 
 	// Reserves and returns an object from the pool. Arguments can be
 	// provided which are perfectly forwarded to a constructor of T.
@@ -44,6 +41,9 @@ public:
 	std::shared_ptr<T> acquireObject(Args... args);
 
 private:
+	// Creates a new block of uninitialized memory, big enough to hold
+	// m_newChunkSize instances of T.
+	void addChunk();
 	// Contains chunks of memory in which instances of T will be created.
 	// For each chunk, the pointer to its first object is stored.
 	std::vector<T*> m_pool;
@@ -51,24 +51,21 @@ private:
 	// are available in the pool.
 	std::vector<T*> m_freeObjects;
 	// The number of T instances that should fit in the first allocated chunk.
-	static const std::size_t ms_initialChunkSize{ 5 };
+	static constexpr std::size_t ms_initialChunkSize{ 5 };
 	// The number of T instances that should fit in a newly allocated chunk.
 	// This value is doubled after each newly created chunk.
 	std::size_t m_newChunkSize{ ms_initialChunkSize };
-	// Creates a new block of uninitialized memory, big enough to hold
-	// m_newChunkSize instances of T.
-	void addChunk();
 	// The allocator to use for allocating and deallocating chunks.
 	Allocator m_allocator;
 };
 
-template <std::default_initializable T, typename Allocator>
+template <typename T, typename Allocator>
 ObjectPool<T, Allocator>::ObjectPool(const Allocator& allocator)
 	: m_allocator{ allocator }
 {
 }
 
-template <std::default_initializable T, typename Allocator>
+template <typename T, typename Allocator>
 ObjectPool<T, Allocator>::~ObjectPool()
 {
 	// Note: this implementation assumes that all objects handed out by this
@@ -85,7 +82,7 @@ ObjectPool<T, Allocator>::~ObjectPool()
 	m_pool.clear();
 }
 
-template <std::default_initializable T, typename Allocator>
+template <typename T, typename Allocator>
 template <typename... Args>
 std::shared_ptr<T> ObjectPool<T, Allocator>::acquireObject(Args... args)
 {
@@ -115,7 +112,7 @@ std::shared_ptr<T> ObjectPool<T, Allocator>::acquireObject(Args... args)
 	}};
 }
 
-template <std::default_initializable T, typename Allocator>
+template <typename T, typename Allocator>
 void ObjectPool<T, Allocator>::addChunk()
 {
 	std::println("Allocating new chunk...");
@@ -123,7 +120,7 @@ void ObjectPool<T, Allocator>::addChunk()
 	// Allocate a new chunk of uninitialized memory big enough to hold
 	// m_newChunkSize instances of T, and add the chunk to the pool.
 	// Care is taken that everything is cleaned up in the event of an exception.
-	m_pool.resize(m_pool.size() + 1);
+	m_pool.push_back(nullptr);
 	try {
 		m_pool.back() = m_allocator.allocate(m_newChunkSize);
 	} catch (...) {
