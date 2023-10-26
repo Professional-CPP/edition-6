@@ -21,8 +21,7 @@ void FooTest::testConstructorABiggerThanB()
 	// WHEN constructing a Foo with a > b
 	// THEN an invalid_argument exception is thrown.
 	Assert::ExpectException<std::invalid_argument>(
-		[] { Foo f{ 2, 1 }; },
-		L"Unknown exception caught.");
+		[] { Foo f{ 2, 1 }; });
 }
 
 void FooTest::testConstructorAEqualB()
@@ -32,8 +31,7 @@ void FooTest::testConstructorAEqualB()
 	// WHEN constructing a Foo with a == b
 	// THEN an invalid_argument exception is thrown.
 	Assert::ExpectException<std::invalid_argument>(
-		[] { Foo f{ 2, 2 }; },
-		L"Unknown exception caught.");
+		[] { Foo f{ 2, 2 }; });
 }
 
 void FooTest::testGetA()
