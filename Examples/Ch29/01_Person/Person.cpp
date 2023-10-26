@@ -5,8 +5,8 @@ using namespace std;
 class Person
 {
 public:
-	Person();
-	Person(string firstName, string lastName, int age);
+	explicit Person();
+	explicit Person(string firstName, string lastName, int age);
 	Person(const Person& rhs);
 	virtual ~Person();
 
