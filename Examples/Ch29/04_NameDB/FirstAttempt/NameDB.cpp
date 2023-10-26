@@ -7,10 +7,10 @@ using namespace std;
 // Reads the names from the file and populates the database.
 // The database is a vector of name/count pairs, storing the
 // number of times each name shows up in the raw data.
-NameDB::NameDB(string_view nameFile)
+NameDB::NameDB(const string& nameFile)
 {
 	// Open the file and check for errors.
-	ifstream inputFile{ nameFile.data() };
+	ifstream inputFile{ nameFile };
 	if (!inputFile) {
 		throw invalid_argument{ "Unable to open file" };
 	}
@@ -30,7 +30,7 @@ NameDB::NameDB(string_view nameFile)
 }
 
 // Returns true if the name exists in the database, false otherwise.
-bool NameDB::nameExists(string_view name) const
+bool NameDB::nameExists(const string& name) const
 {
 	// Iterate through the vector of names looking for the name.
 	for (auto& entry : m_names) {
@@ -43,27 +43,27 @@ bool NameDB::nameExists(string_view name) const
 
 // Precondition: name exists in the vector of names.
 // Postcondition: the count associated with name is incremented.
-void NameDB::incrementNameCount(string_view name)
+void NameDB::incrementNameCount(const string& name)
 {
 	for (auto& entry : m_names) {
 		if (entry.first == name) {
-			++entry.second;
+			entry.second += 1;
 			return;
 		}
 	}
 }
 
 // Adds a new name to the database.
-void NameDB::addNewName(string_view name)
+void NameDB::addNewName(const string& name)
 {
-	m_names.push_back(make_pair(name.data(), 1));
+	m_names.emplace_back(name, 1);
 }
 
 // Returns the rank of the name.
 // First looks up the name to obtain the number of babies with that name.
 // Then iterates through all the names, counting all the names with a higher
 // count than the specified name. Returns that count as the rank.
-int NameDB::getNameRank(string_view name) const
+int NameDB::getNameRank(const string& name) const
 {
 	// Make use of the getAbsoluteNumber() member function.
 	int num{ getAbsoluteNumber(name) };
@@ -88,7 +88,7 @@ int NameDB::getNameRank(string_view name) const
 }
 
 // Returns the count associated with the given name.
-int NameDB::getAbsoluteNumber(string_view name) const
+int NameDB::getAbsoluteNumber(const string& name) const
 {
 	for (auto& entry : m_names) {
 		if (entry.first == name) {

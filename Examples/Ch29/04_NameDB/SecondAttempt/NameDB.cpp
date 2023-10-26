@@ -6,10 +6,10 @@ using namespace std;
 
 // Reads the names from the file and populates the database.
 // The database is a map associating names with their frequency.
-NameDB::NameDB(string_view nameFile)
+NameDB::NameDB(const string& nameFile)
 {
 	// Open the file and check for errors.
-	ifstream inputFile{ nameFile.data() };
+	ifstream inputFile{ nameFile };
 	if (!inputFile) {
 		throw invalid_argument{ "Unable to open file" };
 	}
@@ -18,7 +18,7 @@ NameDB::NameDB(string_view nameFile)
 	string name;
 	while (inputFile >> name) {
 		// Look up the name in the database so far.
-		if (!nameExistsAndIncrement(name)) {
+		if (!incrementIfExists(name)) {
 			// If the name exists in the database, the
 			// member function incremented it, so we just continue.
 			// We get here if it didn't exist, in which case
@@ -30,28 +30,28 @@ NameDB::NameDB(string_view nameFile)
 
 // Returns true if the name exists in the database, false
 // otherwise. If it finds it, it increments it.
-bool NameDB::nameExistsAndIncrement(string_view name)
+bool NameDB::incrementIfExists(const string& name)
 {
 	// Find the name in the map.
-	auto res{ m_names.find(name.data()) };
+	auto res{ m_names.find(name) };
 	if (res != end(m_names)) {
-		++res->second;
+		res->second += 1;
 		return true;
 	}
 	return false;
 }
 
 // Adds a new name to the database.
-void NameDB::addNewName(string_view name)
+void NameDB::addNewName(const string& name)
 {
-	m_names[name.data()] = 1;
+	m_names[name] = 1;
 }
 
 // Returns the rank of the name.
 // First looks up the name to obtain the number of babies with that name.
 // Then iterates through all the names, counting all the names with a higher
 // count than the specified name. Returns that count as the rank.
-int NameDB::getNameRank(string_view name) const
+int NameDB::getNameRank(const string& name) const
 {
 	int num{ getAbsoluteNumber(name) };
 
@@ -75,9 +75,9 @@ int NameDB::getNameRank(string_view name) const
 }
 
 // Returns the count associated with the given name.
-int NameDB::getAbsoluteNumber(string_view name) const
+int NameDB::getAbsoluteNumber(const string& name) const
 {
-	auto res{ m_names.find(name.data()) };
+	auto res{ m_names.find(name) };
 	if (res != end(m_names)) {
 		return res->second;
 	}
