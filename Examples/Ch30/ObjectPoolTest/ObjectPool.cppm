@@ -37,7 +37,7 @@ public:
 	// Reserves and returns an object from the pool. Arguments can be
 	// provided which are perfectly forwarded to a constructor of T.
 	template <typename... Args>
-	std::shared_ptr<T> acquireObject(Args... args);
+	std::shared_ptr<T> acquireObject(Args&&... args);
 
 private:
 	// Creates a new block of uninitialized memory, big enough to hold
@@ -83,7 +83,7 @@ ObjectPool<T, Allocator>::~ObjectPool()
 
 template <typename T, typename Allocator>
 template <typename... Args>
-std::shared_ptr<T> ObjectPool<T, Allocator>::acquireObject(Args... args)
+std::shared_ptr<T> ObjectPool<T, Allocator>::acquireObject(Args&&... args)
 {
 	// If there are no free objects, allocate a new chunk.
 	if (m_freeObjects.empty()) { addChunk(); }
