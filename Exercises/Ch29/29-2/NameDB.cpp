@@ -6,19 +6,18 @@ using namespace std;
 
 // Reads the names from the file and populates the database.
 // The database is a map associating names with their frequency.
-NameDB::NameDB(string_view nameFile)
+NameDB::NameDB(const string& nameFile)
 {
 	// Open the file and check for errors.
-	ifstream inputFile{ nameFile.data() };
+	ifstream inputFile{ nameFile };
 	if (!inputFile) {
 		throw invalid_argument{ "Unable to open file" };
 	}
 
 	// Read the names one at a time.
-	while (!inputFile.eof()) {
-		string name;
-		getline(inputFile, name);
-		++m_names[name];
+	string name;
+	while (inputFile >> name) {
+		m_names[name] += 1;
 	}
 }
 
@@ -26,7 +25,7 @@ NameDB::NameDB(string_view nameFile)
 // First looks up the name to obtain the number of babies with that name.
 // Then iterates through all the names, counting all the names with a higher
 // count than the specified name. Returns that count as the rank.
-int NameDB::getNameRank(string_view name) const
+int NameDB::getNameRank(const string& name) const
 {
 	int num{ getAbsoluteNumber(name) };
 
@@ -50,9 +49,9 @@ int NameDB::getNameRank(string_view name) const
 }
 
 // Returns the count associated with the given name.
-int NameDB::getAbsoluteNumber(string_view name) const
+int NameDB::getAbsoluteNumber(const string& name) const
 {
-	auto res{ m_names.find(name.data()) };
+	auto res{ m_names.find(name) };
 	if (res != end(m_names)) {
 		return res->second;
 	}
