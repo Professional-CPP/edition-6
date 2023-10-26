@@ -5,14 +5,14 @@ using namespace std;
 class KeyValue
 {
 public:
-	KeyValue(string_view key, int value) : m_key{ key }, m_value{ value } {}
+	explicit KeyValue(string_view key, int value) : m_key{ key }, m_value{ value } {}
 
 	const string& getKey() const { return m_key; }
 	int getValue() const { return m_value; }
 
 private:
 	string m_key;
-	int m_value;
+	int m_value{ 0 };
 };
 
 template<>
