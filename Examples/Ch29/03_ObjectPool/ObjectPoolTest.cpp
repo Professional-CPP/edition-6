@@ -6,7 +6,7 @@ using namespace std;
 class ExpensiveObject
 {
 public:
-	ExpensiveObject() { /* ... */  }
+	explicit ExpensiveObject() { /* ... */  }
 	virtual ~ExpensiveObject() = default;
 
 	// Member functions to populate the object with specific information.
@@ -32,7 +32,7 @@ shared_ptr<ExpensiveObject> getExpensiveObject(MyPool& pool)
 	return object;
 }
 
-void processExpensiveObject(ExpensiveObject* /*object*/)
+void processExpensiveObject(ExpensiveObject& /*object*/)
 {
 	// Process the object. (not shown)
 }
@@ -46,7 +46,7 @@ int main()
 	auto start1{ chrono::steady_clock::now() };
 	for (size_t i{ 0 }; i < NumberOfIterations; ++i) {
 		auto object{ getExpensiveObject(requestPool) };
-		processExpensiveObject(object.get());
+		processExpensiveObject(*object.get());
 	}
 	auto end1{ chrono::steady_clock::now() };
 	auto diff1{ end1 - start1 };
@@ -56,9 +56,8 @@ int main()
 	println("Starting loop using new/delete...");
 	auto start2{ chrono::steady_clock::now() };
 	for (size_t i{ 0 }; i < NumberOfIterations; ++i) {
-		auto object{ new ExpensiveObject{} };
-		processExpensiveObject(object);
-		delete object; object = nullptr;
+		auto object{ std::make_unique<ExpensiveObject>() };
+		processExpensiveObject(*object);
 	}
 	auto end2{ chrono::steady_clock::now() };
 	auto diff2{ end2 - start2 };
