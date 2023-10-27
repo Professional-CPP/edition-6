@@ -2,13 +2,13 @@ import std;
 
 using namespace std;
 
-mutex mut1;
-mutex mut2;
+mutex m1;
+mutex m2;
 
 void process()
 {
-	scoped_lock locks{ mut1, mut2 };
-	//scoped_lock<mutex, mutex> locks{ mut1, mut2 };
+	scoped_lock locks{ m1, m2 }; // Uses class template argument deduction, CTAD.
+	//scoped_lock<mutex, mutex> locks{ m1, m2 };
 
 	// Locks acquired.
 
