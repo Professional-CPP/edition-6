@@ -5,7 +5,7 @@ using namespace std;
 class KeyValue
 {
 public:
-	explicit KeyValue(string_view key, int value) : m_key{ key }, m_value{ value } {}
+	KeyValue(string_view key, int value) : m_key{ key }, m_value{ value } {}
 
 	const string& getKey() const { return m_key; }
 	int getValue() const { return m_value; }
