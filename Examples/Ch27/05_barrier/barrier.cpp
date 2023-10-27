@@ -13,7 +13,7 @@ int main()
 	auto completionCallback{ [&]() noexcept {
 		if (iterationCount == numberOfIterations) {
 			println("Finished {} iterations, stopping robots.", numberOfIterations);
-			ranges::for_each(robots, [](auto& robot) { robot.request_stop(); });
+			for (auto& robot : robots) { robot.request_stop(); }
 		} else {
 			++iterationCount;
 			println("All robots finished. Preparing iteration {}.", iterationCount);
@@ -40,6 +40,6 @@ int main()
 		robots.emplace_back(robotThreadFunction, format("Robot_{}", i));
 	}
 
-	ranges::for_each(robots, [](auto& robot) { robot.join(); });
+	for (auto& robot : robots) { robot.join(); }
 	println("Done with all work.");
 }
