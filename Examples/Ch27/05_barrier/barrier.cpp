@@ -4,8 +4,8 @@ using namespace std;
 
 int main()
 {
-	const unsigned numberOfRobots{ 2 };
-	const unsigned numberOfIterations{ 3 };
+	constexpr unsigned numberOfRobots{ 2 };
+	constexpr unsigned numberOfIterations{ 3 };
 	unsigned iterationCount{ 1 };
 
 	vector<jthread> robots;
