@@ -7,10 +7,10 @@ class Logger
 {
 public:
 	// Starts a background thread writing log entries to a file.
-	Logger();
+	explicit Logger();
 	// Prevent copy construction and assignment.
-	Logger(const Logger& src) = delete;
-	Logger& operator=(const Logger& rhs) = delete;
+	Logger(const Logger&) = delete;
+	Logger& operator=(const Logger&) = delete;
 	// Add log entry to the queue.
 	void log(std::string entry);
 

@@ -5,10 +5,10 @@ using namespace std;
 int main()
 {
 	// Launch a number of threads to do some work.
-	const size_t numberOfWorkerThreads{ 10 };
+	constexpr unsigned numberOfWorkerThreads{ 10 };
 	latch latch{ numberOfWorkerThreads };
 	vector<jthread> threads;
-	for (int i{ 0 }; i < numberOfWorkerThreads; ++i) {
+	for (unsigned i{ 0 }; i < numberOfWorkerThreads; ++i) {
 		threads.emplace_back([&latch, i] {
 			// Do some work...
 			print("{} ", i);

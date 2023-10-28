@@ -5,7 +5,7 @@ using namespace std;
 class Counter
 {
 public:
-	Counter(int id, int numIterations)
+	explicit Counter(int id, int numIterations)
 		: m_id{ id }, m_numIterations{ numIterations }
 	{
 	}
@@ -14,13 +14,16 @@ public:
 	{
 		for (int i{ 0 }; i < m_numIterations; ++i) {
 			osyncstream syncedCout{ cout };
-			syncedCout << format("Counter {} has value {}", m_id, i) << endl;
+			syncedCout << format("Counter {} has value {}", m_id, i);
+			syncedCout << endl;
+			// Upon destruction, syncedCout atomically flushes
+			// its contents into cout.
 		}
 	}
 
 private:
-	int m_id;
-	int m_numIterations;
+	int m_id{ 0 };
+	int m_numIterations{ 0 };
 };
 
 int main()

@@ -13,7 +13,7 @@ Logger::Logger()
 Logger::~Logger()
 {
 	{
-		unique_lock lock{ m_mutex };
+		lock_guard lock{ m_mutex };
 		// Gracefully shut down the thread by setting m_exit to true.
 		m_exit = true;
 	}
@@ -27,7 +27,7 @@ Logger::~Logger()
 void Logger::log(string entry)
 {
 	// Lock mutex and add entry to the queue.
-	unique_lock lock{ m_mutex };
+	lock_guard lock{ m_mutex };
 	m_queue.push(move(entry));
 
 	// Notify condition variable to wake up thread.
@@ -43,12 +43,8 @@ void Logger::processEntries()
 		return;
 	}
 
-	// Create a lock for m_mutex, but do not yet acquire a lock on it.
-	unique_lock lock{ m_mutex, defer_lock };
-	// Start processing loop.
-	while (true) {
-		lock.lock();
-
+	unique_lock lock{ m_mutex }; // Acquire a lock on m_mutex.
+	while (true) { // Start processing loop.
 		if (!m_exit) { // Only wait for notifications if we don't have to exit.
 
 			// You can add artificial delays on specific places in your multithreaded
@@ -60,7 +56,9 @@ void Logger::processEntries()
 			// in Chapter 27 is solved.
 			//this_thread::sleep_for(1000ms);
 
-			m_condVar.wait(lock);
+			if (m_queue.empty()) { // Only wait if the queue is empty.
+				m_condVar.wait(lock);
+			}
 		} else {
 			// We have to exit, process the remaining entries in the queue.
 			processEntriesHelper(m_queue, logFile);
@@ -83,6 +81,8 @@ void Logger::processEntries()
 		// Process the entries in the local queue on the stack. This happens after
 		// having released the lock, so other threads are not blocked anymore.
 		processEntriesHelper(localQueue, logFile);
+
+		lock.lock();
 	}
 }
 

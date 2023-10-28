@@ -13,7 +13,7 @@ Logger::Logger()
 void Logger::log(string entry)
 {
 	// Lock mutex and add entry to the queue.
-	unique_lock lock{ m_mutex };
+	lock_guard lock{ m_mutex };
 	m_queue.push(move(entry));
 
 	// Notify condition variable to wake up thread.
@@ -29,12 +29,8 @@ void Logger::processEntries()
 		return;
 	}
 
-	// Create a lock for m_mutex, but do not yet acquire a lock on it.
-	unique_lock lock{ m_mutex, defer_lock };
-	// Start processing loop.
-	while (true) {
-		lock.lock();
-
+	unique_lock lock{ m_mutex }; // Acquire a lock on m_mutex.
+	while (true) { // Start processing loop.
 		// Wait for a notification.
 		m_condVar.wait(lock);
 
@@ -53,6 +49,8 @@ void Logger::processEntries()
 		// Process the entries in the local queue on the stack. This happens after
 		// having released the lock, so other threads are not blocked anymore.
 		processEntriesHelper(localQueue, logFile);
+
+		lock.lock();
 	}
 }
 

@@ -5,7 +5,7 @@ using namespace std;
 class Counter
 {
 public:
-	Counter(int id, int numIterations)
+	explicit Counter(int id, int numIterations)
 		: m_id{ id }, m_numIterations{ numIterations }
 	{
 	}
@@ -18,8 +18,8 @@ public:
 	}
 
 private:
-	int m_id;
-	int m_numIterations;
+	int m_id{ 0 };
+	int m_numIterations{ 0 };
 };
 
 int main()

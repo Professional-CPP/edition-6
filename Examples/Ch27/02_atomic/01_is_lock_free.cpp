@@ -2,8 +2,8 @@ import std;
 
 using namespace std;
 
-class Foo { private: int m_array[123]; };
-class Bar { private: int m_int; };
+struct Foo { int m_array[123]; };
+struct Bar { int m_int; };
 
 int main()
 {

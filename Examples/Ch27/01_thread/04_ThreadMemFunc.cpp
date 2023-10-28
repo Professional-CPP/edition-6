@@ -5,7 +5,7 @@ using namespace std;
 class Request
 {
 public:
-	Request(int id) : m_id{ id } { }
+	explicit Request(int id) : m_id{ id } { }
 
 	void process()
 	{
@@ -13,7 +13,7 @@ public:
 	}
 
 private:
-	int m_id;
+	int m_id{ 0 };
 };
 
 int main()
