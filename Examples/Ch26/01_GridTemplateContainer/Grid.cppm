@@ -3,15 +3,15 @@ export module grid;
 import std;
 
 template <typename Container>
-concept ContainerType = requires(Container c)
-{
-	requires std::random_access_iterator<typename Container::iterator>;
-	typename Container::value_type;
-	c.resize(1);
-};
+concept GridContainerType = 
+	std::ranges::random_access_range<Container> &&
+	requires(Container c) {
+		typename Container::value_type;
+		c.resize(1);
+	};
 
 export
-template <typename T, ContainerType Container>
+template <typename T, GridContainerType Container>
 class Grid
 {
 public:
@@ -42,7 +42,7 @@ private:
 	std::size_t m_width { 0 }, m_height { 0 };
 };
 
-template <typename T, ContainerType Container>
+template <typename T, GridContainerType Container>
 Grid<T, Container>::Grid(std::size_t width, std::size_t height)
 	: m_width{ width }
 	, m_height{ height }
@@ -50,7 +50,7 @@ Grid<T, Container>::Grid(std::size_t width, std::size_t height)
 	m_cells.resize(m_width * m_height);
 }
 
-template <typename T, ContainerType Container>
+template <typename T, GridContainerType Container>
 void Grid<T, Container>::verifyCoordinate(std::size_t x, std::size_t y) const
 {
 	if (x >= m_width) {
@@ -61,14 +61,14 @@ void Grid<T, Container>::verifyCoordinate(std::size_t x, std::size_t y) const
 	}
 }
 
-template <typename T, ContainerType Container>
+template <typename T, GridContainerType Container>
 const typename Container::value_type& Grid<T, Container>::at(std::size_t x, std::size_t y) const
 {
 	verifyCoordinate(x, y);
 	return m_cells[x + y * m_width];
 }
 
-template <typename T, ContainerType Container>
+template <typename T, GridContainerType Container>
 typename Container::value_type& Grid<T, Container>::at(std::size_t x, std::size_t y)
 {
 	return const_cast<typename Container::value_type&>(
