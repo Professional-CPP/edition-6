@@ -6,21 +6,21 @@ template <unsigned int n>
 class Fibonacci
 {
 public:
-	static const unsigned long long value{ Fibonacci<n - 2>::value + Fibonacci<n - 1>::value };
+	static constexpr unsigned long long value{ Fibonacci<n - 2>::value + Fibonacci<n - 1>::value };
 };
 
 template <>
 class Fibonacci<0>
 {
 public:
-	static const unsigned long long value{ 0 };
+	static constexpr unsigned long long value{ 0 };
 };
 
 template <>
 class Fibonacci<1>
 {
 public:
-	static const unsigned long long value{ 1 };
+	static constexpr unsigned long long value{ 1 };
 };
 
 // Bonus: variable template.

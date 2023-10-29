@@ -32,8 +32,8 @@ public:
 	std::size_t getHeight() const { return m_height; }
 	std::size_t getWidth() const { return m_width; }
 
-	static const std::size_t DefaultWidth{ 10 };
-	static const std::size_t DefaultHeight{ 10 };
+	static constexpr std::size_t DefaultWidth{ 10 };
+	static constexpr std::size_t DefaultHeight{ 10 };
 
 private:
 	void verifyCoordinate(std::size_t x, std::size_t y) const;
