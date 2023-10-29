@@ -35,10 +35,12 @@ template <std::size_t WIDTH, std::size_t HEIGHT>
 void Grid<const char*, WIDTH, HEIGHT>::verifyCoordinate(std::size_t x, std::size_t y) const
 {
 	if (x >= WIDTH) {
-		throw std::out_of_range{ std::format("{} must be less than {}.", x, WIDTH) };
+		throw std::out_of_range{
+			std::format("x ({}) must be less than width ({}).", x, WIDTH) };
 	}
 	if (y >= HEIGHT) {
-		throw std::out_of_range{ std::format("{} must be less than {}.", y, HEIGHT) };
+		throw std::out_of_range{
+			std::format("y ({}) must be less than height ({}).", y, HEIGHT) };
 	}
 }
 

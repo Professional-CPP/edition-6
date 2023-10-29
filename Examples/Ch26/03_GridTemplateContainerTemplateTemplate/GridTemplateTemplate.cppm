@@ -16,8 +16,8 @@ public:
 	Grid& operator=(const Grid& rhs) = default;
 
 	// Explicitly default a move constructor and move assignment operator.
-	Grid(Grid&& src) noexcept = default;
-	Grid& operator=(Grid&& rhs) noexcept = default;
+	Grid(Grid&& src) = default;
+	Grid& operator=(Grid&& rhs) = default;
 
 	std::optional<T>& at(std::size_t x, std::size_t y);
 	const std::optional<T>& at(std::size_t x, std::size_t y) const;
@@ -47,10 +47,12 @@ template <typename T, template <typename E, typename Allocator = std::allocator<
 void Grid<T, Container>::verifyCoordinate(std::size_t x, std::size_t y) const
 {
 	if (x >= m_width) {
-		throw std::out_of_range{ std::format("{} must be less than {}.", x, m_width) };
+		throw std::out_of_range{
+			std::format("x ({}) must be less than width ({}).", x, m_width) };
 	}
 	if (y >= m_height) {
-		throw std::out_of_range{ std::format("{} must be less than {}.", y, m_height) };
+		throw std::out_of_range{
+			std::format("y ({}) must be less than height ({}).", y, m_height) };
 	}
 }
 
