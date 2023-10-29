@@ -3,10 +3,10 @@ import std;
 using namespace std;
 
 template<typename... Values>
-bool allEven(const Values&... values) { return (... && (values % 2 == 0)); }
+bool allEven(const Values&... values) { return ((values % 2 == 0) && ...); }
 
 template<typename... Values>
-bool anyEven(const Values&... values) { return (... || (values % 2 == 0)); }
+bool anyEven(const Values&... values) { return ((values % 2 == 0) || ...); }
 
 int main()
 {
