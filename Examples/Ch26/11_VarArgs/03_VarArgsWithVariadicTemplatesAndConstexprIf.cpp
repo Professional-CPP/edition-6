@@ -4,7 +4,7 @@ using namespace std;
 
 void handleValue(int value) { println("Integer: {}", value); }
 void handleValue(double value) { println("Double: {}", value); }
-void handleValue(string_view value) { println("String: {}", value); }
+void handleValue(const string& value) { println("String: {}", value); }
 
 template<typename T1, typename... Tn>
 void processValues(T1&& arg1, Tn&&... args)

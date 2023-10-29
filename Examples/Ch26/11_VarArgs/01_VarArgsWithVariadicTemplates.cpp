@@ -4,7 +4,7 @@ using namespace std;
 
 void handleValue(int value) { println("Integer: {}", value); }
 void handleValue(double value) { println("Double: {}", value); }
-void handleValue(string_view value) { println("String: {}", value); }
+void handleValue(const string& value) { println("String: {}", value); }
 
 
 void processValues()	// Base case to stop recursion
@@ -14,7 +14,7 @@ void processValues()	// Base case to stop recursion
 
 // Version using pass-by-value
 template<typename T1, typename... Tn>
-void processValues(T1 arg1, Tn... args)
+void processValues(const T1& arg1, const Tn&... args)
 {
 	handleValue(arg1);
 	processValues(args...);
