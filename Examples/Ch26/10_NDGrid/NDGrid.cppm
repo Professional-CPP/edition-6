@@ -49,7 +49,7 @@ public:
 	void resize(std::size_t newSize) { m_elements.resize(newSize); }
 	std::size_t getSize() const { return m_elements.size(); }
 
-	staticexpr const std::size_t DefaultSize{ 10 };
+	static constexpr std::size_t DefaultSize{ 10 };
 
 private:
 	std::vector<T> m_elements;
