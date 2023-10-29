@@ -15,17 +15,6 @@ optional<size_t> Find(const T& value, const T* arr, size_t size)
 	return {}; // failed to find it; return empty optional.
 }
 
-template <typename T>
-optional<size_t> Find(T* value, T* const* arr, size_t size)
-{
-	println("ptr overload");
-	for (size_t i{ 0 }; i < size; ++i) {
-		if (*arr[i] == *value) {
-			return i; // found it; return the index.
-		}
-	}
-	return {}; // failed to find it; return empty optional.
-}
 
 optional<size_t> Find(const char* value, const char** arr, size_t size)
 {
@@ -38,6 +27,17 @@ optional<size_t> Find(const char* value, const char** arr, size_t size)
 	return {}; // failed to find it; return empty optional.
 }
 
+template <typename T>
+optional<size_t> Find(T* value, T* const* arr, size_t size)
+{
+	println("ptr overload");
+	for (size_t i{ 0 }; i < size; ++i) {
+		if (*arr[i] == *value) {
+			return i; // found it; return the index.
+		}
+	}
+	return {}; // failed to find it; return empty optional.
+}
 int main()
 {
 	optional<size_t> res;
