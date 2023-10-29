@@ -15,16 +15,7 @@ public:
 
 	void resize(std::size_t newSize)
 	{
-		m_elements.resize(newSize);
-
-		// Resizing the vector calls the 0-argument constructor for
-		// the NDGrid<T, N-1> elements, which constructs
-		// it with the default size. Thus, we must explicitly call
-		// resize() on each of the elements to recursively resize all
-		// nested Grid elements.
-		for (auto& element : m_elements) {
-			element.resize(newSize);
-		}
+		m_elements.resize(newSize, NDGrid<T, N-1> { newSize });
 	}
 
 	std::size_t getSize() const { return m_elements.size(); }
