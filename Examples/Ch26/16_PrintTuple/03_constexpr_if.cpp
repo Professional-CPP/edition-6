@@ -2,15 +2,15 @@ import std;
 
 using namespace std;
 
-template <typename TupleType, int n>
+template <typename TupleType, int N>
 class TuplePrintHelper
 {
 public:
-	TuplePrintHelper(const TupleType& t) {
-		if constexpr (n > 1) {
-			TuplePrintHelper<TupleType, n - 1> tp{ t };
+	explicit TuplePrintHelper(const TupleType& t) {
+		if constexpr (N > 1) {
+			TuplePrintHelper<TupleType, N - 1> tp{ t };
 		}
-		println("{}", get<n - 1>(t));
+		println("{}", get<N - 1>(t));
 	}
 };
 
@@ -22,6 +22,6 @@ void tuplePrint(const T& t)
 
 int main()
 {
-	tuple t1{ 167, "Testing"s, false, 2.3 };
+	tuple t1{ 16, "Test"s, true };
 	tuplePrint(t1);
 }

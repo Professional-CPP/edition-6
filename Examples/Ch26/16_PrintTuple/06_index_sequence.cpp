@@ -11,11 +11,11 @@ void tuplePrintHelper(const Tuple& t, index_sequence<Indices...>)
 template <typename... Args>
 void tuplePrint(const tuple<Args...>& t)
 {
-	tuplePrintHelper(t, index_sequence_for<Args...>());
+	tuplePrintHelper(t, make_index_sequence<sizeof...(Args)>{});
 }
 
 int main()
 {
-	tuple t1{ 167, "Testing"s, false, 2.3 };
+	tuple t1{ 16, "Test"s, true };
 	tuplePrint(t1);
 }

@@ -2,13 +2,13 @@ import std;
 
 using namespace std;
 
-template <typename TupleType, int n>
+template <typename TupleType, int N>
 class TuplePrintHelper
 {
 public:
-	TuplePrintHelper(const TupleType& t) {
-		TuplePrintHelper<TupleType, n - 1> tp{ t };
-		println("{}", get<n - 1>(t));
+	explicit TuplePrintHelper(const TupleType& t) {
+		TuplePrintHelper<TupleType, N - 1> tp{ t };
+		println("{}", get<N - 1>(t));
 	}
 };
 
@@ -16,7 +16,7 @@ template <typename TupleType>
 class TuplePrintHelper<TupleType, 0>
 {
 public:
-	TuplePrintHelper(const TupleType&) { }
+	explicit TuplePrintHelper(const TupleType&) { }
 };
 
 template <typename T>
@@ -27,6 +27,6 @@ void tuplePrint(const T& t)
 
 int main()
 {
-	tuple t1{ 167, "Testing"s, false, 2.3 };
+	tuple t1{ 16, "Test"s, true };
 	tuplePrint(t1);
 }
