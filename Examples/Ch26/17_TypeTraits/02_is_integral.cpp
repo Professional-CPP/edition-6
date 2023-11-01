@@ -17,7 +17,7 @@ void processHelper(const T& t, false_type)
 template <typename T>
 void process(const T& t)
 {
-	processHelper(t, typename is_integral<T>::type{});
+	processHelper(t, is_integral<T>{});
 }
 
 int main()
