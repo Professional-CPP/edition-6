@@ -62,7 +62,7 @@ int main()
 		<< put_time(&t, "%c") << endl;
 
 #if defined(_MSC_VER)
-	#pragma warning(pop)
+	#pragma warning(pop) // Restore warning.
 #endif
 
 	// Quoted string

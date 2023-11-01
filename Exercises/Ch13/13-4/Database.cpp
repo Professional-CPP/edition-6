@@ -20,7 +20,7 @@ void Database::save(const path& folder) const
 	for (const auto& person : m_persons) {
 		// Construct the name of the target file.
 		path filename{ folder };
-		filename /= person.getInitials();
+		filename /= format("{}_{}", person.getFirstName(), person.getLastName());
 		filename += ".person";
 
 		// Open the file for writing.
