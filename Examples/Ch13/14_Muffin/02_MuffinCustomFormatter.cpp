@@ -31,7 +31,7 @@ public:
 		return begin(context);
 	}
 
-	auto format(const Muffin& muffin, auto& ctx)
+	auto format(const Muffin& muffin, auto& ctx) const
 	{
 		ctx.advance_to(format_to(ctx.out(), "{}, size is {}, {}",
 			muffin.getDescription(), muffin.getSize(),
