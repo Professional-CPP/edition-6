@@ -4,8 +4,8 @@ import :main;
 import std;
 
 export
-template <typename T>
-class Grid<T*>
+template <typename U>
+class Grid<U*>
 {
 public:
 	explicit Grid(std::size_t width = DefaultWidth, std::size_t height = DefaultHeight);
@@ -15,14 +15,14 @@ public:
 	Grid(const Grid& src);
 	Grid& operator=(const Grid& rhs);
 
-	// Explicitly default a move constructor and move assignment operator.
-	Grid(Grid&& src) = default;
-	Grid& operator=(Grid&& rhs) = default;
+	// Move constructor and move assignment operator.
+	Grid(Grid&& src) noexcept;
+	Grid& operator=(Grid&& rhs) noexcept;
 
 	void swap(Grid& other) noexcept;
 
-	std::unique_ptr<T>& at(std::size_t x, std::size_t y);
-	const std::unique_ptr<T>& at(std::size_t x, std::size_t y) const;
+	std::unique_ptr<U>& at(std::size_t x, std::size_t y);
+	const std::unique_ptr<U>& at(std::size_t x, std::size_t y) const;
 
 	std::size_t getHeight() const { return m_height; }
 	std::size_t getWidth() const { return m_width; }
@@ -33,20 +33,20 @@ public:
 private:
 	void verifyCoordinate(std::size_t x, std::size_t y) const;
 
-	std::vector<std::unique_ptr<T>> m_cells;
+	std::vector<std::unique_ptr<U>> m_cells;
 	std::size_t m_width { 0 }, m_height { 0 };
 };
 
-template <typename T>
-Grid<T*>::Grid(std::size_t width, std::size_t height)
+template <typename U>
+Grid<U*>::Grid(std::size_t width, std::size_t height)
 	: m_width{ width }
 	, m_height{ height }
 {
 	m_cells.resize(m_width * m_height);
 }
 
-template <typename T>
-void Grid<T*>::swap(Grid& other) noexcept
+template <typename U>
+void Grid<U*>::swap(Grid& other) noexcept
 {
 	using std::swap;
 
@@ -55,8 +55,8 @@ void Grid<T*>::swap(Grid& other) noexcept
 	swap(m_cells, other.m_cells);
 }
 
-template <typename T>
-Grid<T*>::Grid(const Grid& src)
+template <typename U>
+Grid<U*>::Grid(const Grid& src)
 	: Grid { src.m_width, src.m_height }
 {
 	// The ctor-initializer of this constructor delegates first to the
@@ -66,13 +66,13 @@ Grid<T*>::Grid(const Grid& src)
 	for (std::size_t i{ 0 }; i < m_cells.size(); ++i) {
 		// Make a deep copy of the element by using its copy constructor.
 		if (src.m_cells[i]) {
-			m_cells[i].reset(new T{ *(src.m_cells[i]) });
+			m_cells[i] = std::make_unique<U>(*src.m_cells[i]);
 		}
 	}
 }
 
-template <typename T>
-Grid<T*>& Grid<T*>::operator=(const Grid& rhs)
+template <typename U>
+Grid<U*>& Grid<U*>::operator=(const Grid& rhs)
 {
 	// Use copy-and-swap idiom.
 	auto copy{ rhs };    // Do all the work in a temporary instance
@@ -80,8 +80,22 @@ Grid<T*>& Grid<T*>::operator=(const Grid& rhs)
 	return *this;
 }
 
-template <typename T>
-void Grid<T*>::verifyCoordinate(std::size_t x, std::size_t y) const
+template <typename U>
+Grid<U*>::Grid(Grid&& src) noexcept
+{
+	swap(src);
+}
+
+template <typename U>
+Grid<U*>& Grid<U*>::operator=(Grid&& rhs) noexcept
+{
+	auto moved{ std::move(rhs) }; // Move rhs into moved (noexcept)
+	swap(moved); // Commit the work with only non-throwing operations
+	return *this;
+}
+
+template <typename U>
+void Grid<U*>::verifyCoordinate(std::size_t x, std::size_t y) const
 {
 	if (x >= m_width) {
 		throw std::out_of_range{
@@ -93,15 +107,15 @@ void Grid<T*>::verifyCoordinate(std::size_t x, std::size_t y) const
 	}
 }
 
-template <typename T>
-const std::unique_ptr<T>& Grid<T*>::at(std::size_t x, std::size_t y) const
+template <typename U>
+const std::unique_ptr<U>& Grid<U*>::at(std::size_t x, std::size_t y) const
 {
 	verifyCoordinate(x, y);
 	return m_cells[x + y * m_width];
 }
 
-template <typename T>
-std::unique_ptr<T>& Grid<T*>::at(std::size_t x, std::size_t y)
+template <typename U>
+std::unique_ptr<U>& Grid<U*>::at(std::size_t x, std::size_t y)
 {
-	return const_cast<std::unique_ptr<T>&>(std::as_const(*this).at(x, y));
+	return const_cast<std::unique_ptr<U>&>(std::as_const(*this).at(x, y));
 }
