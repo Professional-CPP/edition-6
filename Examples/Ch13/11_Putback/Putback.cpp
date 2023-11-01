@@ -6,9 +6,12 @@ int main()
 {
 	char c;
 	cin >> c;
-	println("Retrieved {} before putback('e').", c);
+	println("Retrieved {}.", c);
 
 	cin.putback('e');  // 'e' will be the next character read off the stream.
-	cin >> c;
-	println("Retrieved {} after putback('e').", c);
+	println("Called putback('e').");
+	
+	while (cin >> c) {
+		println("Retrieved {}.", c);
+	}
 }
