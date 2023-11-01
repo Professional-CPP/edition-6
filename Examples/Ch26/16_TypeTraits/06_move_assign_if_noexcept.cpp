@@ -6,7 +6,7 @@ template <typename T>
 constexpr conditional_t<is_nothrow_move_assignable_v<T>, T&&, const T&>
 move_assign_if_noexcept(T& t) noexcept
 {
-	return move(t);
+	return std::move(t);
 }
 
 class MoveAssignable

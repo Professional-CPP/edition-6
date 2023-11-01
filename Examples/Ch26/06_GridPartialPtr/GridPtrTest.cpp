@@ -17,7 +17,7 @@ int main()
 	psGrid3 = psGrid2;
 
 	auto& element{ psGrid2.at(1, 0) };
-	if (element) {
+	if (element != nullptr) {
 		println("{}", *element);
 		*element = 6;
 	}

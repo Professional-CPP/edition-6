@@ -2,7 +2,7 @@ import std;
 
 using namespace std;
 
-consteval unsigned long long factorial(unsigned char f)
+consteval unsigned long long factorial(int f)
 {
 	if (f == 0) {
 		return 1;

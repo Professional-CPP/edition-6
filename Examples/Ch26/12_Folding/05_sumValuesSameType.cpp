@@ -2,8 +2,8 @@ import std;
 
 using namespace std;
 
-template<typename T, typename... U>
-concept SameTypes = (std::same_as<T, U> && ...);
+template<typename T, typename... Us>
+concept SameTypes = (std::same_as<T, Us> && ...);
 
 template<typename T, typename... Values>
 	requires SameTypes<T, Values...>

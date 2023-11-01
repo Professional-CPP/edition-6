@@ -65,7 +65,7 @@ Grid<U*>::Grid(const Grid& src)
 	// The next step is to copy the data.
 	for (std::size_t i{ 0 }; i < m_cells.size(); ++i) {
 		// Make a deep copy of the element by using its copy constructor.
-		if (src.m_cells[i]) {
+		if (src.m_cells[i] != nullptr) {
 			m_cells[i] = std::make_unique<U>(*src.m_cells[i]);
 		}
 	}

@@ -2,7 +2,7 @@ import std;
 
 using namespace std;
 
-template <unsigned char f>
+template <int f>
 class Factorial
 {
 public:
