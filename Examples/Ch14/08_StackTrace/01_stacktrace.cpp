@@ -9,7 +9,7 @@ void handleStackTrace(const stacktrace& trace)
 	println("    Here are all the frames:");
 	println("---------------------------------------------------------");
 	println("{}", trace);
-	// If the above doesn't work yet, you can use the following:
+	// If the above statement doesn't work yet, you can use the following:
 	//println("{}", to_string(trace));
 	println("---------------------------------------------------------");
 }
