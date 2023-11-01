@@ -14,9 +14,9 @@ public:
 	Grid(const Grid& src) = default;
 	Grid& operator=(const Grid & rhs) = default;
 	
-	// Explicitly delete a move constructor and move assignment operator.
-	Grid(Grid&& src) noexcept = delete;
-	Grid& operator=(Grid&& rhs) noexcept = delete;
+	// Explicitly default a move constructor and move assignment operator.
+	Grid(Grid&& src) = default;
+	Grid& operator=(Grid&& rhs) = default;
 
 	std::optional<T>& at(std::size_t x, std::size_t y);
 	const std::optional<T>& at(std::size_t x, std::size_t y) const;
