@@ -5,7 +5,7 @@ using namespace std;
 class Mixin1
 {
 public:
-	Mixin1(int i) : m_value{ i } {}
+	explicit Mixin1(int i) : m_value{ i } {}
 	virtual void mixin1Func() { println("Mixin1: {}", m_value); }
 
 private:
@@ -15,7 +15,7 @@ private:
 class Mixin2
 {
 public:
-	Mixin2(int i) : m_value{ i } {}
+	explicit Mixin2(int i) : m_value{ i } {}
 	virtual void mixin2Func() { println("Mixin2: {}", m_value); }
 
 private:
@@ -26,7 +26,7 @@ template <typename... Mixins>
 class MyClass : public Mixins...
 {
 public:
-	MyClass(const Mixins&... mixins) : Mixins{ mixins }... {}
+	explicit MyClass(const Mixins&... mixins) : Mixins{ mixins }... {}
 	virtual ~MyClass() = default;
 };
 
