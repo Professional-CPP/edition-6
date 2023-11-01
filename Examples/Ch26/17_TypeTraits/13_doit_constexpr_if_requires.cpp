@@ -13,9 +13,9 @@ class Derived : public IsDoable
 };
 
 template<typename T>
-void callDoit(const T& [[maybe_unused]] t)
+void callDoit(const T& t)
 {
-	if constexpr (is_invocable_v<decltype(&IsDoable::doit), T>) {
+	if constexpr (requires { t.doit(); }) {
 		t.doit();
 	} else {
 		println("Cannot call doit()!");

@@ -13,7 +13,7 @@ class Derived : public IsDoable
 };
 
 template<typename T>
-void callDoit(const T& [[maybe_unused]] t)
+void callDoit(const T& t)
 {
 	if constexpr (is_base_of_v<IsDoable, T>) {
 		t.doit();
