@@ -43,10 +43,10 @@ Spreadsheet::Spreadsheet(const Spreadsheet& src)
 void Spreadsheet::verifyCoordinate(size_t x, size_t y) const
 {
 	if (x >= m_width) {
-		throw out_of_range { format("{} must be less than {}.", x, m_width) };
+		throw out_of_range { format("x ({}) must be less than width ({}).", x, m_width) };
 	}
 	if (y >= m_height) {
-		throw out_of_range { format("{} must be less than {}.", y, m_height) };
+		throw out_of_range { format("y ({}) must be less than height ({}).", y, m_height) };
 	}
 }
 
