@@ -7,7 +7,7 @@ class MyClass
 public:
 	MyClass() = default;
 	MyClass(const MyClass& src) = default;
-	MyClass(string str) : m_str{ move(str) } {}
+	explicit MyClass(string str) : m_str{ move(str) } {}
 	virtual ~MyClass() = default;
 	
 	// Move assignment operator
