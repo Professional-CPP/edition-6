@@ -5,7 +5,7 @@ using namespace std;
 class MyException : public exception
 {
 public:
-	MyException(string message) : m_message{ move(message) } {}
+	explicit MyException(string message) : m_message{ move(message) } {}
 	const char* what() const noexcept override { return m_message.c_str(); }
 
 private:

@@ -6,7 +6,7 @@ export template <typename T>
 class Matrix
 {
 public:
-	Matrix(std::size_t width, std::size_t height);
+	explicit Matrix(std::size_t width, std::size_t height);
 	virtual ~Matrix();
 
 private:

@@ -5,7 +5,7 @@ using namespace std;
 class MyException : public exception
 {
 public:
-	MyException(string message,
+	explicit MyException(string message,
 		source_location location = source_location::current())
 		: m_message{ move(message) }
 		, m_location{ move(location) }

@@ -5,7 +5,7 @@ using namespace std;
 class SubObject
 {
 	public:
-		SubObject(int i)
+		explicit SubObject(int i)
 		{
 			throw runtime_error{ "Exception by SubObject ctor" };
 		}

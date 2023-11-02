@@ -5,7 +5,7 @@ using namespace std;
 class FileError : public exception
 {
 public:
-	FileError(string filename) : m_filename{ move(filename) } {}
+	explicit FileError(string filename) : m_filename{ move(filename) } {}
 	const char* what() const noexcept override { return m_message.c_str(); }
 	virtual const string& getFilename() const noexcept { return m_filename; }
 
@@ -22,7 +22,7 @@ private:
 class FileOpenError : public FileError
 {
 public:
-	FileOpenError(string filename) : FileError{ move(filename) }
+	explicit FileOpenError(string filename) : FileError{ move(filename) }
 	{
 		setMessage(format("Unable to open {}.", getFilename()));
 	}
@@ -33,7 +33,7 @@ public:
 class FileReadError : public FileError
 {
 public:
-	FileReadError(string filename, size_t lineNumber)
+	explicit FileReadError(string filename, size_t lineNumber)
 		: FileError{ move(filename) }, m_lineNumber{ lineNumber }
 	{
 		setMessage(format("Error reading {}, line {}.", getFilename(), lineNumber));
