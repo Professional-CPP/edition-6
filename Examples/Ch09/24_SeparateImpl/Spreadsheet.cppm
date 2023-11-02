@@ -7,7 +7,7 @@ import std;
 export class Spreadsheet
 {
 public:
-	Spreadsheet(std::size_t width = MaxWidth, std::size_t height = MaxHeight);
+	explicit Spreadsheet(std::size_t width = MaxWidth, std::size_t height = MaxHeight);
 	Spreadsheet(const Spreadsheet& src);
 	Spreadsheet(Spreadsheet&&) noexcept;
 	~Spreadsheet();

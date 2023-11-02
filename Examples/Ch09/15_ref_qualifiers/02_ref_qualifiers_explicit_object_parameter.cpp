@@ -5,7 +5,7 @@ using namespace std;
 class TextHolder
 {
 public:
-	TextHolder(string text) : m_text{ move(text) } {}
+	explicit TextHolder(string text) : m_text{ move(text) } {}
 	
 	//const string& getText() const { return m_text; }
 	
