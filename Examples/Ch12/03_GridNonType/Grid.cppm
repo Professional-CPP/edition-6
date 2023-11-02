@@ -15,8 +15,8 @@ public:
 	Grid& operator=(const Grid& rhs) = default;
 
 	// Explicitly delete a move constructor and move assignment operator.
-	Grid(Grid&& src) noexcept = delete;
-	Grid& operator=(Grid&& rhs) noexcept = delete;
+	Grid(Grid&& src) = delete;
+	Grid& operator=(Grid&& rhs) = delete;
 
 	std::optional<T>& at(std::size_t x, std::size_t y);
 	const std::optional<T>& at(std::size_t x, std::size_t y) const;
@@ -34,10 +34,10 @@ template <typename T, std::size_t WIDTH, std::size_t HEIGHT>
 void Grid<T, WIDTH, HEIGHT>::verifyCoordinate(std::size_t x, std::size_t y) const
 {
 	if (x >= WIDTH) {
-		throw std::out_of_range { std::format("{} must be less than {}.", x, WIDTH) };
+		throw std::out_of_range { std::format("x ({}) must be less than width ({}).", x, WIDTH) };
 	}
 	if (y >= HEIGHT) {
-		throw std::out_of_range { std::format("{} must be less than {}.", y, HEIGHT) };
+		throw std::out_of_range { std::format("y ({}) must be less than height ({}).", y, HEIGHT) };
 	}
 }
 

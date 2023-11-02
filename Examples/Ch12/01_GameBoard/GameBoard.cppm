@@ -18,8 +18,8 @@ public:
 	GameBoard& operator=(const GameBoard& rhs); // assignment operator
 	
 	// Explicitly default a move constructor and move assignment operator.
-	GameBoard(GameBoard&& src) noexcept = default;
-	GameBoard& operator=(GameBoard&& src) noexcept = default;
+	GameBoard(GameBoard&& src) = default;
+	GameBoard& operator=(GameBoard&& src) = default;
 
 	std::unique_ptr<GamePiece>& at(std::size_t x, std::size_t y);
 	const std::unique_ptr<GamePiece>& at(std::size_t x, std::size_t y) const;
@@ -27,8 +27,8 @@ public:
 	std::size_t getHeight() const { return m_height; }
 	std::size_t getWidth() const { return m_width; }
 
-	static const std::size_t DefaultWidth{ 10 };
-	static const std::size_t DefaultHeight{ 10 };
+	static constexpr std::size_t DefaultWidth{ 10 };
+	static constexpr std::size_t DefaultHeight{ 10 };
 
 	void swap(GameBoard& other) noexcept;
 

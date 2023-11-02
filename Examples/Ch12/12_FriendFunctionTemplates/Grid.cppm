@@ -15,8 +15,8 @@ public:
 	Grid& operator=(const Grid& rhs) = default;
 
 	// Explicitly default a move constructor and move assignment operator.
-	Grid(Grid&& src) noexcept = default;
-	Grid& operator=(Grid&& rhs) noexcept = default;
+	Grid(Grid&& src) = default;
+	Grid& operator=(Grid&& rhs) = default;
 
 	std::optional<T>& at(std::size_t x, std::size_t y);
 	const std::optional<T>& at(std::size_t x, std::size_t y) const;
@@ -24,8 +24,8 @@ public:
 	std::size_t getHeight() const { return m_height; }
 	std::size_t getWidth() const { return m_width; }
 
-	static const std::size_t DefaultWidth{ 10 };
-	static const std::size_t DefaultHeight{ 10 };
+	static constexpr std::size_t DefaultWidth{ 10 };
+	static constexpr std::size_t DefaultHeight{ 10 };
 
 	friend Grid operator+<T>(const Grid& lhs, const Grid& rhs);
 
@@ -48,10 +48,10 @@ template <typename T>
 void Grid<T>::verifyCoordinate(std::size_t x, std::size_t y) const
 {
 	if (x >= m_width) {
-		throw std::out_of_range { std::format("{} must be less than {}.", x, m_width) };
+		throw std::out_of_range { std::format("x ({}) must be less than width ({}).", x, m_width) };
 	}
 	if (y >= m_height) {
-		throw std::out_of_range { std::format("{} must be less than {}.", y, m_height) };
+		throw std::out_of_range { std::format("y ({}) must be less than height ({}).", y, m_height) };
 	}
 }
 
