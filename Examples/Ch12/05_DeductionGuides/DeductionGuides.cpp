@@ -6,7 +6,7 @@ template <typename T>
 class SpreadsheetCell
 {
 public:
-	SpreadsheetCell(T t) : m_content{ move(t) } { }
+	explicit SpreadsheetCell(T t) : m_content{ move(t) } { }
 	const T& getContent() const { return m_content; }
 private:
 	T m_content;
