@@ -14,9 +14,9 @@ public:
 	Grid(const Grid& src) = default;
 	Grid& operator=(const Grid& rhs) = default;
 
-	// Explicitly delete a move constructor and move assignment operator.
-	Grid(Grid&& src) = delete;
-	Grid& operator=(Grid&& rhs) = delete;
+	// Explicitly default a move constructor and move assignment operator.
+	Grid(Grid&& src) = default;
+	Grid& operator=(Grid&& rhs) = default;
 
 	template <typename E, std::size_t WIDTH2, std::size_t HEIGHT2>
 	Grid(const Grid<E, WIDTH2, HEIGHT2>& src);
