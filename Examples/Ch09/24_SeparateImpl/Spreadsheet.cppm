@@ -21,8 +21,8 @@ public:
 	
 	std::size_t getId() const;
 
-	static const std::size_t MaxHeight{ 100 };
-	static const std::size_t MaxWidth{ 100 };
+	static constexpr std::size_t MaxHeight{ 100 };
+	static constexpr std::size_t MaxWidth{ 100 };
 
 	void swap(Spreadsheet& other) noexcept;
 

@@ -42,8 +42,8 @@ public:
 
 	void swap(Spreadsheet& other) noexcept;
 
-	static const std::size_t MaxHeight{ 100 };
-	static const std::size_t MaxWidth{ 100 };
+	static constexpr std::size_t MaxHeight{ 100 };
+	static constexpr std::size_t MaxWidth{ 100 };
 
 private:
 	void verifyCoordinate(std::size_t x, std::size_t y) const;
