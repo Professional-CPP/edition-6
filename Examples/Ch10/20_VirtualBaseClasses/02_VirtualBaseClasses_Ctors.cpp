@@ -6,7 +6,7 @@ using namespace std;
 //	class Animal
 //	{
 //	public:
-//		Animal(double weight) : m_weight{ weight } {}
+//		explicit Animal(double weight) : m_weight{ weight } {}
 //		virtual double getWeight() const { return m_weight; }
 //	protected:
 //		Animal() = default;
@@ -42,7 +42,7 @@ using namespace std;
 class Animal
 {
 public:
-	Animal(double weight) : m_weight{ weight } {}
+	explicit Animal(double weight) : m_weight{ weight } {}
 	virtual double getWeight() const { return m_weight; }
 protected:
 	Animal() = default;
@@ -55,7 +55,7 @@ class Dog : public virtual Animal
 public:
 	Dog(double weight, string name) : Animal{ weight }, m_name{ move(name) } {}
 protected:
-	Dog(string name) : m_name{ move(name) } {}
+	explicit Dog(string name) : m_name{ move(name) } {}
 private:
 	string m_name;
 };
@@ -65,7 +65,7 @@ class Bird : public virtual Animal
 public:
 	Bird(double weight, bool canFly) : Animal{ weight }, m_canFly{ canFly } {}
 protected:
-	Bird(bool canFly) : m_canFly{ canFly } {}
+	explicit Bird(bool canFly) : m_canFly{ canFly } {}
 private:
 	bool m_canFly{ false };
 };

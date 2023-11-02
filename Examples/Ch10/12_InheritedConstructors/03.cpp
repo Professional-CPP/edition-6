@@ -5,15 +5,15 @@ class Base
 public:
 	virtual ~Base() = default;
 	Base() = default;
-	Base(std::string_view str) {}
-	Base(float f) {}
+	explicit Base(std::string_view str) {}
+	explicit Base(float f) {}
 };
 
 class Derived : public Base
 {
 public:
 	using Base::Base;
-	Derived(float f) {}    // Hides inherited float Base ctor
+	explicit Derived(float f) {}    // Hides inherited float Base ctor
 };
 
 

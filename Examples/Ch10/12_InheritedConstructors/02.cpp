@@ -5,7 +5,7 @@ class Base
 public:
 	virtual ~Base() = default;
 	Base() = default;
-	Base(int i) {}
+	explicit Base(int i) {}
 };
 
 class Derived : public Base

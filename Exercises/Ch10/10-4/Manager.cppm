@@ -12,7 +12,7 @@ export namespace HR
 		using Employee::Employee;
 
 		// Constructor to convert from Employee to Manager.
-		Manager(const Employee& employee)
+		explicit Manager(const Employee& employee)
 			: Employee{ employee }
 		{
 		}

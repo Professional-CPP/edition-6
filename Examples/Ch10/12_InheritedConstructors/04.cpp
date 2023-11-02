@@ -5,7 +5,7 @@ class Base1
 public:
 	virtual ~Base1() = default;
 	Base1() = default;
-	Base1(float f) {}
+	explicit Base1(float f) {}
 };
 
 class Base2
@@ -13,8 +13,8 @@ class Base2
 public:
 	virtual ~Base2() = default;
 	Base2() = default;
-	Base2(std::string_view str) {}
-	Base2(float f) {}
+	explicit Base2(std::string_view str) {}
+	explicit Base2(float f) {}
 };
 
 class Derived : public Base1, public Base2
@@ -22,8 +22,8 @@ class Derived : public Base1, public Base2
 public:
 	using Base1::Base1;
 	using Base2::Base2;
-	Derived(char c) {}
-	Derived(float f) : Base1{ f }, Base2{ f } {}
+	explicit Derived(char c) {}
+	explicit Derived(float f) : Base1{ f }, Base2{ f } {}
 };
 
 
