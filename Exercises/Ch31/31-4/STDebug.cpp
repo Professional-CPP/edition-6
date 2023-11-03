@@ -36,7 +36,7 @@ public:
 	Log(const Args&... args,
 		const source_location& location = source_location::current())
 	{
-		Logger::log(location.function_name(), "(): ", args...);
+		Logger::log(location.function_name(), ": ", args...);
 	}
 };
 
@@ -45,14 +45,10 @@ Log(Ts&&...) -> Log<Ts...>;
 
 
 
-bool isDebugSet(int argc, char* argv[])
+bool isDebugSet(int argc, char** argv)
 {
-	for (int i{ 0 }; i < argc; ++i) {
-		if (strcmp(argv[i], "-d") == 0) {
-			return true;
-		}
-	}
-	return false;
+	auto parameters{ views::counted(argv, argc) };
+	return ranges::contains(parameters, string_view{ "-d" });
 }
 
 
@@ -106,7 +102,7 @@ void trickyFunction(ComplicatedClass* obj)
 	}
 }
 
-int main(int argc, char* argv[])
+int main(int argc, char** argv)
 {
 	Logger::enableLogging(isDebugSet(argc, argv));
 

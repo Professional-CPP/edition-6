@@ -5,7 +5,7 @@ using namespace std;
 
 RingBuffer debugBuffer;
 
-#define log(...) debugBuffer.addEntry(__func__, "(): ", __VA_ARGS__)
+#define LOG(...) debugBuffer.addEntry(__func__, "(): ", __VA_ARGS__)
 
 class ComplicatedClass
 {
@@ -40,26 +40,25 @@ void processUserCommand(UserCommand& /* cmd */)
 
 void trickyFunction(ComplicatedClass* obj)
 {
-	// Trace log the values with which this function starts.
-	log("given argument: ", *obj);
+	LOG("given argument: ", *obj);
 
 	for (size_t i{ 0 }; i < 100; ++i) {
 		UserCommand cmd{ getNextCommand(obj) };
-		log("retrieved cmd ", i, ": ", cmd);
+		LOG("retrieved cmd ", i, ": ", cmd);
 
 		try {
 			processUserCommand(cmd);
 		} catch (const exception& e) {
-			log("exception from processUserCommand(): ", e.what());
+			LOG("exception from processUserCommand(): ", e.what());
 		}
 	}
 }
 
-int main(int argc, char* argv[])
+int main(int argc, char** argv)
 {
 	// Log the command-line arguments.
 	for (size_t i{ 0 }; i < argc; ++i) {
-		log("Argument: ", argv[i]);
+		LOG("Argument: ", argv[i]);
 	}
 
 	ComplicatedClass obj;

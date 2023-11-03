@@ -4,7 +4,7 @@ import std;
 
 using namespace std;
 
-ArticleCitations::ArticleCitations(string_view filename)
+ArticleCitations::ArticleCitations(const string& filename)
 {
 	// All we have to do is read the file.
 	readFile(filename);
@@ -48,10 +48,10 @@ ArticleCitations::~ArticleCitations()
 	delete [] m_citations;
 }
 
-void ArticleCitations::readFile(string_view filename)
+void ArticleCitations::readFile(const string& filename)
 {
 	// Open the file and check for failure.
-	ifstream inputFile{ filename.data() };
+	ifstream inputFile{ filename };
 	if (inputFile.fail()) {
 		throw invalid_argument{ "Unable to open file" };
 	}

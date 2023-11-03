@@ -30,7 +30,7 @@ public:
 		std::print(oss, "{:L} UTC: ", std::chrono::system_clock::now());
 		// Use a unary right fold, see Chapter 26.
 		((oss << args), ...);
-		addStringEntry(oss.str());
+		addStringEntry(std::move(oss).str());
 	}
 
 	// Streams the buffer entries, separated by newlines, to outStream.
@@ -48,7 +48,7 @@ private:
 	std::ostream* m_outStream{ nullptr };
 	bool m_wrapped{ false };
 
-	static const std::size_t DefaultNumEntries{ 500 };
+	static constexpr std::size_t DefaultNumEntries{ 500 };
 
 	void addStringEntry(std::string&& entry);
 };

@@ -5,7 +5,7 @@ import std;
 export class ArticleCitations
 {
 public:
-	ArticleCitations(std::string_view filename);
+	explicit ArticleCitations(const std::string& filename);
 	virtual ~ArticleCitations();
 	ArticleCitations(const ArticleCitations& src);
 	ArticleCitations& operator=(const ArticleCitations& rhs);
@@ -15,10 +15,10 @@ public:
 	const std::string& getCitation(int i) const;
 
 private:
-	void readFile(std::string_view filename);
+	void readFile(const std::string& filename);
 	void copy(const ArticleCitations& src);
 
 	std::string m_article;
-	std::string* m_citations;
-	int m_numCitations;
+	std::string* m_citations{ nullptr };
+	int m_numCitations{ 0 };
 };

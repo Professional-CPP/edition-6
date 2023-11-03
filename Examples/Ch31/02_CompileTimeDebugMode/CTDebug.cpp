@@ -26,17 +26,17 @@ using namespace std;
 		static inline const string ms_debugFilename{ "debugfile.out" };
 	};
 
-	#define log(...) Logger::log(__func__, "(): ", __VA_ARGS__)
+	#define LOG(...) Logger::log(__func__, "(): ", __VA_ARGS__)
 #else
-	#define log(...)
+	#define LOG(...) (void)0
 #endif
 
 // WARNING:
 //		Be careful not to put any code that must be executed for correct program
-//		functioning inside your log() calls. For example, a line as follows could
+//		functioning inside your LOG() calls. For example, a line as follows could
 //		be asking for trouble:
-//		    log("Result: ", calculateResult());
-//		If DEBUG_MODE is not defined, the preprocessor replaces all log() calls with
+//		    LOG("Result: ", calculateResult());
+//		If DEBUG_MODE is not defined, the preprocessor replaces all LOG() calls with
 //		no-ops, which means that the call to calculateResult() is removed as well!
 
 class ComplicatedClass
@@ -74,26 +74,26 @@ void processUserCommand(UserCommand& /* cmd */)
 
 void trickyFunction(ComplicatedClass* obj)
 {
-	log("given argument: ", *obj);
+	LOG("given argument: ", *obj);
 
 	for (size_t i{ 0 }; i < 100; ++i) {
 		UserCommand cmd{ getNextCommand(obj) };
-		log("retrieved cmd ", i, ": ", cmd);
+		LOG("retrieved cmd ", i, ": ", cmd);
 
 		try {
 			processUserCommand(cmd);
 		} catch ([[maybe_unused]] const exception& e) {
-			log("received exception from processUserCommand(): ", e.what());
+			LOG("received exception from processUserCommand(): ", e.what());
 		}
 	}
 }
 
-int main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
+int main([[maybe_unused]] int argc, [[maybe_unused]] char** argv)
 {
 #ifdef DEBUG_MODE
 	// Print the command-line arguments to the trace.
 	for (size_t i{ 0 }; i < argc; ++i) {
-		log("Argument: ", argv[i]);
+		LOG("Argument: ", argv[i]);
 	}
 #endif
 

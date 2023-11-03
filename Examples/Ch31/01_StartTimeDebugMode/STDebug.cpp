@@ -20,7 +20,7 @@ public:
 		}
 		print(logfile, "{:L} UTC: ", chrono::system_clock::now());
 		// Use a unary right fold, see Chapter 26.
-		((logfile << args),...);
+		(logfile << ... << args);
 		logfile << endl;
 	}
 
@@ -30,18 +30,14 @@ private:
 };
 
 
-#define log(...) Logger::log(__func__, "(): ", __VA_ARGS__)
+#define LOG(...) Logger::log(__func__, "(): ", __VA_ARGS__)
 
 
 
-bool isDebugSet(int argc, char* argv[])
+bool isDebugSet(int argc, char** argv)
 {
-	for (size_t i{ 0 }; i < argc; ++i) {
-		if (strcmp(argv[i], "-d") == 0) {
-			return true;
-		}
-	}
-	return false;
+	auto parameters{ views::counted(argv, argc) };
+	return ranges::contains(parameters, string_view{ "-d" });
 }
 
 
@@ -81,28 +77,28 @@ void processUserCommand(UserCommand& /* cmd */)
 
 void trickyFunction(ComplicatedClass* obj)
 {
-	log("given argument: ", *obj);
+	LOG("given argument: ", *obj);
 
 	for (size_t i{ 0 }; i < 100; ++i) {
 		UserCommand cmd{ getNextCommand(obj) };
-		log("retrieved cmd ", i, ": ", cmd);
+		LOG("retrieved cmd ", i, ": ", cmd);
 
 		try {
 			processUserCommand(cmd);
 		} catch (const exception& e) {
-			log("exception from processUserCommand(): ", e.what());
+			LOG("exception from processUserCommand(): ", e.what());
 		}
 	}
 }
 
-int main(int argc, char* argv[])
+int main(int argc, char** argv)
 {
 	Logger::enableLogging(isDebugSet(argc, argv));
 
 	if (Logger::isLoggingEnabled()) {
 		// Print the command-line arguments to the trace.
 		for (size_t i{ 0 }; i < argc; ++i) {
-			log("Argument: ", argv[i]);
+			LOG("Argument: ", argv[i]);
 		}
 	}
 
