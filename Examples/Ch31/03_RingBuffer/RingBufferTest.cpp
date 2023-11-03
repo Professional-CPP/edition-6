@@ -33,7 +33,7 @@ UserCommand getNextCommand(ComplicatedClass* /* obj */)
 	return cmd;
 }
 
-void processUserCommand(UserCommand& /* cmd */)
+void processUserCommand(const UserCommand& /* cmd */)
 {
 	// Details omitted for brevity.
 }

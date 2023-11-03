@@ -28,8 +28,8 @@ public:
 	{
 		std::ostringstream oss;
 		std::print(oss, "{:L} UTC: ", std::chrono::system_clock::now());
-		// Use a unary right fold, see Chapter 26.
-		((oss << args), ...);
+		// Use a fold-expression; see Chapter 26.
+		(oss << ... << args);
 		addStringEntry(std::move(oss).str());
 	}
 
@@ -50,5 +50,5 @@ private:
 
 	static constexpr std::size_t DefaultNumEntries{ 500 };
 
-	void addStringEntry(std::string&& entry);
+	void addStringEntry(std::string entry);
 };

@@ -51,7 +51,6 @@ void accessFreed()
 {
 	int* p1{ new int };
 	delete p1;
-	int* p2{ new int };
 	*p1 = 5; // The memory pointed to by p1 has been freed!
 }
 

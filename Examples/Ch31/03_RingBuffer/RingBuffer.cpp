@@ -24,7 +24,7 @@ RingBuffer::RingBuffer(size_t numEntries, ostream* outStream)
 //
 // The buffer needs to know if the buffer has wrapped or not so
 // that it knows whether to print the entries past m_next in operator<<.
-void RingBuffer::addStringEntry(string&& entry)
+void RingBuffer::addStringEntry(string entry)
 {
 	// If there is a valid m_outStream, write this entry to it.
 	if (m_outStream) { *m_outStream << entry << endl; }

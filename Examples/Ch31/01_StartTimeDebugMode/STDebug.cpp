@@ -19,7 +19,7 @@ public:
 			return;
 		}
 		print(logfile, "{:L} UTC: ", chrono::system_clock::now());
-		// Use a unary right fold, see Chapter 26.
+		// Use a fold-expression; see Chapter 26.
 		(logfile << ... << args);
 		logfile << endl;
 	}
@@ -70,7 +70,7 @@ UserCommand getNextCommand(ComplicatedClass* /* obj */)
 	return cmd;
 }
 
-void processUserCommand(UserCommand& /* cmd */)
+void processUserCommand(const UserCommand& /* cmd */)
 {
 	// Details omitted for brevity.
 }
