@@ -12,8 +12,8 @@ public:
 	Simple& operator=(const Simple& rhs) = delete;
 
 	// Explicitly default move constructor and move assignment operator.
-	Simple(Simple&& src) noexcept = default;
-	Simple& operator=(Simple&& rhs) noexcept = default;
+	Simple(Simple&& src) = default;
+	Simple& operator=(Simple&& rhs) = default;
 
 	virtual void publicMemberFunction();   // Public member function
 	int m_publicInteger;                   // Public data member
@@ -25,6 +25,6 @@ protected:
 private:
 	virtual void privateMemberFunction();  // Private member function
 	int m_privateInteger{ 42 };            // Private data member
-	static const int Constant{ 2 };        // Private constant
+	static constexpr int Constant{ 2 };    // Private constant
 	static inline int ms_staticInt{ 3 };   // Private static data member
 };

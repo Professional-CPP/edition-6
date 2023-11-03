@@ -17,8 +17,8 @@ public:
 	File& operator=(const File& rhs) = delete;
 
 	// Allow move construction and move assignment.
-	File(File&& src) noexcept = default;
-	File& operator=(File&& rhs) noexcept = default;
+	File(File&& src) = default;
+	File& operator=(File&& rhs) = default;
 
 	// get(), release(), and reset()
 	std::FILE* get() const noexcept { return m_file; }
