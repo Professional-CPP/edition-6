@@ -18,9 +18,9 @@ void Logger::log(LogLevel level, const string& message)
 string_view Logger::getLogLevelString(LogLevel level) const
 {
 	switch (level) {
-	case LogLevel::Error: return "ERROR";
-	case LogLevel::Info: return "INFO";
 	case LogLevel::Debug: return "DEBUG";
+	case LogLevel::Info: return "INFO";
+	case LogLevel::Error: return "ERROR";
 	}
 	throw runtime_error{ "Invalid log level." };
 }

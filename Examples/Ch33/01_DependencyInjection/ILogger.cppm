@@ -11,9 +11,9 @@ public:
 
 	// Enumeration for the different log levels.
 	enum class LogLevel {
-		Error,
+		Debug,
 		Info,
-		Debug
+		Error
 	};
 
 	// Sets the log level.

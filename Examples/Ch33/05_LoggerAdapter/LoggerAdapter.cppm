@@ -6,9 +6,9 @@ export class Logger
 {
 public:
 	enum class LogLevel {
-		Error,
+		Debug,
 		Info,
-		Debug
+		Error
 	};
 
 	Logger();

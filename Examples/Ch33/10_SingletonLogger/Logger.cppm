@@ -7,9 +7,9 @@ export class Logger final
 {
 public:
 	enum class LogLevel {
-		Error,
+		Debug,
 		Info,
-		Debug
+		Error
 	};
 
 	// Sets the name of the log file.
