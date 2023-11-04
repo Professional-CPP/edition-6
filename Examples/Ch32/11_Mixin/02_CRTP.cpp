@@ -8,7 +8,7 @@ class SelfDrivable
 public:
 	void drive()
 	{
-		auto& self = static_cast<Derived&>(*this);
+		auto& self{ static_cast<Derived&>(*this) };
 		self.setSpeed(1.2);
 	}
 };

@@ -8,13 +8,13 @@ int main()
 
 	int callCount{ 0 };
 
-	auto count{ ranges::count_if(values,
+	auto evenCount{ranges::count_if(values,
 		[&callCount](int value) {
 			++callCount; 
 			return value % 2 == 0;
 		})
 	};
 
-	println("There are {} even elements in the vector.", count);
+	println("There are {} even elements in the vector.", evenCount);
 	println("Lambda was called {} times.", callCount);
 }

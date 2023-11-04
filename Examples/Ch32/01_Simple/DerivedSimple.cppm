@@ -12,7 +12,7 @@ public:
 	void publicMemberFunction() override // Overridden member function
 	{
 		// Implementation of overridden member function
-		Simple::publicMemberFunction(); // Access base class implementations.
+		Simple::publicMemberFunction(); // Access the base class implementation
 	}
 
 	virtual void anotherMemberFunction() // New member function
