@@ -2,7 +2,7 @@ export module simple_wrapper;
 
 import std;
 
-export template <typename T> requires std::floating_point<T> || std::integral<T>
+export template <typename T> requires (std::floating_point<T> || std::integral<T>)
 class SimpleWrapper
 {
 public:

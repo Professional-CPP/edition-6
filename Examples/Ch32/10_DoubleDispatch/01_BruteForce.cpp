@@ -28,17 +28,13 @@ public:
 
 bool Bear::eats(const Animal& prey) const
 {
-	if (typeid(prey) == typeid(Bear)) { return false; }
-	else if (typeid(prey) == typeid(Fish)) { return true; }
-	else if (typeid(prey) == typeid(TRex)) { return false; }
+	if (typeid(prey) == typeid(Fish)) { return true; }
 	return false;
 }
 
 bool Fish::eats(const Animal& prey) const
 {
-	if (typeid(prey) == typeid(Bear)) { return false; }
-	else if (typeid(prey) == typeid(Fish)) { return true; }
-	else if (typeid(prey) == typeid(TRex)) { return false; }
+	if (typeid(prey) == typeid(Fish)) { return true; }
 	return false;
 }
 

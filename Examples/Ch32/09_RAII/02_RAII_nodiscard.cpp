@@ -16,18 +16,27 @@ public:
 	File(const File& src) = delete;
 	File& operator=(const File& rhs) = delete;
 
-	// Allow move construction and move assignment.
-	File(File&& src) noexcept = default;
-	File& operator=(File&& rhs) noexcept = default;
+	// Allow move construction.
+	File(File&& src) noexcept : m_file{ std::exchange(src.m_file, nullptr) }
+	{
+	}
+
+	// Allow move assignment.
+	File& operator=(File&& rhs) noexcept
+	{
+		if (this != &rhs) {
+			reset();
+			m_file = std::exchange(rhs.m_file, nullptr);
+		}
+		return *this;
+	}
 
 	// get(), release(), and reset()
 	std::FILE* get() const noexcept { return m_file; }
 
 	[[nodiscard]] std::FILE* release() noexcept
 	{
-		std::FILE* file{ m_file };
-		m_file = nullptr;
-		return file;
+		return std::exchange(m_file, nullptr);
 	}
 	
 	void reset(std::FILE* file = nullptr) noexcept

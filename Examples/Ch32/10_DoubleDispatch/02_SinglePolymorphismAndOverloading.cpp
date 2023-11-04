@@ -43,15 +43,15 @@ int main()
 {
 	Bear myBear;
 	Fish myFish;
-	println("{}", myBear.eats(myFish));
+	println("Bear eats fish? {}", myBear.eats(myFish));
 
 	{
 		Animal& animalRef{ myBear };
-		println("{}", animalRef.eats(myFish));
+		println("Bear eats fish? {}", animalRef.eats(myFish));
 	}
 
 	{
 		Animal& animalRef{ myFish };
-		//println("{}", myBear.eats(animalRef)); // BUG! No member function Bear::eats(Animal&)
+		//println("Bear eats fish? {}", myBear.eats(animalRef)); // BUG! No member function Bear::eats(Animal&)
 	}
 }

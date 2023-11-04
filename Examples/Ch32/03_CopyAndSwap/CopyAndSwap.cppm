@@ -1,11 +1,11 @@
 export module copy_and_swap;
 
 // A simple class that illustrates the copy-and-swap idiom.
-export class CopyAndSwap
+export class CopyAndSwap final
 {
 public:
 	CopyAndSwap() = default;
-	virtual ~CopyAndSwap();                         // Virtual destructor
+	~CopyAndSwap();                                 // Destructor
 
 	CopyAndSwap(const CopyAndSwap& src);            // Copy constructor
 	CopyAndSwap& operator=(const CopyAndSwap& rhs); // Copy assignment operator

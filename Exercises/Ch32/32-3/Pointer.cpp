@@ -6,7 +6,7 @@ template <typename T>
 class Pointer final
 {
 public:
-	explicit Pointer(T* data);
+	[[nodiscard]] explicit Pointer(T* data);
 	~Pointer();
 
 	// Prevent copy construction and copy assignment.
@@ -14,8 +14,8 @@ public:
 	Pointer& operator=(const Pointer& rhs) = delete;
 
 	// Allow move construction and move assignment.
-	Pointer(Pointer&& src) noexcept = default;
-	Pointer& operator=(Pointer&& rhs) noexcept = default;
+	Pointer(Pointer&& src) noexcept;
+	Pointer& operator=(Pointer&& rhs) noexcept;
 
 	T& operator*() noexcept;
 	const T& operator*() const noexcept;
@@ -42,6 +42,22 @@ template <typename T>
 Pointer<T>::~Pointer()
 {
 	reset();
+}
+
+template <typename T>
+Pointer<T>::Pointer(Pointer&& src) noexcept
+	: m_data{ std::exchange(src.m_data, nullptr) }
+{
+}
+
+template <typename T>
+Pointer<T>& Pointer<T>::operator=(Pointer&& rhs) noexcept
+{
+	if (this != &rhs) {
+		reset();
+		m_data = std::exchange(rhs.m_data, nullptr);
+	}
+	return *this;
 }
 
 template <typename T>
@@ -86,6 +102,26 @@ int main()
 {
 	Pointer pointer{ new int{ 42 } };
 	println("{}", *pointer);
-	pointer.assign(11u);
-	println("{}", *pointer);
+
+	Pointer pointer2{ std::move(pointer) };
+	println("{}", *pointer2);
+
+	Pointer pointer3{ new int{ 21 } };
+	pointer3 = std::move(pointer2);
+	println("{}", *pointer3);
+
+	pointer3 = std::move(pointer3);
+	println("{}", *pointer3);
+
+	try {
+		Pointer<int> pointer4{ nullptr };
+	}
+	catch (const std::exception& caughtException) {
+		std::println("Exception caught: {}", caughtException.what());
+	}
+
+	Pointer pointer5{ new int{ 42 } };
+	println("{}", *pointer5);
+	pointer5.assign(11u);
+	println("{}", *pointer5);
 }

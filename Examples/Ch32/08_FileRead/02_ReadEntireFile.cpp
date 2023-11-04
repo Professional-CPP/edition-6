@@ -12,5 +12,5 @@ int main()
 
 	string fileContents;
 	getline(inputFile, fileContents, '\0');
-	println("\"{}\"", fileContents);
+	println("{}", fileContents);
 }

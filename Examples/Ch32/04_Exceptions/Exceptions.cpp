@@ -2,9 +2,9 @@ import std;
 
 using namespace std;
 
-void throwIf(bool throwIt)
+void throwIf(bool should)
 {
-	if (throwIt) {
+	if (should) {
 		throw runtime_error{ "Here's my exception" };
 	}
 }
