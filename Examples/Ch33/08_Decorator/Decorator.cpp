@@ -12,7 +12,7 @@ class Paragraph : public IParagraph
 {
 public:
 	explicit Paragraph(std::string text) : m_text{ std::move(text) } {}
-	std::string getHTML() const override { return "<P>" + m_text + "</P>"; }
+	std::string getHTML() const override { return "<p>" + m_text + "</p>"; }
 
 private:
 	std::string m_text;
@@ -25,7 +25,7 @@ public:
 
 	std::string getHTML() const override
 	{
-		return "<B>" + m_wrapped.getHTML() + "</B>";
+		return "<b>" + m_wrapped.getHTML() + "</b>";
 	}
 
 private:
@@ -39,7 +39,7 @@ public:
 
 	std::string getHTML() const override
 	{
-		return "<I>" + m_wrapped.getHTML() + "</I>";
+		return "<i>" + m_wrapped.getHTML() + "</i>";
 	}
 
 private:
