@@ -4,7 +4,7 @@ import std;
 
 using namespace std;
 
-void createSomeCars(IAbstractCarFactory& carFactory)
+void createSomeCars(ICarFactory& carFactory)
 {
 	auto sedan{ carFactory.makeSedan() };
 	auto suv{ carFactory.makeSuv() };

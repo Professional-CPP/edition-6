@@ -1,11 +1,11 @@
 export module ford_factory;
 
-export import iabstractCarFactory;
+export import icarfactory;
 import icar; 
 import ford;
 import std;
 
-export class FordFactory : public IAbstractCarFactory
+export class FordFactory : public ICarFactory
 {
 public:
 	std::unique_ptr<ICar> makeSuv() override { return std::make_unique<FordSuv>(); }
