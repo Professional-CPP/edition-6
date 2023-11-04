@@ -53,11 +53,10 @@ int main()
 	factories.push_back(make_unique<FordFactory>());
 	factories.push_back(make_unique<ToyotaFactory>());
 
-	// To get more interesting results, preorder some cars.
-	factories[0]->requestCar();
-	factories[0]->requestCar();
-	factories[1]->requestCar();
-	factories[3]->requestCar();
+	// To get more interesting results, preorder some cars from specific factories.
+	for (size_t i : {0, 0, 0, 1, 1, 2}) {
+		factories[i]->requestCar();
+	}
 
 	// Create a factory that automatically selects the least busy
 	// factory from a list of given factories.
