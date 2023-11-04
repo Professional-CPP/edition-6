@@ -11,7 +11,7 @@ public:
 	virtual ~Event() = default; // Always a virtual destructor!
 
 	// Adds an observer. Returns an EventHandle to unregister the observer.
-	[[nodiscard]] EventHandle operator+=(function<void(Args...)> observer)
+	[[nodiscard]] EventHandle addObserver(function<void(Args...)> observer)
 	{
 		auto number{ ++m_counter };
 		m_observers[number] = move(observer);
@@ -19,10 +19,9 @@ public:
 	}
 
 	// Unregisters the observer pointed to by the given handle.
-	Event& operator-=(EventHandle handle)
+	void removeObserver(EventHandle handle)
 	{
 		m_observers.erase(handle);
-		return *this;
 	}
 
 	// Raise event: notifies all registered observers.
@@ -37,6 +36,7 @@ private:
 	unsigned m_counter{ 0 };
 	map<EventHandle, function<void(Args...)>> m_observers;
 };
+
 
 
 class ObservableSubject
@@ -62,23 +62,28 @@ private:
 	Event<> m_eventDataDeleted;
 };
 
+
+
 void modified(int a, double b)
 {
 	println("modified({}, {})", a, b);
 }
+
+
 
 class Observer
 {
 public:
 	explicit Observer(ObservableSubject& subject) : m_subject{ subject }
 	{
-		m_subjectModifiedHandle = m_subject.getEventDataModified() +=
-			[this](int i, double d) { onSubjectModified(i, d); };
+		m_subjectModifiedHandle = m_subject.getEventDataModified().addObserver(
+			[this](int i, double d) { onSubjectModified(i, d); });
 	}
 
 	virtual ~Observer()
 	{
-		m_subject.getEventDataModified() -= m_subjectModifiedHandle;
+		m_subject.getEventDataModified().removeObserver(
+			m_subjectModifiedHandle);
 	}
 
 private:
@@ -91,12 +96,14 @@ private:
 	EventHandle m_subjectModifiedHandle;
 };
 
+
 int main()
 {
 	ObservableSubject subject;
 
-	auto handleModified{ subject.getEventDataModified() += modified };
-	auto handleDeleted{ subject.getEventDataDeleted() += [] { println("deleted"); } };
+	auto handleModified{ subject.getEventDataModified().addObserver(modified) };
+	auto handleDeleted{ subject.getEventDataDeleted().addObserver(
+		[] { println("deleted"); }) };
 	Observer observer{ subject };
 
 	subject.modifyData();
@@ -104,7 +111,7 @@ int main()
 
 	println("");
 
-	subject.getEventDataModified() -= handleModified;
+	subject.getEventDataModified().removeObserver(handleModified);
 	subject.modifyData();
 	subject.deleteData();
 }
