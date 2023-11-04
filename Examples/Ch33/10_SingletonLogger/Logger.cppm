@@ -14,18 +14,18 @@ public:
 
 	// Sets the name of the log file.
 	// Note: needs to be called before the first call to instance()!
-	static void setLogFilename(std::string_view logFilename);
+	static void setLogFilename(std::string logFilename);
 
 	// Returns a reference to the singleton Logger object.
 	static Logger& instance();
 
 	// Prevent copy/move construction.
 	Logger(const Logger&) = delete;
-	Logger(Logger&&) noexcept = delete;
+	Logger(Logger&&) = delete;
 
 	// Prevent copy/move assignment operations.
 	Logger& operator=(const Logger&) = delete;
-	Logger& operator=(Logger&&) noexcept = delete;
+	Logger& operator=(Logger&&) = delete;
 
 	// Sets the log level.
 	void setLogLevel(LogLevel level);

@@ -6,7 +6,7 @@ import std;
 export class Logger : public ILogger
 {
 public:
-	explicit Logger(std::string_view logFilename);
+	explicit Logger(const std::string& logFilename);
 	virtual ~Logger();
 	void setLogLevel(LogLevel level) override;
 	void log(std::string_view message, LogLevel logLevel) override;

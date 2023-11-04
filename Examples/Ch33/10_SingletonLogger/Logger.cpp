@@ -4,9 +4,9 @@ import std;
 
 using namespace std;
 
-void Logger::setLogFilename(string_view logFilename)
+void Logger::setLogFilename(string logFilename)
 {
-	ms_logFilename = logFilename.data();
+	ms_logFilename = move(logFilename);
 }
 
 Logger& Logger::instance()

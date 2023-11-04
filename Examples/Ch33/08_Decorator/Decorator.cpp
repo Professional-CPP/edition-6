@@ -11,7 +11,7 @@ public:
 class Paragraph : public IParagraph
 {
 public:
-	Paragraph(std::string text) : m_text{ std::move(text) } {}
+	explicit Paragraph(std::string text) : m_text{ std::move(text) } {}
 	std::string getHTML() const override { return "<P>" + m_text + "</P>"; }
 
 private:
@@ -21,7 +21,7 @@ private:
 class BoldParagraph : public IParagraph
 {
 public:
-	BoldParagraph(const IParagraph& paragraph) : m_wrapped{ paragraph } { }
+	explicit BoldParagraph(const IParagraph& paragraph) : m_wrapped{ paragraph } { }
 
 	std::string getHTML() const override
 	{
@@ -35,7 +35,7 @@ private:
 class ItalicParagraph : public IParagraph
 {
 public:
-	ItalicParagraph(const IParagraph& paragraph) : m_wrapped{ paragraph } { }
+	explicit ItalicParagraph(const IParagraph& paragraph) : m_wrapped{ paragraph } { }
 
 	std::string getHTML() const override
 	{

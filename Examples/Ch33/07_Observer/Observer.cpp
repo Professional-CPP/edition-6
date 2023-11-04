@@ -14,7 +14,7 @@ public:
 	[[nodiscard]] EventHandle operator+=(function<void(Args...)> observer)
 	{
 		auto number{ ++m_counter };
-		m_observers[number] = observer;
+		m_observers[number] = move(observer);
 		return number;
 	}
 
@@ -28,8 +28,8 @@ public:
 	// Raise event: notifies all registered observers.
 	void raise(Args... args)
 	{
-		for (auto& observer : m_observers) {
-			(observer.second)(args...);
+		for (auto& [_, callback] : m_observers) {
+			callback(args...);
 		}
 	}
 
@@ -70,7 +70,7 @@ void modified(int a, double b)
 class Observer
 {
 public:
-	Observer(ObservableSubject& subject) : m_subject{ subject }
+	explicit Observer(ObservableSubject& subject) : m_subject{ subject }
 	{
 		m_subjectModifiedHandle = m_subject.getEventDataModified() +=
 			[this](int i, double d) { onSubjectModified(i, d); };

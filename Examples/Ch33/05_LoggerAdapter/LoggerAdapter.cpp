@@ -35,5 +35,5 @@ NewLoggerAdapter::NewLoggerAdapter()
 
 void NewLoggerAdapter::log(string_view message)
 {
-	m_logger.log(Logger::LogLevel::Info, message.data());
+	m_logger.log(Logger::LogLevel::Info, string{ message });
 }

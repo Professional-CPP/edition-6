@@ -3,20 +3,18 @@ import std;
 
 using namespace std;
 
-class LeastBusyFactory : public CarFactory
+class LeastBusyFactory final : public CarFactory
 {
 public:
 	// Constructs an instance, taking ownership of the given factories.
-	explicit LeastBusyFactory(vector<unique_ptr<CarFactory>>&& factories);
-
-protected:
-	unique_ptr<ICar> createCar() override;
+	explicit LeastBusyFactory(vector<unique_ptr<CarFactory>> factories);
 
 private:
+	unique_ptr<ICar> createCar() override;
 	vector<unique_ptr<CarFactory>> m_factories;
 };
 
-LeastBusyFactory::LeastBusyFactory(vector<unique_ptr<CarFactory>>&& factories)
+LeastBusyFactory::LeastBusyFactory(vector<unique_ptr<CarFactory>> factories)
 	: m_factories{ move(factories) }
 {
 	if (m_factories.empty()) {

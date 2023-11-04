@@ -4,9 +4,9 @@ import std;
 
 using namespace std;
 
-Logger::Logger(string_view logFilename)
+Logger::Logger(const string& logFilename)
 {
-	m_outputStream.open(logFilename.data(), ios_base::app);
+	m_outputStream.open(logFilename, ios_base::app);
 	if (!m_outputStream.good()) {
 		throw runtime_error{ "Unable to initialize the Logger!" };
 	}

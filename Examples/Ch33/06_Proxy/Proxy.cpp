@@ -42,7 +42,7 @@ class PlayerProxy : public IPlayer
 {
 public:
 	// Create a PlayerProxy, taking ownership of the given player.
-	PlayerProxy(unique_ptr<IPlayer> player);
+	explicit PlayerProxy(unique_ptr<IPlayer> player);
 	string getName() const override;
 	// Network connectivity is optional.
 	string sendInstantMessage(string_view message) const override;

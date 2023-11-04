@@ -20,25 +20,23 @@ public:
 		return m_numberOfCarsProduced;
 	}
 
-protected:
-	virtual std::unique_ptr<ICar> createCar() = 0;
-
 private:
+	virtual std::unique_ptr<ICar> createCar() = 0;
 	unsigned m_numberOfCarsProduced{ 0 };
 };
 
-export class FordFactory : public CarFactory
+export class FordFactory final : public CarFactory
 {
-protected:
+private:
 	std::unique_ptr<ICar> createCar() override
 	{
 		return std::make_unique<Ford>();
 	}
 };
 
-export class ToyotaFactory : public CarFactory
+export class ToyotaFactory final : public CarFactory
 {
-protected:
+private:
 	std::unique_ptr<ICar> createCar() override
 	{
 		return std::make_unique<Toyota>();
