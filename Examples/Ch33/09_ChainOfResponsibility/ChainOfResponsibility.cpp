@@ -16,10 +16,14 @@ public:
 
 	explicit Handler(Handler* nextHandler) : m_nextHandler{ nextHandler } { }
 
-	virtual void handleMessage(Event message)
+	virtual void handleMessage(Event message) = 0;
+
+protected:
+	void nextHandler(Event message)
 	{
 		if (m_nextHandler) { m_nextHandler->handleMessage(message); }
 	}
+
 private:
 	Handler* m_nextHandler{ nullptr };
 };
@@ -36,7 +40,7 @@ public:
 		if (message == Event::RightMouseButtonDown) {
 			println("   Handling message RightMouseButtonDown");
 		} else {
-			Handler::handleMessage(message);
+			nextHandler(message);
 		}
 	}
 };
@@ -52,7 +56,7 @@ public:
 		if (message == Event::LeftMouseButtonUp) {
 			println("   Handling message LeftMouseButtonUp");
 		} else {
-			Handler::handleMessage(message);
+			nextHandler(message);
 		}
 	}
 };
@@ -68,7 +72,7 @@ public:
 		if (message == Event::LeftMouseButtonDown) {
 			println("   Handling message LeftMouseButtonDown");
 		} else {
-			Handler::handleMessage(message);
+			nextHandler(message);
 		}
 	}
 };

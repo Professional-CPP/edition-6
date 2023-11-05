@@ -11,7 +11,7 @@ public:
 	virtual ~Event() = default; // Always a virtual destructor!
 
 	// Adds an observer. Returns an EventHandle to unregister the observer.
-	[[nodiscard]] EventHandle addObserver(function<void(Args...)> observer)
+	[[nodiscard]] EventHandle addObserver(function<void(const Args&...)> observer)
 	{
 		auto number{ ++m_counter };
 		m_observers[number] = move(observer);
@@ -25,7 +25,7 @@ public:
 	}
 
 	// Raise event: notifies all registered observers.
-	void raise(Args... args)
+	void raise(const Args&... args)
 	{
 		for (auto& [_, callback] : m_observers) {
 			callback(args...);
@@ -34,7 +34,7 @@ public:
 
 private:
 	unsigned m_counter{ 0 };
-	map<EventHandle, function<void(Args...)>> m_observers;
+	map<EventHandle, function<void(const Args&...)>> m_observers;
 };
 
 
@@ -71,7 +71,7 @@ void modified(int a, double b)
 
 
 
-class Observer
+class Observer final
 {
 public:
 	explicit Observer(ObservableSubject& subject) : m_subject{ subject }
@@ -80,7 +80,7 @@ public:
 			[this](int i, double d) { onSubjectModified(i, d); });
 	}
 
-	virtual ~Observer()
+	~Observer()
 	{
 		m_subject.getEventDataModified().removeObserver(
 			m_subjectModifiedHandle);
