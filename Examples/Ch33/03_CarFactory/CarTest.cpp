@@ -24,16 +24,10 @@ LeastBusyFactory::LeastBusyFactory(vector<unique_ptr<CarFactory>> factories)
 
 unique_ptr<ICar> LeastBusyFactory::createCar()
 {
-	CarFactory* bestSoFar{ m_factories[0].get() };
-
-	for (auto& factory : m_factories) {
-		if (factory->getNumberOfCarsProduced() <
-			bestSoFar->getNumberOfCarsProduced()) {
-			bestSoFar = factory.get();
-		}
-	}
-
-	return bestSoFar->requestCar();
+	auto leastBusyFactory{ ranges::min_element(m_factories,
+		[](const auto& factory1, const auto& factory2) {
+			return factory1->getNumberOfCarsProduced() < factory2->getNumberOfCarsProduced(); }) };
+	return (*leastBusyFactory)->requestCar();
 }
 
 int main()
