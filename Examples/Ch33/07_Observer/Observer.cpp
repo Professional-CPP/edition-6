@@ -42,19 +42,22 @@ private:
 class ObservableSubject
 {
 public:
-	auto& getEventDataModified() { return m_eventDataModified; }
-	auto& getEventDataDeleted() { return m_eventDataDeleted; }
+	EventHandle registerDataModifiedObserver(const auto& observer) { return m_eventDataModified.addObserver(observer); }
+	void unregisterDataModifiedObserver(EventHandle handle) { m_eventDataModified.removeObserver(handle); }
+
+	EventHandle registerDataDeletedObserver(const auto& observer) { return m_eventDataDeleted.addObserver(observer); }
+	void unregisterDataDeletedObserver(EventHandle handle) { m_eventDataDeleted.removeObserver(handle); }
 
 	void modifyData()
 	{
 		// ...
-		getEventDataModified().raise(1, 2.3);
+		m_eventDataModified.raise(1, 2.3);
 	}
 
 	void deleteData()
 	{
 		// ...
-		getEventDataDeleted().raise();
+		m_eventDataDeleted.raise();
 	}
 
 private:
@@ -76,14 +79,13 @@ class Observer final
 public:
 	explicit Observer(ObservableSubject& subject) : m_subject{ subject }
 	{
-		m_subjectModifiedHandle = m_subject.getEventDataModified().addObserver(
+		m_subjectModifiedHandle = m_subject.registerDataModifiedObserver(
 			[this](int i, double d) { onSubjectModified(i, d); });
 	}
 
 	~Observer()
 	{
-		m_subject.getEventDataModified().removeObserver(
-			m_subjectModifiedHandle);
+		m_subject.unregisterDataModifiedObserver(m_subjectModifiedHandle);
 	}
 
 private:
@@ -101,8 +103,8 @@ int main()
 {
 	ObservableSubject subject;
 
-	auto handleModified{ subject.getEventDataModified().addObserver(modified) };
-	auto handleDeleted{ subject.getEventDataDeleted().addObserver(
+	auto handleModified{ subject.registerDataModifiedObserver(modified) };
+	auto handleDeleted{ subject.registerDataDeletedObserver(
 		[] { println("deleted"); }) };
 	Observer observer{ subject };
 
@@ -111,7 +113,7 @@ int main()
 
 	println("");
 
-	subject.getEventDataModified().removeObserver(handleModified);
+	subject.unregisterDataModifiedObserver(handleModified);
 	subject.modifyData();
 	subject.deleteData();
 }
