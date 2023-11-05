@@ -15,7 +15,7 @@ public:
 
 	void doSomething()
 	{
-		m_logger->log("Hello dependency injection!", ILogger::LogLevel::Info);
+		m_logger->log("Hello strategy!", ILogger::LogLevel::Info);
 	}
 
 private:
