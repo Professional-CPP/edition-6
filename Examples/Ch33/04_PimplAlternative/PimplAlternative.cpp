@@ -8,6 +8,11 @@ class Foo
 {
 public:
 	virtual ~Foo() = default;  // Always a virtual destructor!
+	Foo(const Foo&) = default;
+	Foo& operator=(const Foo&) = default;
+	Foo(Foo&&) = default;
+	Foo& operator=(Foo&&) = default;
+
 	static unique_ptr<Foo> create();  // Factory method.
 	// Public functionality...
 	virtual void bar() = 0;

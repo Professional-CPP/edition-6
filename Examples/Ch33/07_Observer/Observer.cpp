@@ -5,11 +5,9 @@ using namespace std;
 using EventHandle = unsigned int;
 
 template <typename... Args>
-class Event
+class Event final
 {
 public:
-	virtual ~Event() = default; // Always a virtual destructor!
-
 	// Adds an observer. Returns an EventHandle to unregister the observer.
 	[[nodiscard]] EventHandle addObserver(function<void(const Args&...)> observer)
 	{

@@ -13,11 +13,6 @@ Logger::Logger(const string& logFilename)
 	println(m_outputStream, "{}: Logger started.", chrono::system_clock::now());
 }
 
-Logger::~Logger()
-{
-	println(m_outputStream, "{}: Logger stopped.", chrono::system_clock::now());
-}
-
 void Logger::setLogLevel(LogLevel level)
 {
 	m_logLevel = level;

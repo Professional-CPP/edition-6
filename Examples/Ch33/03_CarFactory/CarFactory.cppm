@@ -7,6 +7,11 @@ export class CarFactory
 {
 public:
 	virtual ~CarFactory() = default;  // Always a virtual destructor!
+	CarFactory() = default;
+	CarFactory(const CarFactory&) = default;
+	CarFactory& operator=(const CarFactory&) = default;
+	CarFactory(CarFactory&&) = default;
+	CarFactory& operator=(CarFactory&&) = default;
 	
 	std::unique_ptr<ICar> requestCar()
 	{

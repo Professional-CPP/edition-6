@@ -13,6 +13,11 @@ class Handler
 {
 public:
 	virtual ~Handler() = default;
+	Handler() = default;
+	Handler(const Handler&) = default;
+	Handler& operator=(const Handler&) = default;
+	Handler(Handler&&) = default;
+	Handler& operator=(Handler&&) = default;
 
 	explicit Handler(Handler* nextHandler) : m_nextHandler{ nextHandler } { }
 
