@@ -28,12 +28,12 @@ string_view Logger::getLogLevelString(LogLevel level) const
 
 
 
-NewLoggerAdapter::NewLoggerAdapter()
+AdaptedLogger::AdaptedLogger()
 {
-	println("NewLoggerAdapter constructor");
+	println("AdaptedLogger constructor");
 }
 
-void NewLoggerAdapter::log(string_view message)
+void AdaptedLogger::log(string_view message)
 {
 	m_logger.log(Logger::LogLevel::Info, string{ message });
 }

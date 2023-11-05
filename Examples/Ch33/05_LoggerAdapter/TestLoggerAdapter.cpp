@@ -2,6 +2,6 @@ import logger;
 
 int main() 
 {
-	NewLoggerAdapter logger;
+	AdaptedLogger logger;
 	logger.log("Testing the logger.");
 } 

@@ -2,19 +2,30 @@ export module logger;
 
 import std;
 
-export class Logger
+// Definition of a logger interface.
+export class ILogger
 {
 public:
+	virtual ~ILogger() = default;  // Always a virtual destructor!
+
 	enum class LogLevel {
 		Debug,
 		Info,
 		Error
 	};
 
-	Logger();
-	virtual ~Logger() = default;  // Always a virtual destructor!
+	// Logs a single message at the given log level.
+	virtual void log(LogLevel level, const std::string& message) = 0;
+};
 
-	void log(LogLevel level, const std::string& message);
+
+// Concrete implementation of ILogger.
+export class Logger : public ILogger
+{
+public:
+	Logger();
+
+	void log(LogLevel level, const std::string& message) override;
 
 private:
 	// Converts a log level to a human readable string.
@@ -23,19 +34,22 @@ private:
 
 
 
-export class INewLoggerInterface
+// Adapted logger interface.
+export class IAdaptedLogger
 {
 public:
-	virtual ~INewLoggerInterface() = default;  // Always a virtual destructor!
+	virtual ~IAdaptedLogger() = default;  // Always a virtual destructor!
+	// Logs a single message with Info as log level.
 	virtual void log(std::string_view message) = 0;
 };
 
 
 
-export class NewLoggerAdapter : public INewLoggerInterface
+// Implementation of adapted logger.
+export class AdaptedLogger : public IAdaptedLogger
 {
 public:
-	NewLoggerAdapter();
+	AdaptedLogger();
 	void log(std::string_view message) override;
 
 private:
