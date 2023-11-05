@@ -2,7 +2,7 @@ import std;
 
 using namespace std;
 
-using EventHandle = unsigned;
+using EventHandle = unsigned int;
 
 template <typename... Args>
 class Event
@@ -27,13 +27,13 @@ public:
 	// Raise event: notifies all registered observers.
 	void raise(const Args&... args)
 	{
-		for (auto& [_, callback] : m_observers) {
+		for (const auto& [_, callback] : m_observers) {
 			callback(args...);
 		}
 	}
 
 private:
-	unsigned m_counter{ 0 };
+	unsigned int m_counter{ 0 };
 	map<EventHandle, function<void(const Args&...)>> m_observers;
 };
 
