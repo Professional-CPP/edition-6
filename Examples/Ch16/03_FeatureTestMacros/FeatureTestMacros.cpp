@@ -1,5 +1,5 @@
 import std;
-import <version>; // Important to get access to the feature test macros!
+import <version>; // Important to get access to the feature-test macros!
 
 using namespace std;
 
