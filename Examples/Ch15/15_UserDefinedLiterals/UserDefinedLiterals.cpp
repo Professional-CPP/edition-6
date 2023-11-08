@@ -46,7 +46,7 @@ Length operator ""_m(long double d)
 // Cooked _s literal operator
 string operator ""_s(const char* str, size_t len)
 {
-	return string(str, len);
+	return string{ str, len };
 }
 
 int main()
