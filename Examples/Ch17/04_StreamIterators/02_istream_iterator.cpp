@@ -3,7 +3,7 @@ import std;
 using namespace std;
 
 // Calculate the sum of all the elements in a given common range.
-template<weakly_incrementable InputIter>
+template<input_iterator InputIter>
 auto sum(InputIter begin, InputIter end)
 {
 	auto sum{ *begin };

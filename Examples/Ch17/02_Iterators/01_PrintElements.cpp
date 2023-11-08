@@ -2,7 +2,7 @@ import std;
 
 using namespace std;
 
-template<forward_iterator Iter>
+template<input_iterator Iter>
 void myPrint(Iter begin, Iter end)
 {
 	for (auto iter{ begin }; iter != end; ++iter) {
