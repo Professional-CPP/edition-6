@@ -48,5 +48,5 @@ const T& AssociativeArray<T>::operator[](std::string_view key) const
 			return element.m_value;
 		}
 	}
-	throw std::invalid_argument{ std::format("Key '{}' doesn't exist.", key.data()) };
+	throw std::invalid_argument{ std::format("Key '{}' doesn't exist.", std::string{ key }) };
 }

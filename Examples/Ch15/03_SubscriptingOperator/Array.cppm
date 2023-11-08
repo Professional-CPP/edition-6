@@ -10,7 +10,7 @@ public:
 	Array();
 	virtual ~Array();
 
-	// Disallow assignment and pass-by-value.
+	// Disallow copy constructor and copy assignment.
 	Array& operator=(const Array& rhs) = delete;
 	Array(const Array& src) = delete;
 
@@ -33,7 +33,7 @@ public:
 	std::size_t getSize() const noexcept;
 
 private:
-	static const std::size_t AllocSize{ 4 };
+	static constexpr std::size_t AllocSize{ 4 };
 	void resize(std::size_t newSize);
 	T* m_elements{ nullptr };
 	std::size_t m_size{ 0 };
