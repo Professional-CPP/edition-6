@@ -2,7 +2,7 @@ import std;
 
 using namespace std;
 
-template<typename Iter>
+template<forward_iterator Iter>
 auto myFind(Iter begin, Iter end, const typename iterator_traits<Iter>::value_type& value)
 {
 	for (auto iter{ begin }; iter != end; ++iter) {
