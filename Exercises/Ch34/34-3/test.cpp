@@ -7,9 +7,9 @@ using namespace std;
 class ReverseString
 {
 public:
-	ReverseString(string_view s)
+	explicit ReverseString(const string& s)
 	{
-		char* reversedString{ reverseString(const_cast<char*>(s.data())) };
+		char* reversedString{ reverseString(const_cast<char*>(s.c_str())) };
 		m_reversedString = reversedString;
 		freeString(reversedString);
 	}
