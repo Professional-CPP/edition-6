@@ -21,7 +21,7 @@ ostream& operator<<(ostream& os, const Person& person)
 	return os;
 }
 
-template <typename InputIter, typename OutputIter>
+template <input_iterator InputIter, weakly_incrementable OutputIter>
 void myCopy(InputIter begin, InputIter end, OutputIter target)
 {
 	for (auto iter{ begin }; iter != end; ++iter, ++target) {

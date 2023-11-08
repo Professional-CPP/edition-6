@@ -15,7 +15,7 @@ private:
 	string m_lastName;
 };
 
-template <typename InputIter>
+template <input_iterator InputIter>
 auto sum(InputIter begin, InputIter end)
 {
 	auto sum{ *begin };
