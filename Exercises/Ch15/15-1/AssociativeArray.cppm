@@ -3,11 +3,9 @@ export module associative_array;
 import std;
 
 export template <typename T>
-class AssociativeArray
+class AssociativeArray final
 {
 public:
-	virtual ~AssociativeArray() = default;
-	
 	T& operator[](std::string_view key);
 	const T& operator[](std::string_view key) const;
 
