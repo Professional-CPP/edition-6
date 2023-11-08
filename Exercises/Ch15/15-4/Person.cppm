@@ -74,7 +74,7 @@ export std::istream& operator>>(std::istream& is, Person& person)
 	return is;
 }
 
-export Person operator""_p(const char* s, std::size_t)
+export Person operator ""_p(const char* s, std::size_t)
 {
 	std::istringstream input{ s };
 

@@ -10,9 +10,9 @@ public:
 
 	// The user-defined literals _km and _m are friends of Length so they
 	// can use the private constructor.
-	friend Length operator"" _km(long double d);
-	friend Length operator"" _m(long double d);
-	//friend Length operator"" _m(const char* str);
+	friend Length operator ""_km(long double d);
+	friend Length operator ""_m(long double d);
+	//friend Length operator ""_m(const char* str);
 
 private:
 	// Private constructor because users should only be able to construct a
@@ -23,19 +23,19 @@ private:
 };
 
 // Cooked _km literal operator
-Length operator"" _km(long double d)
+Length operator ""_km(long double d)
 {
 	return Length{ d * 1000 }; // Convert to meters.
 }
 
 // Cooked _m literal operator
-Length operator"" _m(long double d)
+Length operator ""_m(long double d)
 {
 	return Length{ d };
 }
 
 // Raw _m literal operator
-//Length operator"" _m(const char* str)
+//Length operator ""_m(const char* str)
 //{
 //	// Implementation omitted; it requires parsing the C-style string
 //	// converting it to a long double, and constructing a Length.
@@ -44,7 +44,7 @@ Length operator"" _m(long double d)
 
 
 // Cooked _s literal operator
-string operator"" _s(const char* str, size_t len)
+string operator ""_s(const char* str, size_t len)
 {
 	return string(str, len);
 }

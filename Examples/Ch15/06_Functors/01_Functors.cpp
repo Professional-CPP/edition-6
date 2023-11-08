@@ -6,8 +6,8 @@ class Squarer
 {
 public:
 	int operator()(int value) const;       // First overloaded function call operator.
-	double operator()(double value) const; // Second overloaded function call operator.
 	int doSquare(int value) const;         // Normal member function.
+	double operator()(double value) const; // Second overloaded function call operator.
 };
 
 // Implementation of first overloaded function call operator.
@@ -16,14 +16,14 @@ int Squarer::operator()(int value) const
 	return doSquare(value);
 }
 
-// Implementation of second overloaded function call operator.
-double Squarer::operator()(double value) const
+// Implementation of normal member function.
+int Squarer::doSquare(int value) const
 {
 	return value * value;
 }
 
-// Implementation of normal member function.
-int Squarer::doSquare(int value) const
+// Implementation of second overloaded function call operator.
+double Squarer::operator()(double value) const
 {
 	return value * value;
 }
