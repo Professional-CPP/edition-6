@@ -8,10 +8,10 @@ int main(int argc, char* argv[])
 {
 	if (argc < 2) {
 		println(cerr, "Usage: {} string-to-be-encrypted", argv[0]);
-		return -1;
+		return 1;
 	}
 
-	print(encrypt(argv[1]));
+	print("{}", encrypt(argv[1]));
 } 
 
 // Performs a very weak form of "encryption" by 
