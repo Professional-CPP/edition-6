@@ -13,7 +13,7 @@ public:
 	Foo(Foo&&) = default;
 	Foo& operator=(Foo&&) = default;
 
-	static unique_ptr<Foo> create();  // Factory method.
+	static unique_ptr<Foo> create();  // Factory function.
 	// Public functionality...
 	virtual void bar() = 0;
 protected:
