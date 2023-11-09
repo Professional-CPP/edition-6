@@ -11,7 +11,7 @@ void Logger::setLogFilename(string logFilename)
 
 Logger& Logger::instance()
 {
-	static Logger instance; // Magic static.
+	static Logger instance; // Thread-safe static local variable.
 	return instance;
 }
 
