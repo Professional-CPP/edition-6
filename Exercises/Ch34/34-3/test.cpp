@@ -9,9 +9,10 @@ class ReverseString
 public:
 	explicit ReverseString(const string& s)
 	{
-		char* reversedString{ reverseString(const_cast<char*>(s.c_str())) };
-		m_reversedString = reversedString;
-		freeString(reversedString);
+		unique_ptr<char[], decltype(&freeString)> reversedString{
+			reverseString(s.c_str()),
+			freeString };
+		m_reversedString = reversedString.get();
 	}
 
 	const string& getReversedString() const

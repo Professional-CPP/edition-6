@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-char* reverseString(char* string)
+char* reverseString(const char* string)
 {
 	size_t stringLength = strlen(string);
 	char* result = (char*)malloc(stringLength + 1); // +1 for null terminating character

@@ -9,7 +9,7 @@ extern "C" {
 	/// <returns>A newly allocated buffer filled with the reverse of the
 	/// given string.
 	/// The returned memory needs to be freed with freeString().</returns>
-	char* reverseString(char* string);
+	char* reverseString(const char* string);
 
 	/// <summary>Frees the memory allocated for the given string.</summary>
 	/// <param name="string">The string to deallocate.</param>
