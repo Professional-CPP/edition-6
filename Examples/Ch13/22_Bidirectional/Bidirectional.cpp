@@ -3,16 +3,16 @@ import std;
 using namespace std;
 
 // Returns false on error
-bool changeNumberForID(string_view filename, int id, string_view newNumber);
+bool changeNumberForID(const string& filename, int id, string_view newNumber);
 
 int main()
 {
 	changeNumberForID("data.txt", 263, "415-555-3333");
 }
 
-bool changeNumberForID(string_view filename, int id, string_view newNumber)
+bool changeNumberForID(const string& filename, int id, string_view newNumber)
 {
-	fstream ioData{ filename.data() };
+	fstream ioData{ filename };
 	if (!ioData) {
 		println(cerr, "Error while opening file {}.", filename);
 		return false;
