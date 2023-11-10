@@ -14,11 +14,11 @@ void Database::clear()
 	m_persons.clear();
 }
 
-void Database::save(string_view filename) const
+void Database::save(const string& filename) const
 {
-	ofstream outFile{ filename.data(), ios_base::trunc };
+	ofstream outFile{ filename, ios_base::trunc };
 	if (!outFile) {
-		throw runtime_error{ format("Cannot open file: {}.", filename.data()) };
+		throw runtime_error{ format("Cannot open file: {}.", filename) };
 	}
 
 	for (const auto& person : m_persons) {
@@ -34,11 +34,11 @@ void Database::save(string_view filename) const
 	}
 }
 
-void Database::load(string_view filename)
+void Database::load(const string& filename)
 {
-	ifstream inFile{ filename.data() };
+	ifstream inFile{ filename };
 	if (!inFile) {
-		throw runtime_error{ format("Cannot open file: {}.", filename.data()) };
+		throw runtime_error{ format("Cannot open file: {}.", filename) };
 	}
 
 	while (inFile) {

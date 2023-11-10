@@ -2,12 +2,12 @@ import std;
 
 using namespace std;
 
-vector<int> readIntegerFile(string_view filename)
+vector<int> readIntegerFile(const string& filename)
 {
-	ifstream inputStream { filename.data() };
+	ifstream inputStream { filename };
 	if (inputStream.fail()) {
 		// We failed to open the file: throw an exception.
-		const string error{ format("Unable to open file {}.", filename.data()) };
+		const string error{ format("Unable to open file {}.", filename) };
 		throw invalid_argument{ error };
 	}
 
@@ -22,7 +22,7 @@ vector<int> readIntegerFile(string_view filename)
 		// We did not reach the end-of-file.
 		// This means that some error occurred while reading the file.
 		// Throw an exception.
-		const string error{ format("Unable to read file {}.", filename.data()) };
+		const string error{ format("Unable to read file {}.", filename) };
 		throw runtime_error{ error };
 	}
 

@@ -19,9 +19,9 @@ int main()
 
 void changeNumberForID(string_view filename, int id, string_view newNumber)
 {
-	fstream ioData{ filename.data() };
+	fstream ioData{ filename };
 	if (!ioData) {
-		throw runtime_error{ format("Error while opening file {}.", filename.data()) };
+		throw runtime_error{ format("Error while opening file {}.", filename) };
 	}
 
 	// Loop until the end of file

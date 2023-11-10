@@ -2,9 +2,9 @@ import std;
 
 using namespace std;
 
-vector<int> readIntegerFile(string_view filename)
+vector<int> readIntegerFile(const string& filename)
 {
-	ifstream inputStream { filename.data() };
+	ifstream inputStream { filename };
 
 	// Read the integers one-by-one and add them to a vector.
 	vector<int> integers;

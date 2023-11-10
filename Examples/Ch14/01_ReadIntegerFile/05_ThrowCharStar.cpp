@@ -2,9 +2,9 @@ import std;
 
 using namespace std;
 
-vector<int> readIntegerFile(string_view filename)
+vector<int> readIntegerFile(const string& filename)
 {
-	ifstream inputStream { filename.data() };
+	ifstream inputStream { filename };
 	if (inputStream.fail()) {
 		// We failed to open the file: throw an exception.
 		throw "Unable to open file";

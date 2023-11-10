@@ -47,12 +47,12 @@ private:
 
 
 
-vector<int> readIntegerFile(string_view filename)
+vector<int> readIntegerFile(const string& filename)
 {
-	ifstream inputStream { filename.data() };
+	ifstream inputStream { filename };
 	if (inputStream.fail()) {
 		// We failed to open the file: throw an exception.
-		throw FileOpenError{ filename.data() };
+		throw FileOpenError{ filename };
 	}
 
 	vector<int> integers;
@@ -76,7 +76,7 @@ vector<int> readIntegerFile(string_view filename)
 			// We did not reach the end of the string stream.
 			// This means that some error occurred while reading this line.
 			// Throw an exception.
-			throw FileReadError{ filename.data(), lineNumber };
+			throw FileReadError{ filename, lineNumber };
 		}
 	}
 
