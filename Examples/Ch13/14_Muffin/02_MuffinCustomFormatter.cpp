@@ -2,11 +2,9 @@ import std;
 
 using namespace std;
 
-class Muffin
+class Muffin final
 {
 public:
-	virtual ~Muffin() = default;
-
 	const string& getDescription() const { return m_description; }
 	void setDescription(string description) { m_description = std::move(description); }
 

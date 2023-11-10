@@ -2,11 +2,9 @@ import std;
 
 using namespace std;
 
-class Muffin
+class Muffin final
 {
 public:
-	virtual ~Muffin() = default;
-
 	const string& getDescription() const { return m_description; }
 	void setDescription(string description) { m_description = std::move(description); }
 
@@ -31,7 +29,7 @@ public:
 		return begin(context);
 	}
 
-	auto format(const Muffin& muffin, auto& ctx)
+	auto format(const Muffin& muffin, auto& ctx) const
 	{
 		ctx.advance_to(format_to(ctx.out(), "{}, size is {}, {}",
 			muffin.getDescription(), muffin.getSize(),
