@@ -2,10 +2,10 @@ import std;
 
 using namespace std;
 
-expected<int, string> parseInteger(string_view str)
+expected<int, string> parseInteger(const string& str)
 {
 	try {
-		return stoi(str.data());
+		return stoi(str);
 	} catch (const invalid_argument& e) {
 		return unexpected{ e.what() };
 	} catch (const out_of_range& e) {

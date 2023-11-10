@@ -5,7 +5,7 @@ using namespace std;
 class Error
 {
 public:
-	Error(string message) : m_message{ move(message) } { }
+	explicit Error(string message) : m_message{ move(message) } { }
 	const string& getMessage() const { return m_message; }
 
 private:

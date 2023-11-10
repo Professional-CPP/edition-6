@@ -5,7 +5,7 @@ using namespace std;
 class Foo
 {
 public:
-	Foo(int i, string s, bool b)
+	explicit Foo(int i, string s, bool b)
 		: m_int{ i }, m_str{ move(s) }, m_bool{ b }
 	{
 	}

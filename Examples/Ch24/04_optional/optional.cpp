@@ -2,10 +2,10 @@ import std;
 
 using namespace std;
 
-optional<int> Parse(string_view str)
+optional<int> Parse(const string& str)
 {
 	try {
-		return stoi(str.data());
+		return stoi(str);
 	} catch (...) {
 		return {};
 	}

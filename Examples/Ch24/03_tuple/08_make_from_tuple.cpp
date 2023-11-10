@@ -5,7 +5,7 @@ using namespace std;
 class Foo
 {
 public:
-	Foo(string str, int i) : m_str{ move(str) }, m_int{ i } {}
+	explicit Foo(string str, int i) : m_str{ move(str) }, m_int{ i } {}
 
 private:
 	string m_str;

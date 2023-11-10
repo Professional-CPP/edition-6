@@ -32,7 +32,7 @@ Parameter parseParameter(const char* parameter)
 class CommandLineParameterVisitor
 {
 public:
-	CommandLineParameterVisitor(string parameterName) : m_parameterName{ move(parameterName) } {}
+	explicit CommandLineParameterVisitor(string parameterName) : m_parameterName{ move(parameterName) } {}
 
 	void operator()(bool value) { println("Boolean: {} -> {}", m_parameterName, value); }
 	void operator()(int value) { println("Integer: {} -> {}", m_parameterName, value); }
