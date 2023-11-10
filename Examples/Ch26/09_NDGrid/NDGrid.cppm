@@ -4,11 +4,10 @@ import std;
 
 export
 template <typename T, std::size_t N>
-class NDGrid
+class NDGrid final
 {
 public:
 	explicit NDGrid(std::size_t size = DefaultSize) { resize(size); }
-	virtual ~NDGrid() = default;
 
 	NDGrid<T, N-1>& operator[](std::size_t x) { return m_elements[x]; }
 	const NDGrid<T, N-1>& operator[](std::size_t x) const { return m_elements[x]; }
@@ -28,11 +27,10 @@ private:
 
 export
 template <typename T>
-class NDGrid<T, 1>
+class NDGrid<T, 1> final
 {
 public:
 	explicit NDGrid(std::size_t size = DefaultSize) { resize(size); }
-	virtual ~NDGrid() = default;
 
 	T& operator[](std::size_t x) { return m_elements[x]; }
 	const T& operator[](std::size_t x) const { return m_elements[x]; }

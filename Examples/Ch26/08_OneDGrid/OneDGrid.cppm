@@ -4,11 +4,10 @@ import std;
 
 export
 template <typename T>
-class OneDGrid
+class OneDGrid final
 {
 public:
 	explicit OneDGrid(std::size_t size = DefaultSize) { resize(size); }
-	virtual ~OneDGrid() = default;
 
 	T& operator[](std::size_t x) { return m_elements[x]; }
 	const T& operator[](std::size_t x) const { return m_elements[x]; }
