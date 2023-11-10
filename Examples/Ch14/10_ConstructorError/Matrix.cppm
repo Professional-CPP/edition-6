@@ -3,11 +3,15 @@ export module matrix;
 import std;
 
 export template <typename T>
-class Matrix
+class Matrix final
 {
 public:
 	explicit Matrix(std::size_t width, std::size_t height);
-	virtual ~Matrix();
+	~Matrix();
+	Matrix(const Matrix&) = delete;
+	Matrix(Matrix&&) = delete;
+	Matrix& operator=(const Matrix&) = delete;
+	Matrix& operator=(Matrix&&) = delete;
 
 private:
 	void cleanup();
