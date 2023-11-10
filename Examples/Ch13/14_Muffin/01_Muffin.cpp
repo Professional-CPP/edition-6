@@ -18,7 +18,7 @@ public:
 
 	void output() const
 	{
-		printf("%s, size is %d, %s", getDescription().data(), getSize(),
+		printf("%s, size is %d, %s", getDescription().c_str(), getSize(),
 			(hasChocolateChips() ? "has chips" : "no chips"));
 	}
 
