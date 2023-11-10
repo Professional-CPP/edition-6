@@ -6,7 +6,7 @@ using namespace std;
 //// Thanks to the use of exceptions, if the function returns normally,
 //// we know that there were no failures, so we can change the return type to void.
 // Throws runtime_error on error.
-void changeNumberForID(string_view filename, int id, string_view newNumber);
+void changeNumberForID(const string& filename, int id, string_view newNumber);
 
 int main()
 {
@@ -17,7 +17,7 @@ int main()
 	}
 }
 
-void changeNumberForID(string_view filename, int id, string_view newNumber)
+void changeNumberForID(const string& filename, int id, string_view newNumber)
 {
 	fstream ioData{ filename };
 	if (!ioData) {
