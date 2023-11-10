@@ -8,7 +8,7 @@ class KeyValuePair
 {
 public:
 	// See Chapter 9 about using pass-by-value semantics.
-	KeyValuePair(Key key, Value value)
+	explicit KeyValuePair(Key key, Value value)
 		: m_key{ std::move(key) }
 		, m_value{ std::move(value) }
 	{
@@ -34,7 +34,7 @@ class KeyValuePair<Key, const char*>
 {
 public:
 	// See Chapter 9 about using pass-by-value semantics.
-	KeyValuePair(Key key, const char* value)
+	explicit KeyValuePair(Key key, const char* value)
 		: m_key{ std::move(key) }
 		, m_value{ value }
 	{
