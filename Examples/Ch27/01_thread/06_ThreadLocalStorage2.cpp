@@ -1,5 +1,5 @@
-static thread_local int x1; // OK, internal linkage
-thread_local int x2;        // OK, external linkage
+static thread_local int x1; // OK, internal linkage (See Chapter 11)
+thread_local int x2;        // OK, external linkage (See Chapter 11)
 
 class Foo
 {
