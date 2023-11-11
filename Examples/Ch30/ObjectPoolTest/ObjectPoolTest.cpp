@@ -51,7 +51,7 @@ void ObjectPoolTest::testExclusivity()
 	ObjectPool<Serial> myPool;
 	// WHEN acquiring several objects from the pool
 	const size_t numberOfObjectsToRetrieve{ 20 };
-	set<size_t> seenSerialNumbers;
+	set<unsigned> seenSerialNumbers;
 
 	for (size_t i{ 0 }; i < numberOfObjectsToRetrieve; ++i) {
 		auto nextSerial{ myPool.acquireObject() };
