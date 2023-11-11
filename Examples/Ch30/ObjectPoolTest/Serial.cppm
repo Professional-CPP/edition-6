@@ -4,7 +4,7 @@ export class Serial
 {
 public:
 	// A new object gets a next serial number.
-	explicit Serial() : m_serialNumber{ ms_nextSerial++ } {}
+	Serial() : m_serialNumber{ ms_nextSerial++ } {}
 	unsigned getSerialNumber() const { return m_serialNumber; }
 
 private:

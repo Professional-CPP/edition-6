@@ -19,10 +19,10 @@ export module object_pool;
 // shared_ptr is destroyed and its reference count reaches 0.
 export
 template <typename T, typename Allocator = std::allocator<T>>
-class ObjectPool
+class ObjectPool final
 {
 public:
-	explicit ObjectPool() = default;
+	ObjectPool() = default;
 	explicit ObjectPool(const Allocator& allocator);
 	~ObjectPool();
 
@@ -94,7 +94,7 @@ std::shared_ptr<T> ObjectPool<T, Allocator>::acquireObject(Args&&... args)
 	// Initialize, i.e. construct, an instance of T in an
 	// uninitialized block of memory using placement new, and
 	// perfectly forward any provided arguments to the constructor.
-	new(object) T{ std::forward<Args>(args)... };
+	::new(object) T{ std::forward<Args>(args)... };
 
 	// Launder the object pointer.
 	T* constructedObject{ std::launder(object) };
