@@ -33,7 +33,7 @@ template<typename... Args>
 class Log
 {
 public:
-	Log(const Args&... args,
+	explicit Log(const Args&... args,
 		const source_location& location = source_location::current())
 	{
 		Logger::log(location.function_name(), ": ", args...);

@@ -12,14 +12,13 @@ import std;
 // in the constructor, and can reset it with the setOutput() member function.
 // 
 // Finally, the operator<< streams the entire buffer to an output stream.
-export class RingBuffer
+export class RingBuffer final
 {
 public:
 	// Constructs a ring buffer with space for numEntries.
 	// Entries are written to *outStream as they are queued (optional).
 	explicit RingBuffer(std::size_t numEntries = DefaultNumEntries,
 		std::ostream* outStream = nullptr);
-	virtual ~RingBuffer() = default;
 
 	// Adds the string to the ring buffer, possibly overwriting the
 	// oldest string in the buffer (if the buffer is full).
