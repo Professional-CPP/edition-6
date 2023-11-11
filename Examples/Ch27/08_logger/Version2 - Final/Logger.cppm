@@ -7,7 +7,7 @@ class Logger
 {
 public:
 	// Starts a background thread writing log entries to a file.
-	explicit Logger();
+	Logger();
 	// Gracefully shut down background thread.
 	virtual ~Logger();
 	// Prevent copy construction and assignment.

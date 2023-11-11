@@ -7,7 +7,7 @@ class Logger
 {
 public:
 	// Starts a background thread writing log entries to a file.
-	explicit Logger();
+	Logger();
 	// Prevent copy construction and assignment.
 	Logger(const Logger&) = delete;
 	Logger& operator=(const Logger&) = delete;
