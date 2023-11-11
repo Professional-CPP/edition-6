@@ -6,7 +6,7 @@ using namespace std;
 class ExpensiveObject
 {
 public:
-	explicit ExpensiveObject() { /* ... */  }
+	ExpensiveObject() { /* ... */  }
 	virtual ~ExpensiveObject() = default;
 
 	// Member functions to populate the object with specific information.
