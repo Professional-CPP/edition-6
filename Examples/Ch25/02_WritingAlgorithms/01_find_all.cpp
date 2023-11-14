@@ -2,10 +2,10 @@ import std;
 
 using namespace std;
 
-template <input_iterator InputIterator,
-	weakly_incrementable OutputIterator,
-	indirect_unary_predicate<InputIterator> Predicate>
-OutputIterator find_all(InputIterator first, InputIterator last,
+template <forward_iterator ForwardIterator,
+	output_iterator<ForwardIterator> OutputIterator,
+	indirect_unary_predicate<ForwardIterator> Predicate>
+OutputIterator find_all(ForwardIterator first, ForwardIterator last,
 	OutputIterator dest, Predicate pred)
 {
 	while (first != last) {
@@ -20,7 +20,7 @@ OutputIterator find_all(InputIterator first, InputIterator last,
 
 int main()
 {
-	vector vec{ 5, 4, 5, 4, 10, 6, 5, 8, 10 };
+	vector<int> vec{ 5, 4, 5, 4, 10, 6, 5, 8, 10 };
 	vector<vector<int>::iterator> matches;
 
 	find_all(begin(vec), end(vec), back_inserter(matches),

@@ -2,12 +2,12 @@ import std;
 
 using namespace std;
 
-template <input_iterator InputIterator,
-	sentinel_for<InputIterator> Sentinel,
-	weakly_incrementable OutputIterator,
+template <forward_iterator ForwardIterator,
+	sentinel_for<ForwardIterator> Sentinel,
+	output_iterator<ForwardIterator> OutputIterator,
 	typename Projection = std::identity,
-	indirect_unary_predicate<projected<InputIterator, Projection>> Predicate>
-OutputIterator find_all(InputIterator first, Sentinel last,
+	indirect_unary_predicate<projected<ForwardIterator, Projection>> Predicate>
+OutputIterator find_all(ForwardIterator first, Sentinel last,
 	OutputIterator dest, Predicate pred, Projection proj = {})
 {
 	while (first != last) {
@@ -23,7 +23,7 @@ OutputIterator find_all(InputIterator first, Sentinel last,
 
 int main()
 {
-	vector vec{ 5, 4, 5, 4, 10, 6, 5, 8, 10 };
+	vector<int> vec{ 5, 4, 5, 4, 10, 6, 5, 8, 10 };
 	vector<vector<int>::iterator> matches;
 
 	find_all(begin(vec), end(vec), back_inserter(matches),
