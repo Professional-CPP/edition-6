@@ -14,8 +14,7 @@ namespace ProCpp
 		// For insert to be successful, the value shall not be in the graph yet. 
 		// Returns true if a new node with given value has been added to
 		// the graph, and false if there was already a node with the given value.
-		bool insert(const T& node_value);
-		bool insert(T&& node_value);
+		bool insert(T node_value);
 
 		// Returns true if the given node value was erased, false otherwise.
 		bool erase(const T& node_value);
@@ -29,16 +28,16 @@ namespace ProCpp
 		// Removes all nodes from the graph.
 		void clear() noexcept;
 
-		// Returns a reference to the node with given index.
-		// No bounds checking is done.
-		T& operator[](std::size_t index);
+		// Returns a reference to the value in the node with given index
+		// without bounds checking.
 		const T& operator[](std::size_t index) const;
 
-		// Two directed graphs are equal if they have the same nodes and edges.
+		// Two directed graphs are equal if their sets of nodes are equal (where
+		// nodes with the same T value are considered equal) and the same number
+		// of edges between each corresponding pair of nodes.
 		// The order in which the nodes and edges have been added does not
 		// affect equality.
 		bool operator==(const directed_graph& rhs) const;
-		bool operator!=(const directed_graph& rhs) const;
 
 		// Swaps all nodes between this graph and the given graph.
 		void swap(directed_graph& other_graph) noexcept;
@@ -53,17 +52,17 @@ namespace ProCpp
 	private:
 		friend details::graph_node<T>;
 
-		using nodes_container_type = std::vector<details::graph_node<T>>;
-		nodes_container_type m_nodes;
+		using node_container_type = std::vector<details::graph_node<T>>;
+		node_container_type m_nodes;
 
 		// Helper member functions to return an iterator to the given node, or the
 		// end iterator if the given node is not in the graph.
-		typename nodes_container_type::iterator find_node(const T& node_value);
-		typename nodes_container_type::const_iterator find_node(const T& node_value) const;
+		typename node_container_type::iterator find_node(const T& node_value);
+		typename node_container_type::const_iterator find_node(const T& node_value) const;
 
 		// Given an iterator to a node, removes that node from all adjacency lists
 		// of all other nodes.
-		void remove_all_links_to(typename nodes_container_type::const_iterator node_iter);
+		void remove_all_links_to(typename node_container_type::const_iterator node_iter);
 
 		// Given a set of adjacency node indices, returns the corresponding
 		// set of node values.
@@ -71,7 +70,7 @@ namespace ProCpp
 			const typename details::graph_node<T>::adjacency_list_type& indices) const;
 
 		// Given an iterator to a node, returns the index of that node in the nodes container.
-		[[nodiscard]] std::size_t get_index_of_node(const typename nodes_container_type::const_iterator& node) const noexcept;
+		[[nodiscard]] std::size_t get_index_of_node(typename node_container_type::const_iterator node) const noexcept;
 	};
 
 	// The following stand-alone swap() function simply
@@ -84,14 +83,7 @@ namespace ProCpp
 	}
 
 	template<typename T>
-	bool directed_graph<T>::insert(const T& node_value)
-	{
-		T copy{ node_value };
-		return insert(std::move(copy));
-	}
-
-	template<typename T>
-	bool directed_graph<T>::insert(T&& node_value)
+	bool directed_graph<T>::insert(T node_value)
 	{
 		auto iter{ find_node(node_value) };
 		if (iter != std::end(m_nodes))
@@ -106,10 +98,9 @@ namespace ProCpp
 	}
 
 	template<typename T>
-	std::size_t directed_graph<T>::get_index_of_node(const typename nodes_container_type::const_iterator& node) const noexcept
+	std::size_t directed_graph<T>::get_index_of_node(typename node_container_type::const_iterator node) const noexcept
 	{
-		const auto index{ std::distance(std::cbegin(m_nodes), node) };
-		return static_cast<std::size_t>(index);
+		return node - std::cbegin(m_nodes);
 	}
 
 	template<typename T>
@@ -142,26 +133,13 @@ namespace ProCpp
 	}
 
 	template<typename T>
-	void directed_graph<T>::remove_all_links_to(typename nodes_container_type::const_iterator node_iter)
+	void directed_graph<T>::remove_all_links_to(typename node_container_type::const_iterator node_iter)
 	{
 		const std::size_t node_index{ get_index_of_node(node_iter) };
 
-		// Iterate over all adjacency lists of all nodes.
 		for (auto&& node : m_nodes)
 		{
-			auto& adjacencyIndices{ node.get_adjacent_nodes_indices() };
-			// First, remove references to the to-be-deleted node.
-			adjacencyIndices.erase(node_index);
-			// Second, modify all adjacency indices to account for the removal of a node.
-			std::vector<std::size_t> indices(std::begin(adjacencyIndices), std::end(adjacencyIndices));
-			std::for_each(std::begin(indices), std::end(indices),
-				[node_index](std::size_t& index) {
-					if (index > node_index) {
-						--index;
-					}
-				});
-			adjacencyIndices.clear();
-			adjacencyIndices.insert(std::begin(indices), std::end(indices));
+			node.remove_node_index(node_index);
 		}
 	}
 
@@ -185,24 +163,19 @@ namespace ProCpp
 	}
 
 	template<typename T>
-	typename directed_graph<T>::nodes_container_type::iterator
+	typename directed_graph<T>::node_container_type::iterator
 		directed_graph<T>::find_node(const T& node_value)
 	{
 		return std::find_if(std::begin(m_nodes), std::end(m_nodes),
-			[&node_value](const auto& node) { return node.value() == node_value; });
+			[&](const auto& node) { return node.value() == node_value; });
 	}
 
 	template<typename T>
-	typename directed_graph<T>::nodes_container_type::const_iterator
+	typename directed_graph<T>::node_container_type::const_iterator
 		directed_graph<T>::find_node(const T& node_value) const
 	{
-		return const_cast<directed_graph<T>*>(this)->find_node(node_value);
-	}
-
-	template<typename T>
-	T& directed_graph<T>::operator[](std::size_t index)
-	{
-		return m_nodes[index].value();
+		return std::find_if(std::begin(m_nodes), std::end(m_nodes),
+			[&](const auto& node) { return node.value() == node_value; });
 	}
 
 	template<typename T>
@@ -255,12 +228,6 @@ namespace ProCpp
 			}
 		}
 		return true;
-	}
-
-	template<typename T>
-	bool directed_graph<T>::operator!=(const directed_graph& rhs) const
-	{
-		return !(*this == rhs);
 	}
 
 	template<typename T>

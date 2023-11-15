@@ -19,14 +19,12 @@ namespace ProCpp
 		using iterator_category = std::bidirectional_iterator_tag;
 		using pointer = const value_type*;
 		using reference = const value_type&;
-		using iterator_type = typename DirectedGraph::nodes_container_type::const_iterator;
+		using node_container_iterator = typename DirectedGraph::node_container_type::const_iterator;
 
 		// Bidirectional iterators must supply a default constructor.
-		// Using an iterator constructed with the default constructor
-		// is undefined, so it doesn't matter how it's initialized.
 		const_directed_graph_iterator() = default;
 
-		const_directed_graph_iterator(iterator_type it);
+		explicit const_directed_graph_iterator(node_container_iterator it);
 
 		reference operator*() const;
 
@@ -46,16 +44,12 @@ namespace ProCpp
 	protected:
 		friend class directed_graph<value_type>;
 
-		iterator_type m_nodeIterator;
-
-		// Helper member functions for operator++ and operator--
-		void increment();
-		void decrement();
+		node_container_iterator m_nodeIterator;
 	};
 
 	template<typename DirectedGraph>
 	const_directed_graph_iterator<DirectedGraph>::const_directed_graph_iterator(
-		iterator_type it) : m_nodeIterator{ it }
+		node_container_iterator it) : m_nodeIterator{ it }
 	{
 	}
 
@@ -73,61 +67,41 @@ namespace ProCpp
 	typename const_directed_graph_iterator<DirectedGraph>::pointer
 		const_directed_graph_iterator<DirectedGraph>::operator->() const
 	{
-		return &(m_nodeIterator->value());
+		return &m_nodeIterator->value();
 	}
 
-	// Defer the details to the increment() helper.
 	template<typename DirectedGraph>
 	const_directed_graph_iterator<DirectedGraph>&
 		const_directed_graph_iterator<DirectedGraph>::operator++()
 	{
-		increment();
+		++m_nodeIterator;
 		return *this;
 	}
 
-	// Defer the details to the increment() helper.
 	template<typename DirectedGraph>
 	const_directed_graph_iterator<DirectedGraph>
 		const_directed_graph_iterator<DirectedGraph>::operator++(int)
 	{
 		auto oldIt{ *this };
-		increment();
+		++*this;
 		return oldIt;
 	}
 
-	// Defer the details to the decrement() helper.
 	template<typename DirectedGraph>
 	const_directed_graph_iterator<DirectedGraph>&
 		const_directed_graph_iterator<DirectedGraph>::operator--()
 	{
-		decrement();
+		--m_nodeIterator;
 		return *this;
 	}
 
-	// Defer the details to the decrement() helper.
 	template<typename DirectedGraph>
 	const_directed_graph_iterator<DirectedGraph>
 		const_directed_graph_iterator<DirectedGraph>::operator--(int)
 	{
 		auto oldIt{ *this };
-		decrement();
+		--*this;
 		return oldIt;
-	}
-
-	// Behavior is undefined if m_nodeIterator already refers to the past-the-end
-	// element, or is otherwise invalid.
-	template<typename DirectedGraph>
-	void const_directed_graph_iterator<DirectedGraph>::increment()
-	{
-		++m_nodeIterator;
-	}
-
-	// Behavior is undefined if m_nodeIterator already refers to the first
-	// element, or is otherwise invalid.
-	template<typename DirectedGraph>
-	void const_directed_graph_iterator<DirectedGraph>::decrement()
-	{
-		--m_nodeIterator;
 	}
 
 }

@@ -13,26 +13,25 @@ namespace ProCpp
 	{
 		std::stringstream output;
 
-		output << std::format("digraph {} {{", graph_name.data()) << std::endl;
+		output << std::format("digraph {} {{\n", graph_name);
 		for (auto&& node : graph)
 		{
-			const auto b{ graph.cbegin(node) };
-			const auto e{ graph.cend(node) };
-			if (b == e)
+			auto adjacent_nodes{ graph.nodes_adjacent_to(node) };
+			if (!adjacent_nodes.has_value())
 			{
-				output << node << std::endl;
+				output << node << '\n';
 			}
 			else
 			{
-				for (auto iter{ b }; iter != e; ++iter)
+				for (const auto& adjacent_node : *adjacent_nodes)
 				{
-					output << std::format("{} -> {}", node, *iter) << std::endl;
+					output << std::format("{} -> {}\n", node, adjacent_node);
 				}
 			}
 		}
-		output << "}" << std::endl;
+		output << "}\n";
 
-		return output.str();
+		return std::move(output).str();
 	}
 
 }

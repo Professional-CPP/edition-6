@@ -15,14 +15,12 @@ namespace ProCpp
 		using iterator_category = std::bidirectional_iterator_tag;
 		using pointer = value_type* ;
 		using reference = value_type& ;
-		using iterator_type = typename DirectedGraph::nodes_container_type::iterator;
+		using node_container_iterator = typename DirectedGraph::node_container_type::iterator;
 
 		// Bidirectional iterators must supply a default constructor.
-		// Using an iterator constructed with the default constructor
-		// is undefined, so it doesn't matter how it's initialized.
 		directed_graph_iterator() = default;
 
-		directed_graph_iterator(iterator_type it);
+		explicit directed_graph_iterator(node_container_iterator it);
 
 		reference operator*() const;
 
@@ -39,7 +37,7 @@ namespace ProCpp
 
 	template<typename DirectedGraph>
 	directed_graph_iterator<DirectedGraph>::directed_graph_iterator(
-		iterator_type it) : const_directed_graph_iterator<DirectedGraph>{ it }
+		node_container_iterator it) : const_directed_graph_iterator<DirectedGraph>{ it }
 	{
 	}
 
@@ -60,41 +58,37 @@ namespace ProCpp
 		return const_cast<pointer>(&(this->m_nodeIterator->value()));
 	}
 
-	// Defer the details to the increment() helper in the base class.
 	template<typename DirectedGraph>
 	directed_graph_iterator<DirectedGraph>&
 		directed_graph_iterator<DirectedGraph>::operator++()
 	{
-		this->increment();
+		++(this->m_nodeIterator);
 		return *this;
 	}
 
-	// Defer the details to the increment() helper in the base class.
 	template<typename DirectedGraph>
 	directed_graph_iterator<DirectedGraph>
 		directed_graph_iterator<DirectedGraph>::operator++(int)
 	{
 		auto oldIt{ *this };
-		this->increment();
+		++*this;
 		return oldIt;
 	}
 
-	// Defer the details to the decrement() helper in the base class.
 	template<typename DirectedGraph>
 	directed_graph_iterator<DirectedGraph>&
 		directed_graph_iterator<DirectedGraph>::operator--()
 	{
-		this->decrement();
+		--(this->m_nodeIterator);
 		return *this;
 	}
 
-	// Defer the details to the decrement() helper in the base class.
 	template<typename DirectedGraph>
 	directed_graph_iterator<DirectedGraph>
 		directed_graph_iterator<DirectedGraph>::operator--(int)
 	{
 		auto oldIt{ *this };
-		this->decrement();
+		--*this;
 		return oldIt;
 	}
 

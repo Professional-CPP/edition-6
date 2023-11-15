@@ -64,12 +64,10 @@ namespace ProCpp
 		{
 		public:
 			// Constructs a graph_node for the given value.
-			graph_node(directed_graph<T, A>& graph, const T& t);
-			graph_node(directed_graph<T, A>& graph, T&& t);
+			explicit graph_node(directed_graph<T, A>& graph, T t);
 
 			// Constructs a graph_node for the given value and with given allocator.
-			graph_node(directed_graph<T, A>& graph, const T& t, const A& allocator);
-			graph_node(directed_graph<T, A>& graph, T&& t, const A& allocator);
+			explicit graph_node(directed_graph<T, A>& graph, T t, const A& allocator);
 
 			~graph_node();
 
@@ -82,51 +80,35 @@ namespace ProCpp
 			graph_node& operator=(graph_node&& rhs) noexcept;
 
 			// Returns a reference to the stored value.
-			[[nodiscard]] T& value() noexcept;
-			[[nodiscard]] const T& value() const noexcept;
-
-			// Equality operators.
-			bool operator==(const graph_node& rhs) const;
-			bool operator!=(const graph_node& rhs) const;
-
-		private:
-			friend class directed_graph<T, A>;
-
-			// A reference to the graph this node is in.
-			directed_graph<T, A>& m_graph;
+			[[nodiscard]] T& value() noexcept { return *(this->m_data); }
+			[[nodiscard]] const T& value() const noexcept { return *(this->m_data); }
 
 			// A type alias for the container type used to store the adjacency list.
 			using adjacency_list_type = std::set<std::size_t>;
 
 			// Returns a reference to the adjacency list.
-			[[nodiscard]] adjacency_list_type& get_adjacent_nodes_indices();
-			[[nodiscard]] const adjacency_list_type& get_adjacent_nodes_indices() const;
+			[[nodiscard]] auto& get_adjacent_nodes_indices() { return m_adjacentNodeIndices; }
+			[[nodiscard]] const auto& get_adjacent_nodes_indices() const { return m_adjacentNodeIndices; }
+
+			// Removes a given node index from the adjacency list and updates
+			// the remaining indices to account for the shift in indices.
+			void remove_node_index(std::size_t node_index);
+
+		private:
+			// A reference to the graph this node is in.
+			directed_graph<T, A>& m_graph;
 
 			adjacency_list_type m_adjacentNodeIndices;
 		};
 
 		template<typename T, typename A>
-		graph_node<T, A>::graph_node(directed_graph<T, A>& graph, const T& t)
-			: graph_node<T, A>{ graph, t, A{} }
-		{
-		}
-
-		template<typename T, typename A>
-		graph_node<T, A>::graph_node(directed_graph<T, A>& graph, const T& t, const A& allocator)
-			: m_graph{ graph }
-			, graph_node_allocator<T, A>{ allocator }
-		{
-			new(this->m_data) T{ t };
-		}
-
-		template<typename T, typename A>
-		graph_node<T, A>::graph_node(directed_graph<T, A>& graph, T&& t)
+		graph_node<T, A>::graph_node(directed_graph<T, A>& graph, T t)
 			: graph_node<T, A>{ graph, std::move(t), A{} }
 		{
 		}
 
 		template<typename T, typename A>
-		graph_node<T, A>::graph_node(directed_graph<T, A>& graph, T&& t, const A& allocator)
+		graph_node<T, A>::graph_node(directed_graph<T, A>& graph, T t, const A& allocator)
 			: m_graph{ graph }
 			, graph_node_allocator<T, A>{ allocator }
 		{
@@ -184,43 +166,23 @@ namespace ProCpp
 		}
 
 		template<typename T, typename A>
-		T& graph_node<T, A>::value() noexcept
+		void graph_node<T, A>::remove_node_index(std::size_t node_index)
 		{
-			return *(this->m_data);
-		}
+			// First, remove references to the to-be-deleted node.
+			m_adjacentNodeIndices.erase(node_index);
 
-		template<typename T, typename A>
-		const T& graph_node<T, A>::value() const noexcept
-		{
-			return *(this->m_data);
-		}
-
-		template<typename T, typename A>
-		bool graph_node<T, A>::operator==(const graph_node& rhs) const
-		{
-			return &m_graph == &rhs.m_graph &&
-				*(this->m_data) == *(rhs.m_data) &&
-				m_adjacentNodeIndices == rhs.m_adjacentNodeIndices;
-		}
-
-		template<typename T, typename A>
-		bool graph_node<T, A>::operator!=(const graph_node& rhs) const
-		{
-			return !(*this == rhs);
-		}
-
-		template<typename T, typename A>
-		typename graph_node<T, A>::adjacency_list_type&
-			graph_node<T, A>::get_adjacent_nodes_indices()
-		{
-			return m_adjacentNodeIndices;
-		}
-
-		template<typename T, typename A>
-		const typename graph_node<T, A>::adjacency_list_type&
-			graph_node<T, A>::get_adjacent_nodes_indices() const
-		{
-			return m_adjacentNodeIndices;
+			// Second, modify all adjacency indices to account for the removal of a node.
+			// std::set doesn't let us modify its elements in place,
+			// so we rebuild the set from scratch.
+			std::vector<std::size_t> indices(std::begin(m_adjacentNodeIndices), std::end(m_adjacentNodeIndices));
+			std::for_each(std::begin(indices), std::end(indices),
+				[node_index](std::size_t& index) {
+					if (index > node_index) {
+						--index;
+					}
+				});
+			m_adjacentNodeIndices.clear();
+			m_adjacentNodeIndices.insert(std::begin(indices), std::end(indices));
 		}
 
 	}
