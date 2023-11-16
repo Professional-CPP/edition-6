@@ -25,7 +25,7 @@ namespace ProCpp
 
 			// Copy and move assignment operators.
 			graph_node_allocator& operator=(const graph_node_allocator&) = delete;
-			graph_node_allocator& operator=(graph_node_allocator&&) noexcept = delete;
+			graph_node_allocator& operator=(graph_node_allocator&&) = delete;
 
 			~graph_node_allocator();
 
@@ -64,10 +64,10 @@ namespace ProCpp
 		{
 		public:
 			// Constructs a graph_node for the given value.
-			explicit graph_node(directed_graph<T, A>& graph, T t);
+			explicit graph_node(directed_graph<T, A>* graph, T t);
 
 			// Constructs a graph_node for the given value and with given allocator.
-			explicit graph_node(directed_graph<T, A>& graph, T t, const A& allocator);
+			explicit graph_node(directed_graph<T, A>* graph, T t, const A& allocator);
 
 			~graph_node();
 
@@ -77,10 +77,9 @@ namespace ProCpp
 
 			// Copy and move assignment operators.
 			graph_node& operator=(const graph_node& rhs);
-			graph_node& operator=(graph_node&& rhs) noexcept;
+			graph_node& operator=(graph_node&& rhs);
 
 			// Returns a reference to the stored value.
-			[[nodiscard]] T& value() noexcept { return *(this->m_data); }
 			[[nodiscard]] const T& value() const noexcept { return *(this->m_data); }
 
 			// A type alias for the container type used to store the adjacency list.
@@ -95,24 +94,24 @@ namespace ProCpp
 			void remove_node_index(std::size_t node_index);
 
 		private:
-			// A reference to the graph this node is in.
-			directed_graph<T, A>& m_graph;
+			// A pointer to the graph this node is in.
+			directed_graph<T, A>* m_graph;
 
 			adjacency_list_type m_adjacentNodeIndices;
 		};
 
 		template<typename T, typename A>
-		graph_node<T, A>::graph_node(directed_graph<T, A>& graph, T t)
+		graph_node<T, A>::graph_node(directed_graph<T, A>* graph, T t)
 			: graph_node<T, A>{ graph, std::move(t), A{} }
 		{
 		}
 
 		template<typename T, typename A>
-		graph_node<T, A>::graph_node(directed_graph<T, A>& graph, T t, const A& allocator)
+		graph_node<T, A>::graph_node(directed_graph<T, A>* graph, T t, const A& allocator)
 			: m_graph{ graph }
 			, graph_node_allocator<T, A>{ allocator }
 		{
-			new(this->m_data) T{ std::move(t) };
+			std::allocator_traits<A>::construct(this->m_allocator, this->m_data, std::move(t));
 		}
 
 		template<typename T, typename A>
@@ -120,7 +119,7 @@ namespace ProCpp
 		{
 			if (this->m_data)
 			{
-				std::destroy_at(this->m_data);
+				std::allocator_traits<A>::destroy(this->m_allocator, this->m_data);
 			}
 		}
 
@@ -130,7 +129,7 @@ namespace ProCpp
 			, m_graph{ src.m_graph }
 			, m_adjacentNodeIndices{ src.m_adjacentNodeIndices }
 		{
-			new(this->m_data) T{ *(src.m_data) };
+			std::allocator_traits<A>::construct(this->m_allocator, this->m_data, *(src.m_data));
 		}
 
 		template<typename T, typename A>
@@ -148,14 +147,14 @@ namespace ProCpp
 			if (this != &rhs)
 			{
 				m_adjacentNodeIndices = rhs.m_adjacentNodeIndices;
-				new(this->m_data) T{ *(rhs.m_data) };
+				std::allocator_traits<A>::construct(this->m_allocator, this->m_data, *(rhs.m_data));
 			}
 			return *this;
 		}
 
 		template<typename T, typename A>
 		typename graph_node<T, A>::graph_node&
-			graph_node<T, A>::operator=(graph_node&& rhs) noexcept
+			graph_node<T, A>::operator=(graph_node&& rhs)
 		{
 			if (this != &rhs)
 			{

@@ -1,4 +1,4 @@
-export module directed_graph:const_adjacent_nodes_iterator;
+export module directed_graph:const_adjacent_nodes_iterator_impl;
 
 import std;
 

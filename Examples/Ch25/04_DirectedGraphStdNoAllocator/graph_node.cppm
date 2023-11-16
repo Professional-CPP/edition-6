@@ -25,7 +25,6 @@ namespace ProCpp
 			}
 
 			// Returns a reference to the stored value.
-			[[nodiscard]] T& value() noexcept { return m_data; }
 			[[nodiscard]] const T& value() const noexcept { return m_data; }
 
 			// A type alias for the container type used to store the adjacency list.

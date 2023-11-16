@@ -1,4 +1,4 @@
-export module directed_graph:const_directed_graph_iterator;
+export module directed_graph:const_directed_graph_iterator_impl;
 
 import std;
 
@@ -11,7 +11,7 @@ namespace ProCpp
 	class directed_graph;
 
 	template<typename DirectedGraph>
-	class const_directed_graph_iterator
+	class const_directed_graph_iterator_impl
 	{
 	public:
 		using value_type = typename DirectedGraph::value_type;
@@ -22,9 +22,9 @@ namespace ProCpp
 		using node_container_iterator = typename DirectedGraph::node_container_type::const_iterator;
 
 		// Bidirectional iterators must supply a default constructor.
-		const_directed_graph_iterator() = default;
+		const_directed_graph_iterator_impl() = default;
 
-		explicit const_directed_graph_iterator(node_container_iterator it);
+		explicit const_directed_graph_iterator_impl(node_container_iterator it);
 
 		reference operator*() const;
 
@@ -32,14 +32,14 @@ namespace ProCpp
 		// So, return a pointer.
 		pointer operator->() const;
 
-		const_directed_graph_iterator& operator++();
-		const_directed_graph_iterator operator++(int);
+		const_directed_graph_iterator_impl& operator++();
+		const_directed_graph_iterator_impl operator++(int);
 
-		const_directed_graph_iterator& operator--();
-		const_directed_graph_iterator operator--(int);
+		const_directed_graph_iterator_impl& operator--();
+		const_directed_graph_iterator_impl operator--(int);
 
 		// Defaulted operator==.
-		bool operator==(const const_directed_graph_iterator&) const = default;
+		bool operator==(const const_directed_graph_iterator_impl&) const = default;
 
 	protected:
 		friend class directed_graph<value_type, typename DirectedGraph::allocator_type>;
@@ -48,15 +48,15 @@ namespace ProCpp
 	};
 
 	template<typename DirectedGraph>
-	const_directed_graph_iterator<DirectedGraph>::const_directed_graph_iterator(
+	const_directed_graph_iterator_impl<DirectedGraph>::const_directed_graph_iterator_impl(
 		node_container_iterator it) : m_nodeIterator{ it }
 	{
 	}
 
 	// Return a reference to the actual element.
 	template<typename DirectedGraph>
-	typename const_directed_graph_iterator<DirectedGraph>::reference
-		const_directed_graph_iterator<DirectedGraph>::operator*() const
+	typename const_directed_graph_iterator_impl<DirectedGraph>::reference
+		const_directed_graph_iterator_impl<DirectedGraph>::operator*() const
 	{
 		return m_nodeIterator->value();
 	}
@@ -64,23 +64,23 @@ namespace ProCpp
 	// Return a pointer to the actual element, so the compiler can
 	// apply -> to it to access the actual desired field.
 	template<typename DirectedGraph>
-	typename const_directed_graph_iterator<DirectedGraph>::pointer
-		const_directed_graph_iterator<DirectedGraph>::operator->() const
+	typename const_directed_graph_iterator_impl<DirectedGraph>::pointer
+		const_directed_graph_iterator_impl<DirectedGraph>::operator->() const
 	{
 		return &m_nodeIterator->value();
 	}
 
 	template<typename DirectedGraph>
-	const_directed_graph_iterator<DirectedGraph>&
-		const_directed_graph_iterator<DirectedGraph>::operator++()
+	const_directed_graph_iterator_impl<DirectedGraph>&
+		const_directed_graph_iterator_impl<DirectedGraph>::operator++()
 	{
 		++m_nodeIterator;
 		return *this;
 	}
 
 	template<typename DirectedGraph>
-	const_directed_graph_iterator<DirectedGraph>
-		const_directed_graph_iterator<DirectedGraph>::operator++(int)
+	const_directed_graph_iterator_impl<DirectedGraph>
+		const_directed_graph_iterator_impl<DirectedGraph>::operator++(int)
 	{
 		auto oldIt{ *this };
 		++*this;
@@ -88,16 +88,16 @@ namespace ProCpp
 	}
 
 	template<typename DirectedGraph>
-	const_directed_graph_iterator<DirectedGraph>&
-		const_directed_graph_iterator<DirectedGraph>::operator--()
+	const_directed_graph_iterator_impl<DirectedGraph>&
+		const_directed_graph_iterator_impl<DirectedGraph>::operator--()
 	{
 		--m_nodeIterator;
 		return *this;
 	}
 
 	template<typename DirectedGraph>
-	const_directed_graph_iterator<DirectedGraph>
-		const_directed_graph_iterator<DirectedGraph>::operator--(int)
+	const_directed_graph_iterator_impl<DirectedGraph>
+		const_directed_graph_iterator_impl<DirectedGraph>::operator--(int)
 	{
 		auto oldIt{ *this };
 		--*this;

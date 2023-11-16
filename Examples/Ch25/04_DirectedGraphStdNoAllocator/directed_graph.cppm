@@ -1,9 +1,7 @@
 export module directed_graph;
 
-//export import :adjacent_nodes_iterator;
-export import :const_adjacent_nodes_iterator;
-export import :directed_graph_iterator;
-export import :const_directed_graph_iterator;
+export import :const_directed_graph_iterator_impl;
+export import :const_adjacent_nodes_iterator_impl;
 import :node;
 import std;
 
@@ -21,8 +19,8 @@ namespace ProCpp
 		using size_type = std::size_t;
 		using difference_type = std::ptrdiff_t;
 
-		using iterator = const_directed_graph_iterator<directed_graph>;
-		using const_iterator = const_directed_graph_iterator<directed_graph>;
+		using iterator = const_directed_graph_iterator_impl<directed_graph>;
+		using const_iterator = const_directed_graph_iterator_impl<directed_graph>;
 		using reverse_iterator = std::reverse_iterator<iterator>;
 		using const_reverse_iterator = std::reverse_iterator<const_iterator>;
 
@@ -36,7 +34,7 @@ namespace ProCpp
 		std::pair<iterator, bool> insert(T node_value);
 		iterator insert(const_iterator hint, T node_value);
 
-		template<std::forward_iterator Iter>
+		template<std::input_iterator Iter>
 		void insert(Iter first, Iter last);
 
 		// Returns an iterator to the element after the last deleted element.
@@ -99,8 +97,7 @@ namespace ProCpp
 		[[nodiscard]] bool empty() const noexcept;
 
 	private:
-		friend class directed_graph_iterator<directed_graph>;
-		friend class const_directed_graph_iterator<directed_graph>;
+		friend class const_directed_graph_iterator_impl<directed_graph>;
 		friend details::graph_node<T>;
 
 		using node_container_type = std::vector<details::graph_node<T>>;
@@ -157,7 +154,7 @@ namespace ProCpp
 	}
 
 	template<typename T>
-	template<std::forward_iterator Iter>
+	template<std::input_iterator Iter>
 	void directed_graph<T>::insert(Iter first, Iter last)
 	{
 		// Copy each element in the range by using an insert_iterator adapter.
@@ -399,23 +396,5 @@ namespace ProCpp
 	{
 		return m_nodes.empty();
 	}
-
-
-
-
-
-
-
-
-	template class directed_graph_iterator<directed_graph<int>>;
-
-
-
-
-
-
-
-
-
 
 }

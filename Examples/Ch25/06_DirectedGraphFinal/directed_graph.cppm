@@ -1,9 +1,7 @@
 export module directed_graph;
 
-export import :adjacent_nodes_iterator;
-export import :const_adjacent_nodes_iterator;
-export import :directed_graph_iterator;
-export import :const_directed_graph_iterator;
+export import :const_directed_graph_iterator_impl;
+export import :const_adjacent_nodes_iterator_impl;
 import :node;
 import std;
 
@@ -22,8 +20,8 @@ namespace ProCpp
 		using size_type = std::size_t;
 		using difference_type = std::ptrdiff_t;
 
-		using iterator = const_directed_graph_iterator<directed_graph>;
-		using const_iterator = const_directed_graph_iterator<directed_graph>;
+		using iterator = const_directed_graph_iterator_impl<directed_graph>;
+		using const_iterator = const_directed_graph_iterator_impl<directed_graph>;
 		using reverse_iterator = std::reverse_iterator<iterator>;
 		using const_reverse_iterator = std::reverse_iterator<const_iterator>;
 
@@ -31,16 +29,16 @@ namespace ProCpp
 
 		directed_graph() noexcept(noexcept(A{})) = default;
 		explicit directed_graph(const A& allocator) noexcept;
-		directed_graph(std::initializer_list<T> init, const A& allocator = A());
+		directed_graph(std::initializer_list<T> il, const A& allocator = A());
 
-		template<std::forward_iterator Iter>
+		template<std::input_iterator Iter>
 		directed_graph(Iter first, Iter last, const A& allocator = A());
 
-		directed_graph& operator=(std::initializer_list<T> init);
+		directed_graph& operator=(std::initializer_list<T> il);
 
-		void assign(std::initializer_list<T> init);
+		void assign(std::initializer_list<T> il);
 
-		template<std::forward_iterator Iter>
+		template<std::input_iterator Iter>
 		void assign(Iter first, Iter last);
 
 		[[nodiscard]] allocator_type get_allocator() const;
@@ -53,10 +51,10 @@ namespace ProCpp
 		std::pair<iterator, bool> insert(T node_value);
 		iterator insert(const_iterator hint, T node_value);
 		
-		template<std::forward_iterator Iter>
+		template<std::input_iterator Iter>
 		void insert(Iter first, Iter last);
 
-		void insert(std::initializer_list<T> init);
+		void insert(std::initializer_list<T> il);
 
 		template<std::ranges::input_range Range>
 		void insert_range(Range&& range);
@@ -132,14 +130,12 @@ namespace ProCpp
 		[[nodiscard]] bool empty() const noexcept;
 
 	private:
-		friend class directed_graph_iterator<directed_graph>;
-		friend class const_directed_graph_iterator<directed_graph>;
+		friend class const_directed_graph_iterator_impl<directed_graph>;
 		friend class details::graph_node<T, A>;
 
-		using node_container_type = std::vector<details::graph_node<T, A>>;
+		using node_container_type = std::vector<details::graph_node<T, A>,
+			typename std::allocator_traits<A>::template rebind_alloc<details::graph_node<T, A>>>;
 		node_container_type m_nodes;
-
-		A m_allocator;
 
 		// Helper member functions to return an iterator to the given node, or the end iterator
 		// if the given node is not in the graph.
@@ -152,7 +148,8 @@ namespace ProCpp
 
 		// Given a set of adjacency node indices, returns the corresponding
 		// set of node values.
-		[[nodiscard]] std::set<T, std::less<>, A> get_adjacent_nodes_values(
+		// The returned set is only for internal use, no need to use the allocator.
+		[[nodiscard]] std::set<T> get_adjacent_nodes_values(
 			const typename details::graph_node<T, A>::adjacency_list_type& indices) const;
 
 		// Given an iterator to a node, returns the index of that node in the nodes container.
@@ -171,19 +168,18 @@ namespace ProCpp
 	template<typename T, typename A>
 	directed_graph<T, A>::directed_graph(const A& allocator) noexcept
 		: m_nodes{ allocator }
-		, m_allocator{ allocator }
 	{
 	}
 
 	template<typename T, typename A>
-	directed_graph<T, A>::directed_graph(std::initializer_list<T> init, const A& allocator)
+	directed_graph<T, A>::directed_graph(std::initializer_list<T> il, const A& allocator)
 		: m_allocator{ allocator }
 	{
-		assign(std::begin(init), std::end(init));
+		assign(std::begin(il), std::end(il));
 	}
 
 	template<typename T, typename A>
-	template<std::forward_iterator Iter>
+	template<std::input_iterator Iter>
 	directed_graph<T, A>::directed_graph(Iter first, Iter last, const A& allocator)
 		: m_allocator{ allocator }
 	{
@@ -191,7 +187,7 @@ namespace ProCpp
 	}
 
 	template<typename T, typename A>
-	template<std::forward_iterator Iter>
+	template<std::input_iterator Iter>
 	void directed_graph<T, A>::assign(Iter first, Iter last)
 	{
 		clear();
@@ -202,17 +198,17 @@ namespace ProCpp
 	}
 
 	template<typename T, typename A>
-	void directed_graph<T, A>::assign(std::initializer_list<T> init)
+	void directed_graph<T, A>::assign(std::initializer_list<T> il)
 	{
-		assign(std::begin(init), std::end(init));
+		assign(std::begin(il), std::end(il));
 	}
 
 	template<typename T, typename A>
-	directed_graph<T, A>& directed_graph<T, A>::operator=(std::initializer_list<T> init)
+	directed_graph<T, A>& directed_graph<T, A>::operator=(std::initializer_list<T> il)
 	{
 		// Use a copy-and-swap-like algorithm to guarantee strong exception safety.
 		// Do all the work in a temporary instance.
-		directed_graph new_graph{ init };
+		directed_graph new_graph{ il };
 		swap(new_graph); // Commit the work with only non-throwing operations.
 		return *this;
 	}
@@ -220,7 +216,7 @@ namespace ProCpp
 	template<typename T, typename A>
 	typename directed_graph<T, A>::allocator_type directed_graph<T, A>::get_allocator() const
 	{
-		return m_allocator;
+		return m_nodes.get_allocator();
 	}
 
 	template<typename T, typename A>
@@ -232,7 +228,7 @@ namespace ProCpp
 			// Value is already in the graph.
 			return { iterator{ iter }, false };
 		}
-		m_nodes.emplace_back(*this, std::move(node_value), m_allocator);
+		m_nodes.emplace_back(this, std::move(node_value));
 
 		// Value successfully added to the graph.
 		return { iterator{ std::prev(std::end(m_nodes)) }, true };
@@ -246,7 +242,7 @@ namespace ProCpp
 	}
 
 	template<typename T, typename A>
-	template<std::forward_iterator Iter>
+	template<std::input_iterator Iter>
 	void directed_graph<T, A>::insert(Iter first, Iter last)
 	{
 		// Copy each element in the range by using an insert_iterator adapter.
@@ -255,16 +251,16 @@ namespace ProCpp
 	}
 
 	template<typename T, typename A>
-	void directed_graph<T, A>::insert(std::initializer_list<T> init)
+	void directed_graph<T, A>::insert(std::initializer_list<T> il)
 	{
-		insert(std::begin(init), std::end(init));
+		insert(std::begin(il), std::end(il));
 	}
 
 	template<typename T, typename A>
 	template<std::ranges::input_range Range>
 	void directed_graph<T, A>::insert_range(Range&& range)
 	{
-		insert(std::begin(range), std::end(range));
+		insert(std::ranges::begin(range), std::ranges::end(range));
 	}
 
 	template<typename T, typename A>
@@ -458,10 +454,10 @@ namespace ProCpp
 
 
 	template<typename T, typename A>
-	std::set<T, std::less<>, A> directed_graph<T, A>::get_adjacent_nodes_values(
+	std::set<T> directed_graph<T, A>::get_adjacent_nodes_values(
 		const typename details::graph_node<T, A>::adjacency_list_type& indices) const
 	{
-		std::set<T, std::less<>, A> values(m_allocator);
+		std::set<T> values;
 		for (auto&& index : indices)
 		{
 			values.insert(m_nodes[index].value());
@@ -496,7 +492,6 @@ namespace ProCpp
 	{
 		using std::swap;
 		m_nodes.swap(other_graph.m_nodes);
-		swap(m_allocator, other_graph.m_allocator);
 	}
 
 	template<typename T, typename A>

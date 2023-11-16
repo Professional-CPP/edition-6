@@ -31,10 +31,9 @@ namespace ProCpp
 
 			// Copy and move assignment operators.
 			graph_node& operator=(const graph_node& rhs);
-			graph_node& operator=(graph_node&& rhs) noexcept;
+			graph_node& operator=(graph_node&& rhs);
 
 			// Returns a reference to the stored value.
-			[[nodiscard]] T& value() noexcept { return *m_data; }
 			[[nodiscard]] const T& value() const noexcept { return *m_data; }
 
 			// A type alias for the container type used to store the adjacency list.
@@ -69,7 +68,7 @@ namespace ProCpp
 			, m_allocator{ allocator }
 		{
 			m_data = m_allocator.allocate(1);
-			new(m_data) T{ std::move(t) };
+			std::allocator_traits<A>::construct(m_allocator, m_data, std::move(t));
 		}
 
 		template<typename T, typename A>
@@ -77,7 +76,7 @@ namespace ProCpp
 		{
 			if (m_data)
 			{
-				std::destroy_at(m_data);
+				std::allocator_traits<A>::destroy(m_allocator, m_data);
 				m_allocator.deallocate(m_data, 1);
 				m_data = nullptr;
 			}
@@ -90,7 +89,7 @@ namespace ProCpp
 			, m_adjacentNodeIndices{ src.m_adjacentNodeIndices }
 		{
 			m_data = m_allocator.allocate(1);
-			new(m_data) T{ *(src.m_data) };
+			std::allocator_traits<A>::construct(m_allocator, m_data, *(src.m_data));
 		}
 
 		template<typename T, typename A>
@@ -110,15 +109,15 @@ namespace ProCpp
 			{
 				m_graph = rhs.m_graph;
 				m_adjacentNodeIndices = rhs.m_adjacentNodeIndices;
-				std::destroy_at(m_data);
-				new(m_data) T{ *(rhs.m_data) };
+				std::allocator_traits<A>::destroy(m_allocator, m_data);
+				std::allocator_traits<A>::construct(m_allocator, m_data, *(rhs.m_data));
 			}
 			return *this;
 		}
 
 		template<typename T, typename A>
 		typename graph_node<T, A>::graph_node&
-			graph_node<T, A>::operator=(graph_node&& rhs) noexcept
+			graph_node<T, A>::operator=(graph_node&& rhs)
 		{
 			if (this != &rhs)
 			{
