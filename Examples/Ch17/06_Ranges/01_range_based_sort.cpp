@@ -5,7 +5,7 @@ using namespace std;
 class Person
 {
 public:
-	Person(string first, string last)
+	explicit Person(string first, string last)
 		: m_firstName{ move(first) }, m_lastName{ move(last) } { }
 
 	const string& getFirstName() const { return m_firstName; }

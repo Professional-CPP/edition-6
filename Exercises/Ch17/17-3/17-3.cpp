@@ -5,7 +5,7 @@ using namespace std;
 class Person
 {
 public:
-	Person(string first, string last)
+	explicit Person(string first, string last)
 		: m_firstName{ move(first) }, m_lastName{ move(last) } { }
 
 	const string& getFirstName() const { return m_firstName; }
@@ -21,7 +21,8 @@ ostream& operator<<(ostream& os, const Person& person)
 	return os;
 }
 
-template <input_iterator InputIter, weakly_incrementable OutputIter>
+template<input_iterator InputIter,
+	output_iterator<iter_reference_t<InputIter>> OutputIter>
 void myCopy(InputIter begin, InputIter end, OutputIter target)
 {
 	for (auto iter{ begin }; iter != end; ++iter, ++target) {
