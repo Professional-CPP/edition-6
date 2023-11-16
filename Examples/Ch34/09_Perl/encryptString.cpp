@@ -4,7 +4,7 @@ using namespace std;
 
 string encrypt(string_view input);
 
-int main(int argc, char* argv[])
+int main(int argc, char** argv)
 {
 	if (argc < 2) {
 		println(cerr, "Usage: {} string-to-be-encrypted", argv[0]);
