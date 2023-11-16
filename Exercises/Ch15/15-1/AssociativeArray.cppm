@@ -13,7 +13,7 @@ private:
 	class Element
 	{
 	public:
-		Element(std::string key, T value)
+		explicit Element(std::string key, T value)
 			: m_key{ std::move(key) }, m_value{ std::move(value) } {}
 		std::string m_key;
 		T m_value;

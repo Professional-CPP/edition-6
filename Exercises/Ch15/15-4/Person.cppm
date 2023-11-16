@@ -7,7 +7,7 @@ export class Person
 public:
 	// Two-parameter constructor automatically creates initials and
 	// delegates the work to the three-parameter constructor.
-	Person(std::string firstName, std::string lastName)
+	explicit Person(std::string firstName, std::string lastName)
 		: Person{ std::move(firstName), std::move(lastName),
 		std::format("{}{}", firstName[0], lastName[0]) }
 	{
@@ -15,7 +15,7 @@ public:
 
 	Person() = default;
 
-	Person(std::string firstName, std::string lastName, std::string initials)
+	explicit Person(std::string firstName, std::string lastName, std::string initials)
 		: m_firstName{ std::move(firstName) }
 		, m_lastName{ std::move(lastName) }
 		, m_initials{ std::move(initials) }
