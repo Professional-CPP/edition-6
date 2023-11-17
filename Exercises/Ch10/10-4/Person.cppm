@@ -16,7 +16,7 @@ export namespace HR
 		// because then firstName and lastName could already have been moved into
 		// temporary std::strings before firstName[O] and lastName[O] are used in
 		// the call to std::format().
-		Person(std::string firstName, std::string lastName)
+		explicit Person(std::string firstName, std::string lastName)
 			: m_firstName{ std::move(firstName) }
 			, m_lastName{ std::move(lastName) }
 		{
@@ -25,7 +25,7 @@ export namespace HR
 
 		Person() = default;
 
-		Person(std::string firstName, std::string lastName, std::string initials)
+		explicit Person(std::string firstName, std::string lastName, std::string initials)
 			: m_firstName{ std::move(firstName) }
 			, m_lastName{ std::move(lastName) }
 			, m_initials{ std::move(initials) }
