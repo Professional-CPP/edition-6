@@ -5,7 +5,7 @@ using namespace std;
 class Person
 {
 public:
-	Person(std::string name) : m_name{ std::move(name) } { }
+	explicit Person(std::string name) : m_name{ std::move(name) } { }
 	const std::string& getName() const { return m_name; }
 
 private:
