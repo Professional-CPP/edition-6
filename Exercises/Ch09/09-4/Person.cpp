@@ -8,9 +8,9 @@ using namespace std;
 class Person::Impl
 {
 public:
-	Impl(string firstName, string lastName);
+	explicit Impl(string firstName, string lastName);
 	Impl() = default;
-	Impl(string firstName, string lastName, string initials);
+	explicit Impl(string firstName, string lastName, string initials);
 
 	const string& getFirstName() const;
 	void setFirstName(string firstName);

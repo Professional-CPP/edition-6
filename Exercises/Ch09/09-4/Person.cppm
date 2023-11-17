@@ -5,9 +5,9 @@ import std;
 export class Person
 {
 public:
-	Person(std::string firstName, std::string lastName);
+	explicit Person(std::string firstName, std::string lastName);
 	Person();
-	Person(std::string firstName, std::string lastName, std::string initials);
+	explicit Person(std::string firstName, std::string lastName, std::string initials);
 	~Person();
 	Person(const Person& src);
 	Person(Person&&) noexcept;

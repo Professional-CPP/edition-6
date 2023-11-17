@@ -5,7 +5,7 @@ import std;
 export class Person
 {
 public:
-	Person(std::string firstName, std::string lastName) //// Pass by value and move.
+	explicit Person(std::string firstName, std::string lastName) //// Pass by value and move.
 		: m_firstName{ std::move(firstName) }, m_lastName{ std::move(lastName) }
 	{
 	}
