@@ -30,12 +30,20 @@ private:
 
 // Person::Impl class member function definitions.
 
-// Two-parameter constructor automatically creates initials and
-// delegates the work to the three-parameter constructor.
+// Two-parameter constructor automatically creates initials.
+// 
+// Warning: delegating to the 3-parameter constructor as follows doesn't work:
+//		Person::Impl::Impl(string firstName, string lastName)
+//			: Impl{ move(firstName), move(lastName),
+//			format("{}{}", firstName[0], lastName[0]) }
+// because then firstName and lastName could already have been moved into
+// temporary std::strings before firstName[O] and lastName[O] are used in
+// the call to std::format().
 Person::Impl::Impl(string firstName, string lastName)
-	: Impl{ move(firstName), move(lastName),
-	format("{}{}", firstName[0], lastName[0]) }
+	: m_firstName{ move(firstName) }
+	, m_lastName{ move(lastName) }
 {
+	m_initials = format("{}{}", m_firstName[0], m_lastName[0]);
 }
 
 Person::Impl::Impl(string firstName, string lastName, string initials)
