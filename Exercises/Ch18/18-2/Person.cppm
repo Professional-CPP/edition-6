@@ -23,7 +23,7 @@ public:
 
 	Person() = default;
 
-	Person(std::string firstName, std::string lastName, std::string initials)
+	explicit Person(std::string firstName, std::string lastName, std::string initials)
 		: m_firstName{ std::move(firstName) }
 		, m_lastName{ std::move(lastName) }
 		, m_initials{ std::move(initials) }
