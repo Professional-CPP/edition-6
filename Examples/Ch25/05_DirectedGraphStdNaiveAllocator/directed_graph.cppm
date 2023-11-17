@@ -106,7 +106,6 @@ namespace ProCpp
 
 		using node_container_type = std::vector<details::graph_node<T, A>,
 			typename std::allocator_traits<A>::template rebind_alloc<details::graph_node<T, A>>>;
-
 		node_container_type m_nodes;
 
 		// Helper member functions to return an iterator to the given node, or the end iterator

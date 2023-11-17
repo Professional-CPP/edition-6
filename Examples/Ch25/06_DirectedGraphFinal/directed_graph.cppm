@@ -173,7 +173,7 @@ namespace ProCpp
 
 	template<typename T, typename A>
 	directed_graph<T, A>::directed_graph(std::initializer_list<T> il, const A& allocator)
-		: m_allocator{ allocator }
+		: m_nodes{ allocator }
 	{
 		assign(std::begin(il), std::end(il));
 	}
@@ -181,7 +181,7 @@ namespace ProCpp
 	template<typename T, typename A>
 	template<std::input_iterator Iter>
 	directed_graph<T, A>::directed_graph(Iter first, Iter last, const A& allocator)
-		: m_allocator{ allocator }
+		: m_nodes{ allocator }
 	{
 		assign(first, last);
 	}
