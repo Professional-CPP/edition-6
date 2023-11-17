@@ -6,7 +6,7 @@ import std;
 export class Person
 {
 public:
-	Person(std::string firstName, std::string lastName);
+	explicit Person(std::string firstName, std::string lastName);
 
 	const std::string& getFirstName() const;
 	const std::string& getLastName() const;

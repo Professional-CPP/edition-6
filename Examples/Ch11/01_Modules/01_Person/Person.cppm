@@ -5,7 +5,7 @@ import std;
 export class Person
 {
 public:
-	Person(std::string firstName, std::string lastName)
+	explicit Person(std::string firstName, std::string lastName)
 		: m_firstName{ std::move(firstName) }, m_lastName{ std::move(lastName) } { }
 
 	const std::string& getFirstName() const { return m_firstName; }
