@@ -8,7 +8,7 @@ import std;
 export class Person
 {
 public:
-	Person(const std::string& firstName, const std::string& lastName)
+	explicit Person(const std::string& firstName, const std::string& lastName)
 		: m_firstName{ firstName }, m_lastName{ lastName }
 	{}
 
