@@ -2,12 +2,11 @@ export module access_list;
 
 import std;
 
-export class AccessList
+export class AccessList final
 {
 public:
-	// Default constructor and destructor.
+	// Default constructor.
 	AccessList() = default;
-	virtual ~AccessList() = default;
 
 	// Constructor to support uniform initialization.
 	AccessList(std::initializer_list<std::string_view> users)
