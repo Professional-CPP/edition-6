@@ -7,7 +7,7 @@ class Processor
 public:
 	using Callback = function<int(int)>;
 
-	Processor(Callback callback)
+	explicit Processor(Callback callback)
 		: m_callback{ callback }
 	{
 	}

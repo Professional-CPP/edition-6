@@ -7,7 +7,7 @@ class BigData {};
 class BigDataProcessor
 {
 public:
-	BigDataProcessor(unique_ptr<BigData> data) : m_data{ move(data) } {}
+	explicit BigDataProcessor(unique_ptr<BigData> data) : m_data{ move(data) } {}
 	void operator()() const { println("Processing BigData instance..."); }
 private:
 	unique_ptr<BigData> m_data;
