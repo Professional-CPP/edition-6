@@ -14,5 +14,5 @@ int main()
 	if (myBitset.test(3)) {
 		println("Bit 3 is set!");
 	}
-	cout << myBitset << endl;
+	println("{}", myBitset.to_string());
 }

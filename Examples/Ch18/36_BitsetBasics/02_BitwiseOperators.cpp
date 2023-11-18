@@ -10,7 +10,7 @@ int main()
 	bitset<10> bitsTwo{ str2 };
 
 	auto bitsThree{ bitsOne & bitsTwo };
-	cout << bitsThree << endl;
+	println("{}", bitsThree.to_string());
 	bitsThree <<= 4;
-	cout << bitsThree << endl;
+	println("{}", bitsThree.to_string());
 }

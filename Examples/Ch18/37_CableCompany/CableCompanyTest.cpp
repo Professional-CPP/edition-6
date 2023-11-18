@@ -12,10 +12,10 @@ int main()
 
 	myCC.newCustomer("Marc G.", "basic");
 	myCC.addPackageToCustomer("Marc G.", "sports");
-	cout << myCC.getCustomerChannels("Marc G.") << endl;
+	println("{}", myCC.getCustomerChannels("Marc G.").to_string());
 
 	try {
-		myCC.getCustomerChannels("John");
+		println("{}", myCC.getCustomerChannels("John").to_string());
 	} catch (const exception& e) {
 		println("Error: {}", e.what());
 	}

@@ -2,11 +2,9 @@ export module cable_company;
 
 import std;
 
-export class CableCompany
+export class CableCompany final
 {
 public:
-	virtual ~CableCompany() = default;
-
 	// Number of supported channels.
 	static const std::size_t NumChannels{ 10 };
 

@@ -2,12 +2,11 @@ export module bank_db;
 
 import std;
 
-export class BankAccount
+export class BankAccount final
 {
 public:
 	BankAccount(int accountNumber, std::string name)
 		: m_accountNumber{ accountNumber }, m_clientName{ std::move(name) } {}
-	virtual ~BankAccount() = default;
 
 	void setAccountNumber(int accountNumber) { m_accountNumber = accountNumber; }
 	int getAccountNumber() const { return m_accountNumber; }
@@ -20,11 +19,9 @@ private:
 	std::string m_clientName;
 };
 
-export class BankDB
+export class BankDB final
 {
 public:
-	virtual ~BankDB() = default;
-
 	// Adds account to the bank database. If an account exists already
 	// with that account number, the new account is not added. Returns true
 	// if the account is added, false if it's not.

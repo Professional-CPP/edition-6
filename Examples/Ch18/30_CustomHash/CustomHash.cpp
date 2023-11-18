@@ -5,7 +5,7 @@ using namespace std;
 class IntWrapper
 {
 public:
-	IntWrapper(int i) : m_wrappedInt{ i } {}
+	explicit IntWrapper(int i) : m_wrappedInt{ i } {}
 	int getValue() const { return m_wrappedInt; }
 	bool operator==(const IntWrapper&) const = default;// = default since C++20
 private:

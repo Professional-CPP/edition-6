@@ -2,11 +2,9 @@ export module buddy_list;
 
 import std;
 
-export class BuddyList
+export class BuddyList final
 {
 public:
-	virtual ~BuddyList() = default;
-
 	// Adds buddy as a friend of name.
 	void addBuddy(const std::string& name, const std::string& buddy);
 
