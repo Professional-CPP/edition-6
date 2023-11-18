@@ -6,13 +6,13 @@ using namespace std;
 
 int main()
 {
-	HMODULE lib{ ::LoadLibrary("User32.dll") };
+	HMODULE lib{ ::LoadLibraryA("User32.dll") };
 	if (!lib) {
 		println("Unable to load User32.dll.");
 		return 1;
 	}
 
-	using MessageBoxFunction = int(*)(HWND, LPCTSTR, LPCTSTR, UINT);
+	using MessageBoxFunction = int(*)(HWND, LPCSTR, LPCSTR, UINT);
 	MessageBoxFunction messageBox{ (MessageBoxFunction)::GetProcAddress(lib, "MessageBoxA") };
 	if (!messageBox) {
 		println("Unable to get the address of MessageBoxA().");
