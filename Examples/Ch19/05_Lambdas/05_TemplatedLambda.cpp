@@ -9,7 +9,6 @@ int main()
 			using V = decay_t<decltype(values)>; // The real type of the vector.
 			using T = typename V::value_type;    // The type of the elements of the vector.
 			T someValue { };
-			//T::some_static_function();
 		} };
 
 		vector values{ 1, 2, 100, 5, 6 };
@@ -19,7 +18,6 @@ int main()
 	{
 		auto lambda{ [] <typename T> (const vector<T>& values) {
 			T someValue{ };
-			//T::some_static_function();
 		} };
 
 		vector values{ 1, 2, 100, 5, 6 };
