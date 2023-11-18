@@ -6,6 +6,7 @@ int main()
 {
 	vector vectorOne{ 1, 2, 3, 5 };
 	vector<int> vectorTwo;
+	println("{:n}", vectorOne);
 
 	// Oops, we forgot to add 4. Insert it in the correct place.
 	vectorOne.insert(cbegin(vectorOne) + 3, 4);
@@ -36,6 +37,7 @@ int main()
 
 	// And add 10 copies of the value 100.
 	vectorTwo.insert(cbegin(vectorTwo), 10, 100);
+	println("{:n}", vectorTwo);
 
 	// Decide we only want 9 elements.
 	vectorTwo.pop_back();

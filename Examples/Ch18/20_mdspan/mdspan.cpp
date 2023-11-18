@@ -24,12 +24,16 @@ int main()
 		print2Dmdspan(data2D);
 	}
 
+	println("");
+
 	{
 		// View data as a 2D array of 2 rows with 4 integers each,
 		// using the column-major layout policy.
 		mdspan<int, extents<int, 2, 4>, layout_left> data2D{ data.data() };
 		print2Dmdspan(data2D);
 	}
+
+	println("");
 
 	{
 		// View data as a 2D array of 2 rows with 4 integers each,
