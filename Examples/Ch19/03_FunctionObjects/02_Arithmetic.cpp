@@ -2,7 +2,7 @@ import std;
 
 using namespace std;
 
-template <forward_iterator Iter, copy_constructible StartValue,
+template <input_iterator Iter, copy_constructible StartValue,
 	invocable<const StartValue&, const StartValue&> Operation>
 auto accumulateData(Iter begin, Iter end, const StartValue& startValue, Operation op)
 {
