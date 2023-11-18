@@ -5,7 +5,7 @@ import std;
 export class BankAccount final
 {
 public:
-	BankAccount(int accountNumber, std::string name)
+	explicit BankAccount(int accountNumber, std::string name)
 		: m_accountNumber{ accountNumber }, m_clientName{ std::move(name) } {}
 
 	void setAccountNumber(int accountNumber) { m_accountNumber = accountNumber; }

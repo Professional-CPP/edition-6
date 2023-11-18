@@ -4,27 +4,27 @@ import std;
 
 using namespace std;
 
-void CableCompany::addPackage(string_view packageName,
+void CableCompany::addPackage(const string& packageName,
 	const bitset<NumChannels>& channels)
 {
 	m_packages.emplace(packageName, channels);
 }
 
-void CableCompany::addPackage(string_view packageName, string_view channels)
+void CableCompany::addPackage(const string& packageName, const string& channels)
 {
-	addPackage(packageName, bitset<NumChannels> { channels.data() });
+	addPackage(packageName, bitset<NumChannels> { channels });
 }
 
-void CableCompany::removePackage(string_view packageName)
+void CableCompany::removePackage(const string& packageName)
 {
-	m_packages.erase(packageName.data());
+	m_packages.erase(packageName);
 }
 
 const bitset<CableCompany::NumChannels>& CableCompany::getPackage(
-	string_view packageName) const
+	const string& packageName) const
 {
 	// Get an iterator to the specified package.
-	if (auto it{ m_packages.find(packageName.data()) }; it != end(m_packages)) {
+	if (auto it{ m_packages.find(packageName) }; it != end(m_packages)) {
 		// Found package. Note that 'it' is an iterator to a name/bitset pair.
 		// The bitset is the second field.
 		return it->second;
@@ -32,7 +32,7 @@ const bitset<CableCompany::NumChannels>& CableCompany::getPackage(
 	throw out_of_range{ format("Invalid package '{}'.", packageName) };
 }
 
-void CableCompany::newCustomer(string_view name, string_view package)
+void CableCompany::newCustomer(const string& name, const string& package)
 {
 	// Get the channels for the given package.
 	auto& packageChannels{ getPackage(package) };
@@ -40,7 +40,7 @@ void CableCompany::newCustomer(string_view name, string_view package)
 	newCustomer(name, packageChannels);
 }
 
-void CableCompany::newCustomer(string_view name,
+void CableCompany::newCustomer(const string& name,
 	const bitset<NumChannels>& channels)
 {
 	// Add customer to the customers map.
@@ -50,7 +50,7 @@ void CableCompany::newCustomer(string_view name,
 	}
 }
 
-void CableCompany::addChannel(string_view name, int channel)
+void CableCompany::addChannel(const string& name, int channel)
 {
 	// Get the current channels for the customer.
 	auto& customerChannels{ getCustomerChannelsHelper(name) };
@@ -58,7 +58,7 @@ void CableCompany::addChannel(string_view name, int channel)
 	customerChannels.set(channel);
 }
 
-void CableCompany::removeChannel(string_view name, int channel)
+void CableCompany::removeChannel(const string& name, int channel)
 {
 	// Get the current channels for the customer.
 	auto& customerChannels{ getCustomerChannelsHelper(name) };
@@ -66,7 +66,7 @@ void CableCompany::removeChannel(string_view name, int channel)
 	customerChannels.reset(channel);
 }
 
-void CableCompany::addPackageToCustomer(string_view name, string_view package)
+void CableCompany::addPackageToCustomer(const string& name, const string& package)
 {
 	// Get the channels for the given package.
 	auto& packageChannels{ getPackage(package) };
@@ -76,16 +76,16 @@ void CableCompany::addPackageToCustomer(string_view name, string_view package)
 	customerChannels |= packageChannels;
 }
 
-void CableCompany::deleteCustomer(string_view name)
+void CableCompany::deleteCustomer(const string& name)
 {
-	m_customers.erase(name.data());
+	m_customers.erase(name);
 }
 
 const bitset<CableCompany::NumChannels>& CableCompany::getCustomerChannels(
-	string_view name) const
+	const string& name) const
 {
 	// Find an iterator to the customer.
-	if (auto it{ m_customers.find(name.data()) }; it != end(m_customers)) {
+	if (auto it{ m_customers.find(name) }; it != end(m_customers)) {
 		// Found customer. Note that 'it' is an iterator to a name/bitset pair.
 		// The bitset is the second field.
 		return it->second;
@@ -94,7 +94,7 @@ const bitset<CableCompany::NumChannels>& CableCompany::getCustomerChannels(
 }
 
 bitset<CableCompany::NumChannels>& CableCompany::getCustomerChannelsHelper(
-	string_view name)
+	const string& name)
 {
 	// Forward to const getCustomerChannels() to avoid code duplication.
 	return const_cast<bitset<NumChannels>&>(

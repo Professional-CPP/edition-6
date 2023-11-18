@@ -3,15 +3,13 @@ export module packet_buffer;
 import std;
 
 export template <typename T>
-class PacketBuffer
+class PacketBuffer final
 {
 public:
 	// If maxSize is 0, the size is unlimited, because creating
 	// a buffer of size 0 makes little sense. Otherwise only
 	// maxSize packets are allowed in the buffer at any one time.
 	explicit PacketBuffer(std::size_t maxSize = 0);
-
-	virtual ~PacketBuffer() = default;
 
 	// Stores a packet in the buffer.
 	// Returns false if the packet has been discarded because

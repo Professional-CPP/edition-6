@@ -5,15 +5,14 @@ import std;
 // Class template RoundRobin
 // Provides simple round-robin semantics for a list of elements.
 export template <typename T>
-class RoundRobin
+class RoundRobin final
 {
 public:
 	// Client can give a hint as to the number of expected elements for
 	// increased efficiency.
 	explicit RoundRobin(std::size_t numExpected = 0);
-	virtual ~RoundRobin() = default;
 
-	// Prevent assignment and pass-by-value
+	// Prevent copy construction and copy assignment
 	RoundRobin(const RoundRobin& src) = delete;
 	RoundRobin& operator=(const RoundRobin& rhs) = delete;
 

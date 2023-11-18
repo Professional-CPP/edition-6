@@ -6,7 +6,7 @@ import std;
 export class Error final
 {
 public:
-	Error(int priority, std::string errorString)
+	explicit Error(int priority, std::string errorString)
 		: m_priority{ priority }, m_errorString{ std::move(errorString) } { }
 	int getPriority() const { return m_priority; }
 	const std::string& getErrorString() const { return m_errorString; }

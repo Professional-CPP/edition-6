@@ -3,7 +3,7 @@ export module phone_book;
 import person;
 import std;
 
-export class PhoneBook
+export class PhoneBook final
 {
 public:
 	void addPhoneNumber(const Person& person, std::string_view phoneNumber);
