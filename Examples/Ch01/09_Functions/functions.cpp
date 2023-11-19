@@ -6,8 +6,8 @@ void myFunction(int i, char c);
 
 void myFunction(int i, char c)
 {
-	println("the value of i is {}", i);
-	println("the value of c is {}", c);
+	println("The value of i is {}.", i);
+	println("The value of c is {}.", c);
 }
 
 int addNumbers(int number1, int number2)

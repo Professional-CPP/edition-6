@@ -12,5 +12,5 @@ int main()
 	int initializedInt{ 7 };
 
 	println("{} is a random value", uninitializedInt);
-	println("{} was assigned an initial value", initializedInt);
+	println("{} was assigned as an initial value", initializedInt);
 }
