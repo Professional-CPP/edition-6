@@ -24,13 +24,14 @@ OutputIterator transform_if(ForwardIterator first, ForwardIterator last,
 
 int main()
 {
-	vector values{ 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+	array values{ 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
 	println("{:n}", values);
 
-	transform_if(begin(values), end(values), begin(values),
+	vector<int> result;
+	transform_if(begin(values), end(values), back_insert_iterator{ result },
 		[](const auto& value) { return value % 2 != 0; },
 		[](const auto& value) { return value * 2; });
 
-	println("{:n}", values);
+	println("{:n}", result);
 }
