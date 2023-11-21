@@ -88,11 +88,15 @@ namespace ProCpp
 		const_reference at(size_type index) const;
 
 		// Iterator member functions.
+		iterator begin() noexcept;
+		iterator end() noexcept;
 		const_iterator begin() const noexcept;
 		const_iterator end() const noexcept;
 		const_iterator cbegin() const noexcept;
 		const_iterator cend() const noexcept;
 
+		reverse_iterator rbegin() noexcept;
+		reverse_iterator rend() noexcept;
 		const_reverse_iterator rbegin() const noexcept;
 		const_reverse_iterator rend() const noexcept;
 		const_reverse_iterator crbegin() const noexcept;
@@ -362,18 +366,18 @@ namespace ProCpp
 		return m_nodes.at(index).value();
 	}
 
-	template<typename T>
-	typename directed_graph<T>::const_iterator
-		directed_graph<T>::cbegin() const noexcept
+	template <typename T>
+	typename directed_graph<T>::iterator
+		directed_graph<T>::begin() noexcept
 	{
-		return begin();
+		return iterator{ std::begin(m_nodes) };
 	}
 
-	template<typename T>
-	typename directed_graph<T>::const_iterator
-		directed_graph<T>::cend() const noexcept
+	template <typename T>
+	typename directed_graph<T>::iterator
+		directed_graph<T>::end() noexcept
 	{
-		return end();
+		return iterator{ std::end(m_nodes) };
 	}
 
 	template<typename T>
@@ -390,7 +394,34 @@ namespace ProCpp
 		return const_iterator{ std::end(m_nodes) };
 	}
 
+	template<typename T>
+	typename directed_graph<T>::const_iterator
+		directed_graph<T>::cbegin() const noexcept
+	{
+		return begin();
+	}
 
+	template<typename T>
+	typename directed_graph<T>::const_iterator
+		directed_graph<T>::cend() const noexcept
+	{
+		return end();
+	}
+
+
+	template <typename T>
+	typename directed_graph<T>::reverse_iterator
+		directed_graph<T>::rbegin() noexcept
+	{
+		return reverse_iterator{ end() };
+	}
+
+	template <typename T>
+	typename directed_graph<T>::reverse_iterator
+		directed_graph<T>::rend() noexcept
+	{
+		return reverse_iterator{ begin() };
+	}
 
 	template<typename T>
 	typename directed_graph<T>::const_reverse_iterator
