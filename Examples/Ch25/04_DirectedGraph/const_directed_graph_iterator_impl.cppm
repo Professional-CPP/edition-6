@@ -41,7 +41,7 @@ namespace ProCpp
 		// Defaulted operator==.
 		bool operator==(const const_directed_graph_iterator_impl&) const = default;
 
-	protected:
+	private:
 		friend class directed_graph<value_type>;
 
 		node_container_iterator m_nodeIterator;

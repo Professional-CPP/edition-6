@@ -27,8 +27,6 @@ int main()
 	graph.insert_edge(33, 44);
 	graph.insert_edge(44, 55);
 
-	graph = initializer_list{ 1,2,3 };
-
 	// Try to insert a duplicate, and use structured bindings for the result.
 	auto [iter22, inserted] = graph.insert(22);
 	if (!inserted) { println("Duplicate element."); }
