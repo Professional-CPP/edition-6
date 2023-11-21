@@ -60,7 +60,7 @@ namespace ProCpp
 	typename const_adjacent_nodes_iterator_impl<DirectedGraph>::reference
 		const_adjacent_nodes_iterator_impl<DirectedGraph>::operator*() const
 	{
-		// Return an reference to the actual node, not the index to the node.
+		// Return a reference to the actual node, not the index to the node.
 		return (*m_graph)[*m_adjacentNodeIterator];
 	}
 

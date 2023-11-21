@@ -11,7 +11,7 @@ namespace ProCpp
 	template <typename T>
 	std::string to_dot(const directed_graph<T>& graph, std::string_view graph_name)
 	{
-		std::stringstream output;
+		std::ostringstream output;
 
 		output << std::format("digraph {} {{\n", graph_name);
 		for (auto&& node : graph)
