@@ -8,8 +8,8 @@ namespace ProCpp
 
 	// Returns a given graph in DOT format.
 	export
-	template <typename T, typename A>
-	std::string to_dot(const directed_graph<T, A>& graph, std::string_view graph_name)
+	template <typename T>
+	std::string to_dot(const directed_graph<T>& graph, std::string_view graph_name)
 	{
 		std::stringstream output;
 

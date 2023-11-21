@@ -7,7 +7,7 @@ namespace ProCpp
 
 	// Forward declaration.
 	export
-	template<typename T, typename A>
+	template<typename T>
 	class directed_graph;
 
 	template<typename DirectedGraph>
@@ -42,7 +42,7 @@ namespace ProCpp
 		bool operator==(const const_directed_graph_iterator_impl&) const = default;
 
 	protected:
-		friend class directed_graph<value_type, typename DirectedGraph::allocator_type>;
+		friend class directed_graph<value_type>;
 
 		node_container_iterator m_nodeIterator;
 	};
