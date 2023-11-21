@@ -4,8 +4,8 @@
 //// NOTE:
 ////   This file does not compile on itself.
 ////   It just contains the implementation for the contains() member function.
-////   You can take the code from 05_DirectedGraphFinal and add the
-////   below contains() member function.
+////   You can take the code from Examples\Ch25\04_DirectedGraph
+////   and add the below contains() member function.
 ////
 //////////////////////////////////////////////////////////////////////////////
 
