@@ -5,8 +5,11 @@ import std;
 using namespace ProCpp;
 using namespace std;
 
-// Force all code to be compiled for testing.
-template class directed_graph<string>;
+namespace ProCpp
+{
+	// Force all code to be compiled for testing.
+	template class directed_graph<string>;
+}
 
 int main()
 {
