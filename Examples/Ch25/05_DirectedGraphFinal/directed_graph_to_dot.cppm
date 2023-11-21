@@ -13,23 +13,23 @@ namespace ProCpp
 	{
 		std::ostringstream output;
 
-		output << std::format("digraph {} {{\n", graph_name);
+		std::println(output, "digraph {} {{", graph_name);
 		for (auto&& node : graph)
 		{
 			auto adjacent_nodes{ graph.nodes_adjacent_to(node) };
 			if (!adjacent_nodes.has_value())
 			{
-				output << node << '\n';
+				std::println(output, "{}", node);
 			}
 			else
 			{
 				for (const auto& adjacent_node : *adjacent_nodes)
 				{
-					output << std::format("{} -> {}\n", node, adjacent_node);
+					std::println(output, "{} -> {}", node, adjacent_node);
 				}
 			}
 		}
-		output << "}\n";
+		std::println(output, "}}");
 
 		return std::move(output).str();
 	}
