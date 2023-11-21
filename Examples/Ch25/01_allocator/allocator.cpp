@@ -1,13 +1,11 @@
 import std;
 
-using namespace std;
-
 class MyClass {};
 
 int main()
 {
 	// Create an allocator to use.
-	allocator<MyClass> alloc;
+	std::allocator<MyClass> alloc;
 
 	// Allocate an uninitialized memory block for 1 instance of MyClass.
 	auto* memory{ alloc.allocate(1) };
@@ -16,7 +14,7 @@ int main()
 	new(memory) MyClass{};
 
 	// Destroy MyClass instance.
-	destroy_at(memory);
+	std::destroy_at(memory);
 
 	// Deallocate memory block.
 	alloc.deallocate(memory, 1);

@@ -53,6 +53,7 @@ namespace ProCpp
 		friend details::graph_node<T>;
 
 		using node_container_type = std::vector<details::graph_node<T>>;
+
 		node_container_type m_nodes;
 
 		// Helper member functions to return an iterator to the given node, or the

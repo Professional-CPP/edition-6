@@ -42,6 +42,7 @@ namespace ProCpp
 		directed_graph& operator=(const directed_graph& rhs) = default;
 		directed_graph& operator=(directed_graph&& rhs) noexcept = default;
 
+		// initializer_list assignment operator.
 		directed_graph& operator=(std::initializer_list<T> il);
 
 		void assign(std::initializer_list<T> il);
