@@ -39,8 +39,8 @@ namespace ProCpp
 		explicit directed_graph(Iter first, Iter last);
 
 		// Copy and move assignment operators.
-		directed_graph& operator=(const directed_graph& rhs) = default;
-		directed_graph& operator=(directed_graph&& rhs) noexcept = default;
+		directed_graph& operator=(const directed_graph&) = default;
+		directed_graph& operator=(directed_graph&&) noexcept = default;
 
 		// initializer_list assignment operator.
 		directed_graph& operator=(std::initializer_list<T> il);
