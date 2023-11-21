@@ -29,6 +29,5 @@ int main()
 {
 	vector<int> fibonacci(24);
 	generate_fibonacci(begin(fibonacci), end(fibonacci));
-	for (auto& value : fibonacci) { print("{} ", value); }
-	println("");
+	println("{:n}", fibonacci);
 }
