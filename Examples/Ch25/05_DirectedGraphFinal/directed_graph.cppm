@@ -503,7 +503,6 @@ namespace ProCpp
 	template<typename T>
 	void directed_graph<T>::swap(directed_graph& other_graph) noexcept
 	{
-		using std::swap;
 		m_nodes.swap(other_graph.m_nodes);
 	}
 
