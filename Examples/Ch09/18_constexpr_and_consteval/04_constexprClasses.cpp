@@ -7,7 +7,7 @@ class Matrix
 public:
 	Matrix() = default; // Implicitly constexpr
 
-	constexpr Matrix(unsigned rows, unsigned columns)
+	constexpr explicit Matrix(unsigned rows, unsigned columns)
 		: m_rows{ rows }, m_columns{ columns }
 	{
 	}
