@@ -120,13 +120,13 @@ size_t Spreadsheet::Impl::getId() const
 
 // Spreadsheet member function definitions.
 Spreadsheet::Spreadsheet(size_t width, size_t height)
+	: m_impl{ make_unique<Impl>(width, height) }
 {
-	m_impl = make_unique<Impl>(width, height);
 }
 
 Spreadsheet::Spreadsheet(const Spreadsheet& src)
+	: m_impl{ make_unique<Impl>(*src.m_impl) }
 {
-	m_impl = make_unique<Impl>(*src.m_impl);
 }
 
 Spreadsheet::~Spreadsheet() = default;
