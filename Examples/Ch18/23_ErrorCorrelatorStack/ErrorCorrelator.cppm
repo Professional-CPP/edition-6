@@ -21,7 +21,7 @@ private:
 // Stream insertion overload for Errors.
 export std::ostream& operator<<(std::ostream& os, const Error& err)
 {
-	os << std::format("{} (priority {})", err.getErrorString(), err.getPriority());
+	std::print(os, "{} (priority {})", err.getErrorString(), err.getPriority());
 	return os;
 }
 
