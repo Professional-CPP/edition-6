@@ -17,7 +17,7 @@ using namespace std;
 //	class Dog : public virtual Animal
 //	{
 //	public:
-//		Dog(double weight, string name) : Animal{ weight }, m_name{ move(name) } {}
+//		explicit Dog(double weight, string name) : Animal{ weight }, m_name{ move(name) } {}
 //	private:
 //		string m_name;
 //	};
@@ -25,7 +25,7 @@ using namespace std;
 //	class Bird : public virtual Animal
 //	{
 //	public:
-//		Bird(double weight, bool canFly) : Animal{ weight }, m_canFly{ canFly } {}
+//		explicit Bird(double weight, bool canFly) : Animal{ weight }, m_canFly{ canFly } {}
 //	private:
 //		bool m_canFly{ false };
 //	};
@@ -33,7 +33,7 @@ using namespace std;
 //	class DogBird : public Dog, public Bird
 //	{
 //	public:
-//		DogBird(double weight, string name, bool canFly)
+//		explicit DogBird(double weight, string name, bool canFly)
 //			: Dog{ weight, move(name) }, Bird{ weight, canFly } {}
 //	};
 
@@ -53,7 +53,7 @@ private:
 class Dog : public virtual Animal
 {
 public:
-	Dog(double weight, string name) : Animal{ weight }, m_name{ move(name) } {}
+	explicit Dog(double weight, string name) : Animal{ weight }, m_name{ move(name) } {}
 protected:
 	explicit Dog(string name) : m_name{ move(name) } {}
 private:
@@ -63,7 +63,7 @@ private:
 class Bird : public virtual Animal
 {
 public:
-	Bird(double weight, bool canFly) : Animal{ weight }, m_canFly{ canFly } {}
+	explicit Bird(double weight, bool canFly) : Animal{ weight }, m_canFly{ canFly } {}
 protected:
 	explicit Bird(bool canFly) : m_canFly{ canFly } {}
 private:
@@ -73,7 +73,7 @@ private:
 class DogBird : public Dog, public Bird
 {
 public:
-	DogBird(double weight, string name, bool canFly)
+	explicit DogBird(double weight, string name, bool canFly)
 		: Animal { weight }, Dog{ move(name) }, Bird{ canFly } {}
 };
 
