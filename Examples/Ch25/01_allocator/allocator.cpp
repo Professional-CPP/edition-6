@@ -11,7 +11,7 @@ int main()
 	auto* memory{ alloc.allocate(1) };
 
 	// Use placement new operator to construct a MyClass in place.
-	new(memory) MyClass{};
+	::new(memory) MyClass{};
 
 	// Destroy MyClass instance.
 	std::destroy_at(memory);
