@@ -13,10 +13,10 @@ public:
 	void clear();
 
 	// Saves all persons in the database to the given file.
-	void save(std::string_view filename) const;
+	void save(const std::string& filename) const;
 
 	// Loads all persons from the given file and stores them in the database.
-	void load(std::string_view filename);
+	void load(const std::string& filename);
 
 	// Outputs all persons to the given stream.
 	void outputAll(std::ostream& output) const;
