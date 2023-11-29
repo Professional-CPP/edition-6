@@ -5,7 +5,7 @@ import std;
 export class InvalidCoordinate : public std::exception
 {
 public:
-	InvalidCoordinate(std::size_t x, std::size_t y, std::size_t maxX, std::size_t maxY)
+	explicit InvalidCoordinate(std::size_t x, std::size_t y, std::size_t maxX, std::size_t maxY)
 		: m_x{ x }, m_y{ y }
 		, m_maxX{ maxX }, m_maxY{ maxY }
 	{
