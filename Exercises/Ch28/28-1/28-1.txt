@@ -7,5 +7,5 @@ Software life cycle models:
 Software engineering methodologies:
 - Scrum
 - The Unified Process
-- eXtreme Programming
+- Extreme Programming
 
