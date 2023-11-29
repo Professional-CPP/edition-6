@@ -45,7 +45,7 @@ int main()
     ////} catch (const domain_error& caughtException) {
     ////    println("domain_error: {}", caughtException.what());
     ////}
-    //// If you look at Figure 14-3, you'll see that domain_error
+    //// If you look at Figure 14.3, you'll see that domain_error
     //// is a derived class from logic_error. So, the above order of catch
     //// statements is wrong: you should first catch the more specific
     //// exception class, then a more general. So the order needs to be reversed:
