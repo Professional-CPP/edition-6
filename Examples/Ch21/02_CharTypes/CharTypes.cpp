@@ -19,4 +19,16 @@ int main()
 	// C++23
 	const char hello[]{ u8"こんにちは世界" };
 	println("{}", hello);
+
+	{
+		// The same 3 formula from before, but this time using
+		// const char[] instead of const char8_t*.
+		const char formula1[]{ u8"\x3C0 r\xB2" };
+		const char formula2[]{ u8"\u03C0 r\u00B2" };
+		const char formula3[]{ u8"\N{GREEK SMALL LETTER PI} r\N{SUPERSCRIPT TWO}" };
+
+		println("{}", formula1);
+		println("{}", formula2);
+		println("{}", formula3);
+	}
 }
