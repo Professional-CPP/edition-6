@@ -19,8 +19,8 @@ public:
 			return;
 		}
 		print(logfile, "{:L} UTC: ", chrono::system_clock::now());
-		// Use a unary right fold, see Chapter 26.
-		((logfile << args), ...);
+		// Use a fold-expression; see Chapter 26.
+		(logfile << ... << args);
 		logfile << endl;
 	}
 
