@@ -14,7 +14,6 @@ public:
 		case Figure::Heart: return "Heart";
 		case Figure::Spade: return "Spade";
 		case Figure::Club: return "Club";
-		default: return "";
 		}
 	}
 };
