@@ -1,0 +1,5 @@
+1) testConstructorALessThanB
+2) testConstructorABiggerThanB
+3) testConstructorAEqualB
+4) testGetA
+5) testGetB
