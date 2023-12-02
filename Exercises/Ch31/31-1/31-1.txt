@@ -1,0 +1,1 @@
+The fundamental law of debugging is that you have to accept that there will be bugs in code you write. As such, you should try your best to avoid bugs while you’re coding, but at the same time, you need to plan for bugs in any code you write.

@@ -1,0 +1,6 @@
+Alan Turing, "On Computable Numbers, with an Application to the Entscheidungsproblem", Proceedings of the London Mathematical Society, Series 2, Vol.42 (1936-37), 230-265.
+
+Gödel, "Über formal unentscheidbare Sätze der Principia Mathematica und verwandter Systeme, I", Monatshefte Math. Phys., 38 (1931), 173-198.
+Alonzo Church. "An unsolvable problem of elementary number theory", American J. of Math., 58 (1936), 345-363.
+Alonzo Church. "A note on the Entscheidungsproblem", J. of Symbolic Logic, 1 (1936), 40-41.
+E.W. Hobson, "Theory of functions of a real variable (2nd ed., 1921)", 87-88.
