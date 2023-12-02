@@ -4,7 +4,7 @@ import std;
 
 using namespace std;
 
-void process(Pointer<SpreadsheetCell>& p)
+void process(const Pointer<SpreadsheetCell>& p)
 {
 	if (p != nullptr) { println("not nullptr"); }
 	if (p != 0)       { println("not 0"); }
