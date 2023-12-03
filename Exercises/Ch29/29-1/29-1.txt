@@ -1,0 +1,3 @@
+1) Design-level efficiency is far more important than language-level efficiency.
+
+2) Do not get obsessed with efficiency. First, write well-designed, correct, readable, and maintainable code. Subsequently, if you suspect a performance issue, use a profiler to analyze the performance. If the profiler points to issues, only then think about optimizing your code.
