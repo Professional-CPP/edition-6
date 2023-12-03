@@ -7,7 +7,7 @@ public:
 	Simple();                              // Constructor
 	virtual ~Simple() = default;           // Defaulted virtual destructor
 
-	// Disallow assignment and pass-by-value.
+	// Disallow copy construction and copy assignments.
 	Simple(const Simple& src) = delete;
 	Simple& operator=(const Simple& rhs) = delete;
 

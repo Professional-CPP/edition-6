@@ -75,9 +75,7 @@ const T& Pointer<T>::operator*() const noexcept
 template <typename T>
 T* Pointer<T>::release() noexcept
 {
-	T* data{ m_data };
-	m_data = nullptr;
-	return data;
+	return std::exchange(m_data, nullptr);
 }
 
 template <typename T>
