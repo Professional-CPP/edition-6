@@ -1,0 +1,1 @@
+A map sorts its elements according to operator< or a user-supplied comparator. Elements are sorted so that it’s efficient to find out whether an element is already in the map or not. An unordered_map on the other hand does not sort its elements, but instead uses a mechanism called hashing to make verifying the existence of an element in the map even more efficient.

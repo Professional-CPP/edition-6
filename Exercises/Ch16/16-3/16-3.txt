@@ -1,0 +1,7 @@
+Vocabulary types are types that you will use all the time in your day-to-day coding, such as vector, optional, string, unique_ptr, shared_ptr, and so on.
+
+Additional vocabulary types introduced in this chapter:
+- std::variant: contains a value of a given set of types.
+- std::any: contains a value of any type.
+- std::optional: either contains a value of a certain type, or is empty.
+- std::expected: either contains a value of an expected type, or a value of an error type.

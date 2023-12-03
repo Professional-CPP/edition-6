@@ -1,0 +1,1 @@
+A plate mechanism like in a self-service restaurant can be represented with an std::stack. Elements are pushed on the top of the stack, and elements are removed from the top of the stack as well.
