@@ -18,7 +18,7 @@ int main()
 			++iterationCount;
 			println("All robots finished. Preparing iteration {}...", iterationCount);
 			this_thread::sleep_for(1s);
-			println("Iteration {} is ready to start. Waking up robots.", iterationCount);
+			println("Iteration {} ready to start. Waking up robots.", iterationCount);
 		}
 	} };
 
@@ -48,7 +48,7 @@ int main()
 
 	println("Preparing iteration {}...", iterationCount);
 	this_thread::sleep_for(1s);
-	println("Iteration {} is ready to start. Waking up robots.", iterationCount);
+	println("Iteration {} ready to start. Waking up robots.", iterationCount);
 	threadWaiter.count_down();
 
 	for (auto& robot : robots) { robot.join(); }
