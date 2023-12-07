@@ -31,9 +31,9 @@ void myAdvance(Iter& iter, Distance n)
 template<typename Iter>
 void testAdvance(Iter iter)
 {
-	print("*iter   = {} | ", *iter);
+	print("*iter = {} | ", *iter);
 	myAdvance(iter, 3); print("3 ahead = {} | ", *iter);
-	myAdvance(iter, -2); println("2 back  = {}", *iter);
+	myAdvance(iter, -2); println("2 back = {}", *iter);
 }
 
 int main()

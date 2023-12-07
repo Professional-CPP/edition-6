@@ -17,7 +17,7 @@ private:
 
 ostream& operator<<(ostream& os, const Person& person)
 {
-	os << person.getFirstName() << " " << person.getLastName();
+	os << format("{} {}", person.getFirstName(), person.getLastName());
 	return os;
 }
 

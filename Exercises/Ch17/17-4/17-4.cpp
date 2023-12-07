@@ -12,7 +12,7 @@ int main()
 		vector<int> values;
 
 		for (auto& value : ranges::istream_view<int>(cin)
-			| views::take_while([](const auto& v) {return v != -1; })) {
+			| views::take_while([](const auto& v) { return v != -1; })) {
 			values.push_back(value);
 		}
 
@@ -25,7 +25,7 @@ int main()
 	// Option 2: no loop, but using a range-based vector constructor.
 	{
 		auto r{ ranges::istream_view<int>(cin)
-			| views::take_while([](const auto& v) {return v != -1; }) };
+			| views::take_while([](const auto& v) { return v != -1; }) };
 
 		vector<int> values{ from_range, r };
 

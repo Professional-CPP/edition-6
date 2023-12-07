@@ -27,5 +27,5 @@ int main()
 
 	// Modify the elements using a range-based for loop.
 	for (auto& value : result3) { value *= 10; }
-	printRange("After modifying elements through a view, vector contains: ", values);
+	printRange("After modifying elements through a view, vector contains:\n", values);
 }

@@ -15,6 +15,6 @@ int main()
 	auto result{ values
 		| views::filter([](const auto& value) {return value % 2 == 0; })
 		| views::take(3)
-		| views::transform([](const auto& v) { return format("\"{}\"", v); }) };
+		| views::transform([](const auto& v) { return format("{}", v); }) };
 	printRange("Result: ", result);
 }
