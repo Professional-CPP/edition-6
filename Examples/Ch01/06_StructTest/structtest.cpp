@@ -1,5 +1,5 @@
 import std;
-import employee;
+import employee; // Import our employee module
 
 using namespace std;
 
