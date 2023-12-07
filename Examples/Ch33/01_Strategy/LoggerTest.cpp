@@ -9,7 +9,7 @@ public:
 	explicit Foo(ILogger* logger) : m_logger{ logger }
 	{
 		if (m_logger == nullptr) {
-			throw invalid_argument("ILogger cannot be null.");
+			throw invalid_argument{ "ILogger cannot be null." };
 		}
 	}
 
