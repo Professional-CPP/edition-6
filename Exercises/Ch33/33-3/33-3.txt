@@ -1,0 +1,2 @@
+The following Wikipedia article discusses the prototype pattern in detail:
+https://en.wikipedia.org/wiki/Prototype_pattern
