@@ -23,8 +23,8 @@ int main()
 
 	{
 		int (Employee::*functionPtr) () const { &Employee::getSalary };
-		Employee* employee{ new Employee{ "John", "Doe"} };
+		Employee johnD{ "John", "Doe" };
+		Employee* employee{ &johnD };
 		println("{}", (employee->*functionPtr)());
-		delete employee;
 	}
 }

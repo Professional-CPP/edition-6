@@ -4,7 +4,7 @@ using namespace std;
 
 int main()
 {
-	auto power{ [](this auto self, double value, int exponent) {
+	auto power{ [](this auto& self, double value, int exponent) {
 		if (exponent == 0) { return 1.0; }
 		else if (exponent < 0) { return 1.0 / self(value, -exponent); }
 		else { return value * self(value, exponent - 1); }

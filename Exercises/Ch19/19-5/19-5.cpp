@@ -8,7 +8,7 @@ public:
 	using Callback = function<int(int)>;
 
 	explicit Processor(Callback callback)
-		: m_callback{ callback }
+		: m_callback{ move(callback) }
 	{
 	}
 
