@@ -2,7 +2,7 @@ import std;
 
 using namespace std;
 
-template<invocable<int, int> Matcher, invocable<size_t, int, int> MatchHandler>
+template<predicate<int, int> Matcher, invocable<size_t, int, int> MatchHandler>
 void findMatches(span<const int> values1, span<const int> values2,
 	Matcher matcher, MatchHandler handler)
 {

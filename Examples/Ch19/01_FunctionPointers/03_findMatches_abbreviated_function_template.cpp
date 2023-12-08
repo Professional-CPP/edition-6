@@ -3,7 +3,7 @@ import std;
 using namespace std;
 
 void findMatches(span<const int> values1, span<const int> values2,
-	invocable<int, int> auto matcher, invocable<size_t, int, int> auto handler)
+	predicate<int, int> auto matcher, invocable<size_t, int, int> auto handler)
 {
 	if (values1.size() != values2.size()) { return; } // Must be same size.
 

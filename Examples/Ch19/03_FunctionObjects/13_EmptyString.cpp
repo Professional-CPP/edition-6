@@ -2,7 +2,7 @@ import std;
 
 using namespace std;
 
-template<invocable<const string&> Matcher>
+template<predicate<const string&> Matcher>
 void printMatchingStrings(const vector<string>& strings, Matcher matcher)
 {
 	for (const auto& string : strings) {
