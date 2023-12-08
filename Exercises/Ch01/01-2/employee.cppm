@@ -2,7 +2,7 @@ export module employee;
 
 namespace HR {
 
-	//// Use a type-safe enum class enumeration.
+	//// Use a strongly typed enum class enumeration.
 	export enum class Title {
 		Engineer,
 		SeniorEngineer,

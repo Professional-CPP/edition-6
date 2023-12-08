@@ -55,6 +55,6 @@ int main()
 				println("Manager");
 				break;
 		}
-		cout << endl;
+		println("");
 	}
 }

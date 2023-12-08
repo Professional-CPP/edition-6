@@ -10,5 +10,5 @@ void mysteryFunction(const string* someString)
 int main()
 {
 	string myString{ "The string" };
-	mysteryFunction(&myString);
+	mysteryFunction(&myString);  // &myString is a string*
 }
