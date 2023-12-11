@@ -20,7 +20,7 @@ int main()
 	//// So, we need to specify the template type argument explicitly.
 	println("{}", average<double>(values1));
 
-	array<int, 4> values2{ 1, 2, 3, 4 };
+	array values2{ 1, 2, 3, 4 };
 	println("{}", average<int>(values2));
 	println("{}", average<int>({ values2.data() + 2, 2 }));
 }

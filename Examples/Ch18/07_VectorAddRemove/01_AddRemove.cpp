@@ -12,7 +12,7 @@ int main()
 	vectorOne.insert(cbegin(vectorOne) + 3, 4);
 
 	// Add elements 6 through 10 to vectorTwo.
-	for (int i{ 6 }; i <= 10; i++) {
+	for (int i{ 6 }; i <= 10; ++i) {
 		vectorTwo.push_back(i);
 	}
 

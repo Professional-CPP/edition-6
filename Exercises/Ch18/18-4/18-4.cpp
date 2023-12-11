@@ -16,7 +16,7 @@ int main()
 	vector values1{ 1.1, 2.2, 3.3, 4.4 };
 	println("{}", average(values1));
 
-	array<double, 4> values2{ 1.1, 2.2, 3.3, 4.4 };
+	array values2{ 1.1, 2.2, 3.3, 4.4 };
 	println("{}", average(values2));
 	println("{}", average({ values2.data() + 2, 2 }));
 }

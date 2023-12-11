@@ -97,6 +97,5 @@ bitset<CableCompany::NumChannels>& CableCompany::getCustomerChannelsHelper(
 	const string& name)
 {
 	// Forward to const getCustomerChannels() to avoid code duplication.
-	return const_cast<bitset<NumChannels>&>(
-		as_const(*this).getCustomerChannels(name));
+    return const_cast<bitset<NumChannels>&>(getCustomerChannels(name));
 }

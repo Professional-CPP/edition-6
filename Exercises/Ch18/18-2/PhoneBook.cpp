@@ -22,14 +22,13 @@ void PhoneBook::removePhoneNumber(const Person& person, string_view phoneNumber)
 
 vector<string> PhoneBook::getPhoneNumbers(const Person& person) const
 {
-	vector<string> phoneNumbers;
-
 	auto [begin, end]{ m_phoneBook.equal_range(person) };
 	
 	// Using C++23 ranges functionality.
-	return ranges::subrange(begin, end) | views::values | ranges::to<vector>();
+	return ranges::subrange{ begin, end } | views::values | ranges::to<vector>();
 	
 	// Before C++23.
+	//vector<string> phoneNumbers;
 	//for (auto iter{ begin }; iter != end; ++iter) {
 	//	phoneNumbers.push_back(iter->second);
 	//}
