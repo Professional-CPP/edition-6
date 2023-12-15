@@ -5,7 +5,7 @@ using namespace std;
 template<forward_iterator ForwardIterator,
 	output_iterator<iter_reference_t<ForwardIterator>> OutputIterator,
 	indirect_unary_predicate<ForwardIterator> Predicate,
-	typename UnaryOperation>
+	invocable<iter_reference_t<ForwardIterator>> UnaryOperation>
 OutputIterator transform_if(ForwardIterator first, ForwardIterator last,
 	OutputIterator output, Predicate pred, UnaryOperation op)
 {

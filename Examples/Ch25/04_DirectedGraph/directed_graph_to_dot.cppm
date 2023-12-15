@@ -17,7 +17,7 @@ namespace ProCpp
 		for (auto&& node : graph)
 		{
 			auto adjacent_nodes{ graph.nodes_adjacent_to(node) };
-			if (!adjacent_nodes.has_value())
+			if (adjacent_nodes->begin() == adjacent_nodes->end())
 			{
 				std::println(output, "{}", node);
 			}
