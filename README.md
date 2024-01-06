@@ -1,11 +1,10 @@
 # Professional C++, 6th Edition
 This code repository contains all code snippets and exercise solutions for the book [**Professional C++, 6th Edition**](https://www.wiley.com/en-us/Professional+C%2B%2B%2C+6th+Edition-p-00398147) by Marc Gregoire (Wiley, 2024).
 
-<img 
-    style="display: block; margin-left: auto; margin-right: auto; width: 200;"
-    src="Cover - Professional C++ 6th Edition.jpg" 
-    alt="Cover - Professional C++, 6th Edition">
+<p align="center">
+<img width="200" src="Cover - Professional C++ 6th Edition.jpg" alt="Cover - Professional C++, 6th Edition">
 </img>
+</p>
 
 ## Copyright
 
