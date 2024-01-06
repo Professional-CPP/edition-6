@@ -9,7 +9,7 @@ This code repository contains all code snippets and exercise solutions for the b
 ## Copyright
 
 Copyright (c) 2024 Marc Gregoire. All rights reserved.<br/>
-See LICENSE.txt for the full license and no warranty claim.
+See [LICENSE.txt](LICENSE.txt) for the full license and no warranty claim.
 
 ## Issues
 If you find any issue with the provided source code:
