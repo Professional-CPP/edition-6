@@ -14,4 +14,4 @@ See [LICENSE.txt](LICENSE.txt) for the full license and no warranty claim.
 ## Issues
 If you find any issue with the provided source code:
 * Submit the issue by clicking on the [Issues tab in GitHub](https://github.com/Professional-CPP/edition-6/issues).
-* Send an email to [Marc Gregoire](mailto:marc.gregoire@nuonsoft.com?subject=[GitHub]%20Professional%20C++%20Source%20Code%20Issue).
+* Or, send an email to [Marc Gregoire](mailto:marc.gregoire@nuonsoft.com?subject=[GitHub]%20Professional%20C++%20Source%20Code%20Issue).
