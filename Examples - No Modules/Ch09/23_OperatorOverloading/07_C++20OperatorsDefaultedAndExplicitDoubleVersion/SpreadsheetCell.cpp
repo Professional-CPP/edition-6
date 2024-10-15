@@ -1,5 +1,6 @@
 #include "SpreadsheetCell.h"
 #include <charconv>
+#include <stdexcept>
 
 using namespace std;
 
