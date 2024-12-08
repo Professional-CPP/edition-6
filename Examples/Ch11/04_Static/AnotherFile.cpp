@@ -1,6 +1,7 @@
 import std;
 
-static void f();
+void f();
+//static void f();
 
 void f()
 {
