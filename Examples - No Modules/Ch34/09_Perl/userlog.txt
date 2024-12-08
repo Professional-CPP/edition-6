@@ -1,0 +1,6 @@
+Login: bucky-bo
+Password: feldspar
+
+bucky-bo> mail
+bucky-bo has no mail
+bucky-bo> exit
