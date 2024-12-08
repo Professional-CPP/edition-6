@@ -1,0 +1,21 @@
+Results when compiling the code on Windows with Microsoft Visual C++ 2022 in 64 bit:
+sizeof(char) = 1
+sizeof(short) = 2
+sizeof(int) = 4
+sizeof(long) = 4
+sizeof(long long) = 8
+
+Results when compiling the code on Windows with Microsoft Visual C++ 2022 in 32 bit:
+sizeof(char) = 1
+sizeof(short) = 2
+sizeof(int) = 4
+sizeof(long) = 4
+sizeof(long long) = 8
+
+Results when compiling the code on Linux with GCC 10.1 in 32 bit:
+sizeof(char) = 1
+sizeof(short) = 2
+sizeof(int) = 4
+sizeof(long) = 8
+sizeof(long long) = 8
+

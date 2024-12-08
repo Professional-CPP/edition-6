@@ -1,0 +1,11 @@
+Software life cycle models:
+- The waterfall model
+- The sashimi model
+- The spiral-like models
+- The agile model
+
+Software engineering methodologies:
+- Scrum
+- The Unified Process
+- Extreme Programming
+

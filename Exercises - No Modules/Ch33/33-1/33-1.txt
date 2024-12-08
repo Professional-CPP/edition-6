@@ -1,0 +1,2 @@
+The following Wikipedia article discusses the command pattern in detail:
+https://en.wikipedia.org/wiki/Command_pattern

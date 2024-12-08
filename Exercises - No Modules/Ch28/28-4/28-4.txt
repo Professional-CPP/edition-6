@@ -1,0 +1,4 @@
+Rapid application development is a software development methodology which puts less emphasis on planning but more on making the process adaptive. In such a process, prototypes are often used in addition to, or even in place of, formal design specifications. The term is also often used for graphical user interface development environments that allow you to visually build up your graphical user interface. It allows for rapid, visual, application development.
+
+How does it relate to the contents of this chapter?
+Rapid application development is actually a generic term. Concrete examples of rapid application development are the spiral-like, agile, and unified models, as discussed in this chapter.

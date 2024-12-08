@@ -1,0 +1,2 @@
+The following Wikipedia article discusses the facade pattern in detail:
+https://en.wikipedia.org/wiki/Facade_pattern
