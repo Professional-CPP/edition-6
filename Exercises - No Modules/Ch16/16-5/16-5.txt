@@ -1,0 +1,1 @@
+A sequence of elements is partitioned on a certain predicate, if all the elements for which the predicate returns true are before the elements for which it returns false.
