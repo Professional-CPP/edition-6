@@ -17,10 +17,12 @@ string_view GetLocalizedFormat(Language language)
 int main()
 {
 	Language language{ Language::English };
-	vprint_unicode(GetLocalizedFormat(language), make_format_args(1, 2));
+	int number1 = 1;
+	int number2 = 2;
+	vprint_unicode(cout, GetLocalizedFormat(language), make_format_args(number1, number2));
 	println("");
 	language = Language::Dutch;
-	vprint_unicode(GetLocalizedFormat(language), make_format_args(1, 2));
+	vprint_unicode(cout, GetLocalizedFormat(language), make_format_args(number1, number2));
 
 	// The following call using print() does not compile.
 	//print(GetLocalizedFormat(language), 1, 2);

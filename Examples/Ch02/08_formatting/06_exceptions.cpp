@@ -5,7 +5,8 @@ using namespace std;
 int main()
 {
 	try {
-		vprint_unicode("An integer: {5}", make_format_args(42));
+		int number{ 42 };
+		vprint_unicode(cout, "An integer: {5}", make_format_args(number));
 	} catch (const format_error& caught_exception) {
 		println("{}", caught_exception.what()); // "Argument not found."
 	}
