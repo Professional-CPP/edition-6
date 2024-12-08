@@ -1,3 +1,5 @@
+#pragma once
+
 #include "HostHandle.h"
 #include "ConnectionHandle.h"
 
